@@ -25,6 +25,7 @@ const EditPost = () => {
     const { user } = useSelector((state) => state.auth)
     const navigate = useNavigate
     const { id } = useParams()
+    const [photo, setPhoto] = useState('')
     const [errorsServer, setErrorsServer] = useState('')
     const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
         defaultValues: {
@@ -45,6 +46,7 @@ const EditPost = () => {
                 } else {
                     setValue("photo", null);
                 }
+                setPhoto(response.data.photo)
 
             } catch (error) {
                 navigate("*")
@@ -54,6 +56,34 @@ const EditPost = () => {
         fetchPost()
 
     }, [id, setValue, navigate])
+
+
+    const deletePhoto = () => {
+        (async () => {
+            try {
+                await axiosPrivate.put(`/blog/post/editPost/deletePhoto/${id}`, { photo: photo });
+                toast.success("Your photo was deleted")
+            } catch (error) {
+                if (error.response) setErrorsServer(error.response.data.errors);
+                toast.error("Unable to delete photo")
+            }
+        })();
+        if (errorsServer) setErrorsServer('')
+    }
+
+
+    const updatePhoto = () => {
+        (async () => {
+            try {
+                await axiosPrivate.put(`/blog/post/editPost/updatePhoto/${id}`, { photo: photo });
+                toast.success("Your photo was deleted")
+            } catch (error) {
+                if (error.response) setErrorsServer(error.response.data.errors);
+                toast.error("Unable to delete photo")
+            }
+        })();
+        if (errorsServer) setErrorsServer('')
+    }
 
 
     const submitEditPost = (data) => {
@@ -66,10 +96,7 @@ const EditPost = () => {
 
         if (data.photo) {
             formData.append('photo', data.photo[0]);
-        } else {
-            formData.append('photo', null);
         }
-
 
         (async () => {
             try {
@@ -105,75 +132,152 @@ const EditPost = () => {
                 className="editPostContainer"
             >
                 <h1 className=".editPostTitle">Edit Post</h1>
-                <form className="editPostForm" onSubmit={handleSubmit(submitEditPost)}>
-                    {errorsServer && errorsServer.map((error) => (
-                        <div className="errorMsg" key={error.param}>
-                            <div>{error.msg}</div>
+
+
+                {photo ?
+                    <div>
+                        <div>
+                            <img className="currentPhoto" src={`http://localhost:5000/public/images/${photo}`} alt={`${photo}`} />
+                            <button onClick={deletePhoto}>
+                                Delete Photo
+                            </button>
                         </div>
-                    ))}
 
-                    {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
-                    {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
-                    {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
+                        <form className="editPostForm" onSubmit={handleSubmit(submitEditPost)}>
+                            {errorsServer && errorsServer.map((error) => (
+                                <div className="errorMsg" key={error.param}>
+                                    <div>{error.msg}</div>
+                                </div>
+                            ))}
 
+                            {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
+                            {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
+                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
 
-                    <TextField
-                        className="title"
-                        type="text"
-                        name="title"
-                        InputLabelProps={{ shrink: true }}
-                        label="Title"
-                        fullWidth
-                        margin="normal"
-                        {...register("title", { required: true, minLength: 5 })}
-                    >
-                    </TextField>
-
-
-                    <FormControl fullWidth margin="normal">
-                        <InputLabel htmlFor="category" >Category</InputLabel>
-                        <Select
-                            name="category"
-                            className="category"
-                            label="Category"
-                            value={watch('category') || ''}
-                            {...register("category", { required: true })}
-                        >
-                            <MenuItem value="physical">Physical</MenuItem>
-                            <MenuItem value="creative">Creative</MenuItem>
-                            <MenuItem value="mental">Mental</MenuItem>
-                            <MenuItem value="food">Food</MenuItem>
-                            <MenuItem value="collecting">Collecting</MenuItem>
-                            <MenuItem value="games+puzzles">Games+Puzzles</MenuItem>
-                        </Select>
-                    </FormControl>
-
-                    <label htmlFor="photo">Upload Photo:
-                        <input
-                            type="file"
-                            name="photo"
-                            className="photo"
-                            {...register("photo")}
-                        />
-                    </label>
+                            <TextField
+                                className="title"
+                                type="text"
+                                name="title"
+                                InputLabelProps={{ shrink: true }}
+                                label="Title"
+                                fullWidth
+                                margin="normal"
+                                {...register("title", { required: true, minLength: 5 })}
+                            >
+                            </TextField>
 
 
-                    <TextField
-                        className="post"
-                        name="post"
-                        InputLabelProps={{ shrink: true }}
-                        label="Blog Post"
-                        fullWidth
-                        multiline
-                        margin="normal"
-                        rows={20}
-                        {...register("post", { required: true, minLength: 5 })}
-                    />
+                            <FormControl fullWidth margin="normal">
+                                <InputLabel htmlFor="category" >Category</InputLabel>
+                                <Select
+                                    name="category"
+                                    className="category"
+                                    label="Category"
+                                    value={watch('category') || ''}
+                                    {...register("category", { required: true })}
+                                >
+                                    <MenuItem value="physical">Physical</MenuItem>
+                                    <MenuItem value="creative">Creative</MenuItem>
+                                    <MenuItem value="mental">Mental</MenuItem>
+                                    <MenuItem value="food">Food</MenuItem>
+                                    <MenuItem value="collecting">Collecting</MenuItem>
+                                    <MenuItem value="games+puzzles">Games+Puzzles</MenuItem>
+                                </Select>
+                            </FormControl>
 
 
 
-                    <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>
-                </form>
+                            <TextField
+                                className="post"
+                                name="post"
+                                InputLabelProps={{ shrink: true }}
+                                label="Blog Post"
+                                fullWidth
+                                multiline
+                                margin="normal"
+                                rows={20}
+                                {...register("post", { required: true, minLength: 5 })}
+                            />
+
+
+
+                            <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>
+                        </form>
+                    </div>
+                    :
+                    <div>
+                        <form className="editPostForm" onSubmit={handleSubmit(submitEditPost)}>
+                            {errorsServer && errorsServer.map((error) => (
+                                <div className="errorMsg" key={error.param}>
+                                    <div>{error.msg}</div>
+                                </div>
+                            ))}
+
+                            {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
+                            {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
+                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
+
+                            <label htmlFor="photo">Upload Photo:
+                                <input
+                                    type="file"
+                                    name="photo"
+                                    className="photo"
+                                    {...register("photo")}
+                                />
+                            </label>
+
+
+                            <TextField
+                                className="title"
+                                type="text"
+                                name="title"
+                                InputLabelProps={{ shrink: true }}
+                                label="Title"
+                                fullWidth
+                                margin="normal"
+                                {...register("title", { required: true, minLength: 5 })}
+                            >
+                            </TextField>
+
+
+                            <FormControl fullWidth margin="normal">
+                                <InputLabel htmlFor="category" >Category</InputLabel>
+                                <Select
+                                    name="category"
+                                    className="category"
+                                    label="Category"
+                                    value={watch('category') || ''}
+                                    {...register("category", { required: true })}
+                                >
+                                    <MenuItem value="physical">Physical</MenuItem>
+                                    <MenuItem value="creative">Creative</MenuItem>
+                                    <MenuItem value="mental">Mental</MenuItem>
+                                    <MenuItem value="food">Food</MenuItem>
+                                    <MenuItem value="collecting">Collecting</MenuItem>
+                                    <MenuItem value="games+puzzles">Games+Puzzles</MenuItem>
+                                </Select>
+                            </FormControl>
+
+
+
+                            <TextField
+                                className="post"
+                                name="post"
+                                InputLabelProps={{ shrink: true }}
+                                label="Blog Post"
+                                fullWidth
+                                multiline
+                                margin="normal"
+                                rows={20}
+                                {...register("post", { required: true, minLength: 5 })}
+                            />
+
+
+
+                            <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>
+                        </form>
+                    </div>
+                }
             </Grid>
         </Box>
     )

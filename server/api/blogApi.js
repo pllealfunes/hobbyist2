@@ -231,6 +231,7 @@ router.put('/post/editPost/:postid', validationMiddleware,
                     return res.status(400).json({ errors: [{ msg: 'Invalid photo format' }] });
                 }
 
+
                 if (photoName) {
                     const post = {
                         user: fields.user,
@@ -239,11 +240,9 @@ router.put('/post/editPost/:postid', validationMiddleware,
                         post: fields.post,
                         photo: files.photo.originalFilename,
                     };
-                    console.log(files.photo.filepath)
-                    console.log("PATH" + files.photo.path)
-                    console.log(post)
 
-                    PostService.update(post)
+
+                    PostService.update(req.params.postid, post)
                         .then((post) => {
                             console.log(post)
                             path.join(__dirname, "../public/images", files.photo.originalFilename);
@@ -268,7 +267,7 @@ router.put('/post/editPost/:postid', validationMiddleware,
                         post: fields.post
                     };
 
-                    PostService.update(post)
+                    PostService.update(req.params.postid, post)
                         .then((post) => {
                             res.status(200);
                             res.json(post);
@@ -286,10 +285,25 @@ router.put('/post/editPost/:postid', validationMiddleware,
 // Delete Photo from Edit Form
 
 router.put('/post/editPost/deletePhoto/:postid', (req, res, next) => {
-    fs.unlinkSync(`.${req.body.currentPhoto}`);
-    let post = {
-        photo: undefined
+
+    if (req.body) {
+        // If there are errors, delete any uploaded files
+        if (req.body.photo) {
+            fs.unlink("./public/images/" + req.body.photo, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+        }
+        return res.status(400);
+
+
     }
+
+    const post = {
+        "photo": undefined
+    }
+
     PostService.update(req.params.postid, post)
         .then((removePhoto) => {
             res.status(200);
@@ -298,6 +312,7 @@ router.put('/post/editPost/deletePhoto/:postid', (req, res, next) => {
             res.status(404);
             res.end();
         });
+
 });
 
 router.put('/post/editPost/updatePhoto/:postid', upload.single('photo'), (req, res, next) => {

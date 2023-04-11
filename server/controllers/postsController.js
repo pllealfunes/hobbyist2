@@ -46,7 +46,7 @@ class PostService {
             .then((post) => {
                 post.set(data)
                 post.save()
-                return comment
+                return post
             })
     }
 

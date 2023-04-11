@@ -122,7 +122,10 @@ header {
 
 /* Create and Edit Form Styles */
 
-
+.currentPhoto {
+  width: 150px;
+  height: 100px;
+}
 
 .editCommContainer {
   padding: 32px;
