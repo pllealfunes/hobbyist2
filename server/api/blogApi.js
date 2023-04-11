@@ -313,26 +313,10 @@ router.put('/post/editPost/deletePhoto/:postid', (req, res, next) => {
 
 });
 
-router.put('/post/editPost/updatePhoto/:postid', upload.single('photo'), (req, res, next) => {
-    const path = "/public/images/" + (req.file ? req.file.filename : undefined);
-    let post = {
-        photo: path,
-    }
-    PostService.update(req.params.postid, post)
-        .then((updatePhoto) => {
-            res.status(200);
-            res.json(updatePhoto);
-        }).catch((err) => {
-            if (req.file) {
-                fs.unlinkSync(`.${path}`)
-            }
-            res.status(404);
-            res.end();
-        });
-});
+
 
 //  Delete Posts with their Comments
-router.delete('/post/deletePost/:postid', verifyJWT, (req, res) => {
+router.delete('/post/deletePost/:postid', (req, res) => {
     CommentService.deleteAll(req.params.postid)
         .then((comment) => {
             res.status(200)
@@ -341,6 +325,21 @@ router.delete('/post/deletePost/:postid', verifyJWT, (req, res) => {
             res.status(404)
             res.end()
         });
+
+
+    PostService.find(req.params.postid)
+        .then((post) => {
+            fs.unlink("./public/images/" + post.photo, (err) => {
+                if (err) {
+                    console.error(err);
+                }
+            });
+            res.status(200);
+            res.json(post);
+        }).catch((err) => {
+            res.status(404);
+            res.end();
+        })
 
 
     PostService.delete(req.params.postid)

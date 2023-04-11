@@ -7,6 +7,7 @@ import axiosPrivate from "../config/interceptor";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from '../features/auth/authSlice'
 
+
 // Import other components
 import Modal from "../components/DeleteModal"
 import FollowCategoryBtn from "../components/FollowCategoryBtn";
@@ -130,9 +131,10 @@ const PostDetails = () => {
             (async () => {
                 try {
                     await axiosPrivate.delete(`/blog/post/deletePost/${postId}`);
-                    console.log("deleted post with comments");
+                    toast.success('Deleted Post')
                     navigate("/profile")
                 } catch (error) {
+                    toast.success('Unable to Delete Post')
                     if (error.response) setErrorsServer(error.response.data.errors)
                     toast.error("Unable to delete post")
                 }
