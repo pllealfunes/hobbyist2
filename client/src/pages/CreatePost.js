@@ -54,7 +54,7 @@ const CreatNewPost = () => {
         formData.append('category', data.category);
         formData.append('post', data.post);
         formData.append('photo', data.photo[0]);
-        console.log(data.photo[0]);
+
         (async () => {
             try {
                 await axios.post(`${process.env.REACT_APP_URL}/api/blog/post/newPost`, formData)

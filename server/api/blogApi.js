@@ -329,11 +329,13 @@ router.delete('/post/deletePost/:postid', (req, res) => {
 
     PostService.find(req.params.postid)
         .then((post) => {
-            fs.unlink("./public/images/" + post.photo, (err) => {
-                if (err) {
-                    console.error(err);
-                }
-            });
+            if (post.photo) {
+                fs.unlink("./public/images/" + post.photo, (err) => {
+                    if (err) {
+                        console.error(err);
+                    }
+                });
+            }
             res.status(200);
             res.json(post);
         }).catch((err) => {
