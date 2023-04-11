@@ -295,13 +295,11 @@ router.put('/post/editPost/deletePhoto/:postid', (req, res, next) => {
                 }
             });
         }
-        return res.status(400);
-
 
     }
 
     const post = {
-        "photo": undefined
+        photo: null
     }
 
     PostService.update(req.params.postid, post)
