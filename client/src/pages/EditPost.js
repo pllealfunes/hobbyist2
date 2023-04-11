@@ -55,7 +55,7 @@ const EditPost = () => {
 
         fetchPost()
 
-    }, [id, setValue, navigate, photo])
+    }, [id, setValue, navigate])
 
 
     const deletePhoto = () => {
@@ -63,6 +63,7 @@ const EditPost = () => {
             try {
                 await axiosPrivate.put(`/blog/post/editPost/deletePhoto/${id}`, { photo: photo });
                 toast.success("Your photo was deleted")
+                setPhoto('')
             } catch (error) {
                 if (error.response) setErrorsServer(error.response.data.errors);
                 toast.error("Unable to delete photo")
@@ -71,19 +72,6 @@ const EditPost = () => {
         if (errorsServer) setErrorsServer('')
     }
 
-
-    const updatePhoto = () => {
-        (async () => {
-            try {
-                await axiosPrivate.put(`/blog/post/editPost/updatePhoto/${id}`, { photo: photo });
-                toast.success("Your photo was deleted")
-            } catch (error) {
-                if (error.response) setErrorsServer(error.response.data.errors);
-                toast.error("Unable to delete photo")
-            }
-        })();
-        if (errorsServer) setErrorsServer('')
-    }
 
 
     const submitEditPost = (data) => {
@@ -101,10 +89,11 @@ const EditPost = () => {
         (async () => {
             try {
                 await axiosPrivate.put(`/blog/post/editPost/${id}`, formData);
-                toast.success("View your profile for your new post!")
+                toast.success("Updated post!")
+                setPhoto(data.photo[0].name)
             } catch (error) {
                 if (error.response) setErrorsServer(error.response.data.errors);
-                toast.error("Unable to create new post")
+                toast.error("Unable to update post")
             }
         })();
         if (errorsServer) setErrorsServer('')

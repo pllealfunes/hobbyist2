@@ -232,7 +232,7 @@ router.put('/post/editPost/:postid', validationMiddleware,
                 }
 
 
-                if (photoName) {
+                if (photoName && !fs.existsSync(files.photo.originalFilename)) {
                     const post = {
                         user: fields.user,
                         title: fields.title,
