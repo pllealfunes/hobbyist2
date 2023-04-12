@@ -58,7 +58,7 @@ export default function RootLayout() {
                         p: { xs: 4, md: 10 },
                         pt: 12,
                         pb: 12,
-                        fontSize: { xs: '12px', md: '14px' }
+                        fontSize: { xs: '14px', md: '16px' }
                     }}
                 >
                     <Grid container spacing={2} justifyContent="space-between">
@@ -76,7 +76,7 @@ export default function RootLayout() {
                                     mt: 4,
                                 }}
                             >
-                                <a href="https://github.com/pllealfunes/hobbyist_capstone" target="blank">
+                                <a href="https://github.com/pllealfunes/hobbyist2" target="blank">
                                     <GitHubIcon sx={{ mr: 1 }} />
                                 </a>
                                 <TwitterIcon sx={{ mr: 1 }} />
@@ -135,7 +135,7 @@ export default function RootLayout() {
                                         </ListItemText>
                                         <ListItemText>
                                             <Typography lineHeight={2} variant="caption2">
-                                                <LogoutBtn className="navbar-link" to="/logout" />
+                                                <LogoutBtn className="footerLogout" to="/logout" />
                                             </Typography>
                                         </ListItemText>
                                     </div>

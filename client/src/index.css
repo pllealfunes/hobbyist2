@@ -12,7 +12,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F5F5F5;
 }
 
 code {
@@ -37,10 +36,7 @@ nav [aria-current] {
 }
 
 
-main {
-  max-width: 1200px;
-  margin: 40px auto;
-}
+main {}
 
 
 header {
@@ -64,13 +60,63 @@ header {
   text-decoration: none;
 }
 
+footer {
+  background-color: #F5F5F5;
+  flex-shrink: 0;
+}
 
 /* Home STYLING */
 
-.heroSection {
+.heroSection,
+.getstartedSection,
+.exploreSection {
   background-color: #fccc04;
-  width: 100%;
-  padding: 12px, 30px, 12px, 30px;
+}
+
+.homePhoto {
+  width: 500px;
+  height: 500px;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.loginBtn,
+.signupBtn {
+  background-color: #fff2f2;
+  font-weight: bold;
+  font-size: medium;
+  color: #0A0909;
+  padding: 15px 25px;
+  border: 1px solid #0A0909;
+  border-radius: 5px;
+  margin: 15px;
+}
+
+
+.logoutBtn {
+  background-color: #fccc04;
+  font-weight: bold;
+  color: #0A0909;
+  padding: 5px 10px;
+  border: 1px solid #0A0909;
+  border-radius: 5px;
+}
+
+.loginBtn:hover,
+.signupBtn:hover {
+  background-color: #a18100;
+  color: #fff2f2;
+}
+
+
+.logoutBtn:hover {
+  background-color: #a18100;
+  color: #fff2f2;
 }
 
 
