@@ -26,7 +26,6 @@ const Home = () => {
                         direction="column"
                         alignItems="center"
                         justifyContent="center"
-                        wrap="nowrap"
                     >
                         <Typography variant="h2" component="h2" gutterBottom={true}>
                             <Typography variant="h2" component="span">Hobbyist</Typography>

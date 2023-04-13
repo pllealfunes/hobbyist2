@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Outlet, NavLink, Link } from "react-router-dom";
 import LogoutBtn from '../components/LogoutBtn'
 import { useSelector } from 'react-redux'
@@ -8,9 +9,21 @@ import {
     Grid,
     List,
     ListItemText,
-    Typography
-} from "@mui/material";
+    Typography,
+    AppBar,
+    Toolbar,
+    IconButton,
+    Menu,
+    Container,
+    Avatar,
+    Button,
+    Tooltip,
+    MenuItem,
+    Divider,
 
+} from "@mui/material";
+import AdbIcon from '@mui/icons-material/Adb';
+import MenuIcon from '@mui/icons-material/Menu';
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -21,32 +34,253 @@ export default function RootLayout() {
         (state) => state.auth
     )
 
+    const [anchorElNav, setAnchorElNav] = useState(null)
+    const [anchorElUser, setAnchorElUser] = useState(null)
+
+
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
+
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
 
     return (
         <div className="root-layout">
-            <header>
-                <NavLink className="header-title" to="/"><h1>Hobbyist</h1></NavLink>
-                <nav className="navigation">
-                    {!user && (
-                        <ul>
-                            <li> <NavLink className="navbar-link" to="/">Home</NavLink></li>
-                            <li> <NavLink className="navbar-link" to="/explore">Explore</NavLink></li>
-                            <li> <NavLink className="navbar-link" to="/login">Login</NavLink></li>
-                            <li> <NavLink className="navbar-link" to="/signup">Signup</NavLink></li>
-                        </ul>
-                    )}
-                    {user && (
-                        <ul>
-                            <li> <NavLink className="navbar-link" to="/">Home</NavLink></li>
-                            <li><NavLink className="navbar-link" to="/createNewPost">NewPost</NavLink></li>
-                            <li> <NavLink className="navbar-link" to="/explore">Explore</NavLink></li>
-                            <li> <NavLink className="navbar-link" to="/feed">Feed</NavLink></li>
-                            <li><NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}>{user.currentUser.username.toUpperCase()}</NavLink></li>
-                            <li><LogoutBtn className="navbar-link" to="/logout" /></li>
-                        </ul>
-                    )}
-                </nav>
-            </header>
+            {!user && (
+                <Box sx={{ display: 'flex' }}>
+                    <AppBar position="static" color="default">
+                        <Container maxWidth="xl">
+                            <Toolbar disableGutters>
+                                <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                                <Grid
+                                    direction="row"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    container
+                                >
+                                    <div>
+                                        <Typography
+                                            variant="h6"
+                                            noWrap
+                                            component="a"
+                                            href="/"
+                                            sx={{
+                                                mr: 2,
+                                                display: { xs: 'none', md: 'flex' },
+                                                fontFamily: 'monospace',
+                                                fontWeight: 700,
+                                                letterSpacing: '.3rem',
+                                                color: 'inherit',
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            Hobbyist
+                                        </Typography>
+                                    </div>
+                                    <div>
+                                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                                            <IconButton
+                                                size="large"
+                                                aria-label="account of current user"
+                                                aria-controls="menu-appbar"
+                                                aria-haspopup="true"
+                                                onClick={handleOpenNavMenu}
+                                            >
+                                                <MenuIcon />
+                                            </IconButton>
+                                            <Menu
+                                                id="menu-appbar"
+                                                anchorEl={anchorElNav}
+                                                anchorOrigin={{
+                                                    vertical: 'bottom',
+                                                    horizontal: 'left',
+                                                }}
+                                                keepMounted
+                                                transformOrigin={{
+                                                    vertical: 'top',
+                                                    horizontal: 'left',
+                                                }}
+                                                open={Boolean(anchorElNav)}
+                                                onClose={handleCloseNavMenu}
+                                                sx={{
+                                                    display: { xs: 'block', md: 'none' }
+                                                }}
+                                            >
+                                                <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
+                                                <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                                <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
+                                                <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
+                                            </Menu>
+                                        </Box>
+                                    </div>
+                                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                                    <Typography
+                                        variant="h5"
+                                        noWrap
+                                        component="a"
+                                        href=""
+                                        sx={{
+                                            mr: 2,
+                                            display: { xs: 'flex', md: 'none' },
+                                            flexGrow: 1,
+                                            fontFamily: 'monospace',
+                                            fontWeight: 700,
+                                            letterSpacing: '.3rem',
+                                            color: 'inherit',
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        Hobbyist
+                                    </Typography>
+                                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                                        <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
+                                        <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                        <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
+                                        <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
+                                    </Box>
+                                </Grid>
+                            </Toolbar>
+                        </Container>
+                    </AppBar>
+                </Box>
+            )}
+            {user && (
+                <AppBar className="muiNav" position="static" color="default">
+                    <Container maxWidth="xl">
+                        <Toolbar disableGutters>
+                            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                            <Typography
+                                variant="h6"
+                                noWrap
+                                component="a"
+                                href="/"
+                                sx={{
+                                    mr: 2,
+                                    display: { xs: 'none', md: 'flex' },
+                                    fontFamily: 'monospace',
+                                    fontWeight: 700,
+                                    letterSpacing: '.3rem',
+                                    color: 'inherit',
+                                    textDecoration: 'none',
+                                }}
+                            >
+                                Hobbyist
+                            </Typography>
+
+                            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                                <IconButton
+                                    size="large"
+                                    aria-label="account of current user"
+                                    aria-controls="menu-appbar"
+                                    aria-haspopup="true"
+                                    onClick={handleOpenNavMenu}
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                                <Menu
+                                    id="menu-appbar"
+                                    anchorEl={anchorElNav}
+                                    anchorOrigin={{
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'left',
+                                    }}
+                                    open={Boolean(anchorElNav)}
+                                    onClose={handleCloseNavMenu}
+                                    sx={{
+                                        display: { xs: 'block', md: 'none' },
+                                    }}
+                                >
+
+                                    <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
+                                    <MenuItem><NavLink className="navbar-link" to="/createNewPost">NewPost</NavLink></MenuItem>
+                                    <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                    <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
+                                    <MenuItem><NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}>{user.currentUser.username.toUpperCase()}</NavLink></MenuItem>
+                                    <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
+                                </Menu>
+                            </Box>
+                            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                            <Typography
+                                variant="h5"
+                                noWrap
+                                component="a"
+                                href=""
+                                sx={{
+                                    mr: 2,
+                                    display: { xs: 'flex', md: 'none' },
+                                    flexGrow: 1,
+                                    fontFamily: 'monospace',
+                                    fontWeight: 700,
+                                    letterSpacing: '.3rem',
+                                    color: 'inherit',
+                                    textDecoration: 'none',
+                                }}
+                            >
+                                Hobbyist
+                            </Typography>
+                            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                                <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
+                                <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
+                            </Box>
+
+                            <Box sx={{ flexGrow: 0 }}>
+                                <Grid
+                                    container
+                                    direction="row"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                >
+                                    <Tooltip title="Open settings">
+                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                            <Avatar alt="Doesn't have profile photo" />
+                                        </IconButton>
+                                    </Tooltip>
+                                </Grid>
+                                <Menu
+                                    sx={{ mt: '45px', p: 5 }}
+                                    id="menu-appbar"
+                                    anchorEl={anchorElUser}
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    keepMounted
+                                    transformOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    open={Boolean(anchorElUser)}
+                                    onClose={handleCloseUserMenu}
+                                >
+                                    <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
+                                    <Divider />
+                                    <MenuItem><NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}>Profile</NavLink></MenuItem>
+                                    <MenuItem>Favorites</MenuItem>
+                                    <MenuItem><NavLink className="navbar-link" to="/createNewPost">NewPost</NavLink></MenuItem>
+                                    <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
+                                </Menu>
+                            </Box>
+                        </Toolbar>
+                    </Container>
+                </AppBar>
+            )}
+
             <main>
                 <Outlet />
             </main>

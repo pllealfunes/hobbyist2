@@ -6,7 +6,19 @@ import CategoryResults from '../components/CategoryResults';
 import ErrorMessage from '../components/ErrorMessage';
 import axiosPrivate from '../config/interceptor';
 
-
+/*** MATERIAL UI STYLING ***/
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import SendIcon from '@mui/icons-material/Send';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 
 const ExplorePage = () => {
     const categories = ["Physical", "Creative", "Mental", "Food", "Collecting", "Games/Puzzles"]
@@ -75,35 +87,66 @@ const ExplorePage = () => {
 
 
     return (
-        <div className="container">
-            <h1>Explore page</h1>
-            <div className='categoryConatiner'>
-                {categories.map((category) => (
-                    <button className="categoryBtn" key={category} onClick={(event) => searchCategory(event, category)}>
-                        <h3>{category}</h3>
-                    </button>
-                ))}
-            </div>
-            <section className="searchSection">
-                <div className="searchFormContainer">
-                    <form className="searchForm" onSubmit={handleSubmit(searchForm)}>
-                        <label htmlFor="searchBox"></label>
-                        {errors.search && <span>Search box cannot be empty when doing a search</span>}
-                        <input
-                            id="searchBox"
-                            name="search"
-                            placeholder="Search"
-                            {...register("search", { required: true })}
-                        />
-                        <button className="submitCommBtn" type="submit">Submit</button>
-                    </form>
-                    {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
-                    {showResults && <SearchResults searchResults={searchResults} />}
-                    {showCategory && <CategoryResults categoryResults={categoryResults} />}
-                    {showErrorMessage && <ErrorMessage />}
-                </div>
-            </section>
-        </div>
+        <section className="searchSection">
+            <Box
+                display="flex"
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                className="searchWrapper"
+            >
+                <Grid
+                    container
+                    className="searchContainer"
+                    width={700}
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-evenly"
+                    sx={{
+                        boxShadow: 2,
+                        '& button': { my: 3 },
+                    }}
+                >
+                    <h2 className="searchTitle">Explore page</h2>
+                    <Grid
+                        className='categoryConatiner'
+                        container
+                        direction="row"
+                        alignItems="center"
+                        justifyContent="space-evenly"
+                    >
+                        {categories.map((category) => (
+                            <button className="categoryBtn" key={category} onClick={(event) => searchCategory(event, category)}>
+                                <h3>{category}</h3>
+                            </button>
+                        ))}
+                    </Grid>
+
+                    <div className="searchFormContainer">
+                        <form className="searchForm" onSubmit={handleSubmit(searchForm)}>
+                            <label htmlFor="searchBox"></label>
+                            {errors.search && <span>Search box cannot be empty when doing a search</span>}
+                            <TextField
+                                id="searchBox"
+                                type='text'
+                                label="search bar"
+                                name="search"
+                                placeholder="Search"
+                                fullWidth
+                                margin="normal"
+                                {...register("search", { required: true })}
+                            />
+                            <Button className="submitFormBtn" type="submit" variant="contained" color="success" fullWidth>Submit</Button>
+                        </form>
+                    </div>
+                </Grid>
+            </Box>
+            {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
+            {showResults && <SearchResults searchResults={searchResults} />}
+            {showCategory && <CategoryResults categoryResults={categoryResults} />}
+            {showErrorMessage && <ErrorMessage />}
+
+        </section>
     )
 }
 
