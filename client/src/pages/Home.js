@@ -26,6 +26,7 @@ const Home = () => {
                         direction="column"
                         alignItems="center"
                         justifyContent="center"
+                        wrap="nowrap"
                     >
                         <Typography variant="h2" component="h2" gutterBottom={true}>
                             <Typography variant="h2" component="span">Hobbyist</Typography>
@@ -39,8 +40,7 @@ const Home = () => {
             <article className="blogSection">
                 <Box
                     sx={{
-                        py: 10,
-                        px: 10
+                        py: 10
                     }}
 
                 >
@@ -48,15 +48,15 @@ const Home = () => {
                         container
                         direction="row"
                         alignItems="center"
-                        justifyContent="space-between"
+                        justifyContent="space-evenly"
                     >
-
                         <div>
                             <Grid
                                 container
                                 direction="column"
                                 alignItems="center"
                                 justifyContent="center"
+                                wrap="nowrap"
                             >
                                 <img className="homePhoto" src="../images/Typing-cuate.png" alt="Write Blogs about hobbies" />
                                 <a href="https://storyset.com/work">Work illustrations by Storyset</a>
@@ -77,8 +77,7 @@ const Home = () => {
             <article className="exploreSection">
                 <Box
                     sx={{
-                        py: 10,
-                        px: 10,
+                        py: 10
                     }}
                 >
                     <Grid
@@ -116,8 +115,7 @@ const Home = () => {
             <article className="discoverSection">
                 <Box
                     sx={{
-                        py: 10,
-                        px: 5,
+                        py: 10
                     }}
                 >
                     <Grid
@@ -139,6 +137,7 @@ const Home = () => {
                                 direction="column"
                                 alignItems="center"
                                 justifyContent="center"
+                                wrap="nowrap"
                             >
                                 <img className="homePhoto" src="../images/Enthusiastic-cuate.png" alt="Discover hobbies photo" />
                                 <a href="https://storyset.com/people">People illustrations by Storyset</a>

@@ -105,22 +105,23 @@ const EditPost = () => {
             display="flex"
             direction="column"
             alignItems="center"
-            justifyContent="center">
+            justifyContent="center"
+            className="editpostContainer"
+        >
+
             <Grid
                 container
                 width={700}
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
+                className="formeditContainer"
                 sx={{
-                    p: 5,
                     boxShadow: 2,
-                    borderRadius: 2,
                     '& button': { my: 3 },
                 }}
-                className="editPostContainer"
             >
-                <h1 className=".editPostTitle">Edit Post</h1>
+                <h1 className="editPostTitle">Edit Post</h1>
 
 
                 {photo ?
@@ -210,7 +211,7 @@ const EditPost = () => {
                                 <input
                                     type="file"
                                     name="photo"
-                                    className="photo"
+                                    className="photoInput"
                                     {...register("photo")}
                                 />
                             </label>

@@ -168,6 +168,20 @@ footer {
 
 /* Create and Edit Form Styles */
 
+.newpostContainer,
+.editpostContainer {
+  background-color: #fccc04;
+}
+
+.formpostContainer,
+.formeditContainer {
+  padding: 3rem;
+  box-shadow: 5px;
+  border-radius: 10px;
+  background-color: #F5F5F5;
+  margin: 3rem;
+}
+
 .currentPhoto {
   width: 150px;
   height: 100px;
@@ -194,16 +208,15 @@ footer {
 }
 
 .createTitle,
-.editPostTitle .editCommTitle {
+.editPostTitle,
+.editCommTitle {
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
 }
 
-textarea {
-  resize: none;
+.photoInput {
+  margin: 30px;
 }
-
-
 
 
 .commFormContainer {

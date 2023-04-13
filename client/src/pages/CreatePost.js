@@ -74,7 +74,9 @@ const CreatNewPost = () => {
             display="flex"
             direction="column"
             alignItems="center"
-            justifyContent="center">
+            justifyContent="center"
+            className="newpostContainer"
+        >
 
             <Grid
                 container
@@ -82,11 +84,9 @@ const CreatNewPost = () => {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                className="formPostContainer"
+                className="formpostContainer"
                 sx={{
-                    p: 5,
                     boxShadow: 2,
-                    borderRadius: 2,
                     '& button': { my: 3 },
                 }}
             >
@@ -105,6 +105,15 @@ const CreatNewPost = () => {
                     {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
                     {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
 
+
+                    <label htmlFor="photo">Upload Photo:
+                        <input
+                            type="file"
+                            name="photo"
+                            className="photoInput"
+                            {...register("photo")}
+                        />
+                    </label>
 
                     <TextField
                         className="title"
@@ -136,26 +145,6 @@ const CreatNewPost = () => {
                         </Select>
                     </FormControl>
 
-
-                    <label htmlFor="photo">Upload Photo:
-                        <input
-                            type="file"
-                            name="photo"
-                            className="photo"
-                            {...register("photo")}
-                        />
-                    </label>
-
-                    {selectedPhotoPreview && (
-                        <img
-                            src={selectedPhotoPreview}
-                            alt={selectedPhotoPreview.name}
-                            height={20}
-                            width={30}
-                        />
-                    )}
-
-
                     <TextField
                         className="post"
                         name="post"
@@ -167,7 +156,9 @@ const CreatNewPost = () => {
                         rows={20}
                         {...register("post", { required: true, minLength: 5 })}
                     />
+
                     <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>
+
                 </form>
 
             </Grid>
