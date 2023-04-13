@@ -48,6 +48,7 @@ router.get('/user/:id', (req, res, next) => {
                 "id": user._id,
                 "username": user.username,
                 "email": user.email,
+                "bio": user.bio,
                 "categories": user.categories,
                 "users": user.users
             }
@@ -69,6 +70,7 @@ router.put('/:id/followCategory/:category', (req, res, next) => {
             res.status(404).send({ message: "Cannot unfollow category" })
             res.end()
         });
+
 })
 
 
@@ -83,22 +85,12 @@ router.put('/:id/unFollowCategory/:category', (req, res, next) => {
             res.status(404).send({ message: "Cannot unfollow category" })
             res.end()
         });
+
 })
 
 /* Code associated with following a user */
 router.put('/:userid/followUser/:id', async (req, res, next) => {
-    /*try {
-        if (await UserService.find({ username: req.params.username })) {
-            const user = await UserService.find({ username: req.params.username })
-            if (req.body.currentUser !== user._id) {
-                const currentUser = req.body.currentUser
-                await User.findOneAndUpdate({ _id: currentUser }, { $addToSet: { users: user._id } }).exec()
-            }
-        }
-        return res.status(200)
-    } catch (error) {
-        return res.status(404).json({ error: "Cannot follow user" })
-    }*/
+
     User.findOneAndUpdate({ _id: req.params.userid }, { $addToSet: { users: req.params.id } })
         .then((updateCategory) => {
             res.status(200)
@@ -107,22 +99,12 @@ router.put('/:userid/followUser/:id', async (req, res, next) => {
             res.status(404).send({ message: "Cannot unfollow user" })
             res.end()
         });
+
 })
 
 /* Code associated with unfollowing users */
 router.put('/:userid/unFollowUser/:id', async (req, res, next) => {
-    /*try {
-        if (await UserService.find({ username: req.params.username })) {
-            const user = await UserService.find({ username: req.params.username })
-            if (req.body.currentUser !== user._id) {
-                const currentUser = req.body.currentUser
-                await User.findOneAndUpdate({ _id: currentUser }, { $pull: { users: user._id } }).exec()
-            }
-        }
-        return res.status(200)
-    } catch (error) {
-        return res.status(404).json({ error: "Cannot unfollow user" })
-    }*/
+
     User.findOneAndUpdate({ _id: req.params.userid }, { $pull: { users: req.params.id } })
         .then((updateCategory) => {
             res.status(200)
@@ -131,6 +113,7 @@ router.put('/:userid/unFollowUser/:id', async (req, res, next) => {
             res.status(404).send({ message: "Cannot unfollow user" })
             res.end()
         });
+
 })
 
 // error

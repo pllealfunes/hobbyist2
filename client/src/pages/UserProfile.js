@@ -22,6 +22,7 @@ const UserProfile = () => {
             try {
 
                 let userProfile = await dispatch(getUser(id))
+                console.log(userProfile.payload);
                 setUserProfile(userProfile.payload)
                 let response = await axiosPrivate.get(`/blog/post/user/${id}`)
                 setPosts(response.data)
@@ -35,13 +36,12 @@ const UserProfile = () => {
 
         })();
 
-    }, [id])
+    }, [id, dispatch, user])
 
 
     useEffect(() => {
         (async () => {
             try {
-
                 if (singleUser) {
                     if (singleUser.users.includes(id)) {
                         setIsFollow(true)
@@ -56,7 +56,7 @@ const UserProfile = () => {
 
         })();
 
-    }, [singleUser])
+    }, [singleUser, id])
 
     const followUser = async () => {
         try {
@@ -104,6 +104,7 @@ const UserProfile = () => {
                 user.currentUser.id !== id ?
                     <div>
                         <h2>{userProfile.username}</h2>
+                        <p>{userProfile.bio}</p>
                         <button
                             className="followBtn"
                             onClick={() => {
@@ -139,6 +140,8 @@ const UserProfile = () => {
 
                     <div>
                         <h2>{userProfile.username}</h2>
+                        <p>{userProfile.bio}</p>
+                        <Link to={`/editProfile/${userProfile.id}`}><button>Edit Profile</button></Link>
                         <div>
                             {userProfile.users?.length > 0 ? <p>Following {userProfile.users.length}</p> : <p>Following 0</p>}
                             {userProfile.categories?.length > 0 ? <p>Categories {userProfile.categories.length}</p> : <p>Categories 0</p>}
@@ -162,6 +165,7 @@ const UserProfile = () => {
                 :
                 <div>
                     <h2>{userProfile.username}</h2>
+                    <p>{userProfile.bio}</p>
                     <div>
                         {userProfile.users?.length > 0 ? <p>Following {userProfile.users.length}</p> : <p>Following 0</p>}
                         {userProfile.categories?.length > 0 ? <p>Categories {userProfile.categories.length}</p> : <p>Categories 0</p>}

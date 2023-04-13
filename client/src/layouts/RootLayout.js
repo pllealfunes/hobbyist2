@@ -54,9 +54,12 @@ export default function RootLayout() {
     };
 
 
+
+
+
     return (
         <div className="root-layout">
-            {!user && (
+            {!user &&
                 <Box sx={{ display: 'flex' }}>
                     <AppBar position="static" color="default">
                         <Container maxWidth="xl">
@@ -88,7 +91,15 @@ export default function RootLayout() {
                                         </Typography>
                                     </div>
                                     <div>
-                                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                                        <Box
+                                            sx={{
+                                                flexGrow: 1,
+                                                display: { xs: 'flex' },
+                                                visibility: {
+                                                    md: 'hidden'
+                                                }
+                                            }}
+                                        >
                                             <IconButton
                                                 size="large"
                                                 aria-label="account of current user"
@@ -113,7 +124,11 @@ export default function RootLayout() {
                                                 open={Boolean(anchorElNav)}
                                                 onClose={handleCloseNavMenu}
                                                 sx={{
-                                                    display: { xs: 'block', md: 'none' }
+                                                    display: { xs: 'block' },
+                                                    visibility: {
+                                                        md: 'hidden'
+                                                    }
+
                                                 }}
                                             >
                                                 <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
@@ -123,7 +138,12 @@ export default function RootLayout() {
                                             </Menu>
                                         </Box>
                                     </div>
-                                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                                    <AdbIcon sx={{
+                                        display: { xs: 'flex' },
+                                        mr: 1, visibility: {
+                                            md: 'hidden'
+                                        }
+                                    }} />
                                     <Typography
                                         variant="h5"
                                         noWrap
@@ -131,7 +151,10 @@ export default function RootLayout() {
                                         href=""
                                         sx={{
                                             mr: 2,
-                                            display: { xs: 'flex', md: 'none' },
+                                            display: { xs: 'flex' },
+                                            visibility: {
+                                                md: 'hidden'
+                                            },
                                             flexGrow: 1,
                                             fontFamily: 'monospace',
                                             fontWeight: 700,
@@ -153,8 +176,8 @@ export default function RootLayout() {
                         </Container>
                     </AppBar>
                 </Box>
-            )}
-            {user && (
+            }
+            {user &&
                 <AppBar className="muiNav" position="static" color="default">
                     <Container maxWidth="xl">
                         <Toolbar disableGutters>
@@ -177,7 +200,11 @@ export default function RootLayout() {
                                 Hobbyist
                             </Typography>
 
-                            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                            <Box sx={{
+                                flexGrow: 1, display: { xs: 'flex' }, visibility: {
+                                    md: 'hidden'
+                                }
+                            }}>
                                 <IconButton
                                     size="large"
                                     aria-label="account of current user"
@@ -202,19 +229,24 @@ export default function RootLayout() {
                                     open={Boolean(anchorElNav)}
                                     onClose={handleCloseNavMenu}
                                     sx={{
-                                        display: { xs: 'block', md: 'none' },
+                                        display: { xs: 'block' },
+                                        visibility: {
+                                            md: 'hidden'
+                                        }
                                     }}
                                 >
 
                                     <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                    <MenuItem><NavLink className="navbar-link" to="/createNewPost">NewPost</NavLink></MenuItem>
                                     <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
                                     <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
-                                    <MenuItem><NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}>{user.currentUser.username.toUpperCase()}</NavLink></MenuItem>
-                                    <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
+
                                 </Menu>
                             </Box>
-                            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                            <AdbIcon sx={{
+                                display: { xs: 'flex' }, mr: 1, visibility: {
+                                    md: 'hidden'
+                                }
+                            }} />
                             <Typography
                                 variant="h5"
                                 noWrap
@@ -270,16 +302,16 @@ export default function RootLayout() {
                                 >
                                     <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
                                     <Divider />
-                                    <MenuItem><NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}>Profile</NavLink></MenuItem>
+                                    <NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}><MenuItem>Profile</MenuItem></NavLink>
                                     <MenuItem>Favorites</MenuItem>
-                                    <MenuItem><NavLink className="navbar-link" to="/createNewPost">NewPost</NavLink></MenuItem>
+                                    <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
                                     <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
                                 </Menu>
                             </Box>
                         </Toolbar>
                     </Container>
                 </AppBar>
-            )}
+            }
 
             <main>
                 <Outlet />

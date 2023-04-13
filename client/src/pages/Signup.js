@@ -22,7 +22,9 @@ const Signup = () => {
         defaultValues: {
             username: "",
             email: "",
-            password: ""
+            password: "",
+            bio: "",
+            photo: ""
         }
     });
 
@@ -30,11 +32,18 @@ const Signup = () => {
     const dispatch = useDispatch()
 
     const newUser = async (data) => {
+
+        const formData = new FormData()
+        formData.append('username', data.username);
+        formData.append('email', data.email);
+        formData.append('password', data.password);
+        formData.append('bio', data.bio);
+        formData.append('photo', data.photo[0]);
+
         try {
-            await dispatch(registerUser(data)).unwrap()
+            await dispatch(registerUser(formData)).unwrap()
             toast.success('New Account Created')
-            navigate('/profile')
-            dispatch(reset())
+            navigate('/feed')
         } catch (error) {
             toast.error(error)
         }
@@ -64,12 +73,24 @@ const Signup = () => {
                 <AccountCircleIcon sx={{ fontSize: 80 }} />
                 <h2 className='loginTitle'>Signup</h2>
                 <Stack>
+                    {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A Photo is required.</span></Alert>}
                     {errors.username && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Username must be 5 characters long</span></Alert>}
                     {errors.email && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Please enter a valid email</span></Alert>}
                     {errors.password && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A password must contain at least 8 Characters, 1 Uppercase Character, 1 lowercase character, 1 Number, and 1 Special Character</span></Alert>}
+                    {errors.bio && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A short bio is required.</span></Alert>}
                 </Stack>
 
                 <form className="registerForm" onSubmit={handleSubmit(newUser)}>
+
+
+                    <label htmlFor="photo">Upload Photo:
+                        <input
+                            type="file"
+                            name="photo"
+                            className="photoInput"
+                            {...register("photo", { required: true })}
+                        />
+                    </label>
 
                     <TextField
                         id="username"
@@ -121,6 +142,18 @@ const Signup = () => {
                         variant="filled"
                         fullWidth
                         margin="normal"
+                    />
+
+                    <TextField
+                        className="bioContainer"
+                        name="bio"
+                        label="User Bio"
+                        placeholder="Write Bio"
+                        fullWidth
+                        multiline
+                        margin="normal"
+
+                        {...register("bio", { required: true, minLength: 10 })}
                     />
 
                     <Button className="signupBtn" type="submit" color="success" variant="contained" fullWidth>Submit</Button>
