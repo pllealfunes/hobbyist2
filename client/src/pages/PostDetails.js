@@ -174,11 +174,11 @@ const PostDetails = () => {
                 <h1>{post.title}</h1>
                 {user ? <FollowCategoryBtn category={post.category} user={user} /> : <div><div>{post.category}</div> <button onClick={() => (navigate('/login'))}>Follow Category</button></div>}
                 <div className="postContainer">
-                    {post.photo && <img src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" height={500} />}
+                    {post.photo && <img src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" height={300} width={500} />}
                     <p>{post.post}</p>
                     <Author id={post.user} />
                 </div>
-                {user.currentUser.id === `${post.user}` && <div>
+                {user && user.currentUser.id === `${post.user}` && <div>
                     <Link key={post._id} to={`/post/editPost/${post._id}`}>
                         <button>Edit Post</button>
                     </Link>
@@ -215,7 +215,7 @@ const PostDetails = () => {
                         <div key={comment._id}>
                             <Author id={comment.user} />
                             <p>{comment.comment}</p>
-                            {user.currentUser.id === `${comment.user}` && <div>
+                            {user && user.currentUser.id === `${comment.user}` && <div>
                                 <Link key={comment._id} to={`/post/comment/editComment/${comment._id}`}>
                                     <button>Edit Comment</button>
                                 </Link>

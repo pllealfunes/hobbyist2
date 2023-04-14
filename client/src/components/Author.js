@@ -17,7 +17,7 @@ export const Author = ({ id }) => {
                 console.log(error);
             }
         })();
-    }, [id])
+    }, [id, dispatch])
 
 
     return (

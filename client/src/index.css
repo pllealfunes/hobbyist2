@@ -55,7 +55,7 @@ footer {
 .heroSection,
 .getstartedSection,
 .exploreSection {
-  background-color: #fccc04;
+  background-color: #FFBF86;
 }
 
 .homePhoto {
@@ -93,7 +93,7 @@ footer {
 }
 
 .categoryBtn {
-  background-color: #fccc04;
+  background-color: #FFBF86;
   font-weight: bold;
   color: #0A0909;
   padding: 10px 10px;
@@ -256,8 +256,12 @@ footer {
 
 /* Explore Styling*/
 
+.latestTitle {
+  margin-bottom: 5rem;
+}
+
 .searchWrapper {
-  background-color: #fccc04;
+  background-color: #FFBF86;
 }
 
 .searchTitle {
@@ -266,8 +270,51 @@ footer {
 }
 
 .searchContainer {
-  box-shadow: 5px;
   border-radius: 10px;
   background-color: #F5F5F5;
   margin: 3rem;
+}
+
+.postCard {
+  background-color: #ffb473;
+}
+
+.resultsContainer {
+  padding: 3rem;
+}
+
+.profilePhoto {
+  margin-right: 10px;
+}
+
+.postCategory {
+  padding: 5px;
+}
+
+.my-masonry-grid {
+  display: -webkit-box;
+  /* Not needed if autoprefixing */
+  display: -ms-flexbox;
+  /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px;
+  /* gutter size offset */
+  width: auto;
+}
+
+.my-masonry-grid_column {
+  padding-left: 30px;
+  /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column>div {
+  /* change div to reference your elements you put in <Masonry> */
+  background: grey;
+  margin-bottom: 30px;
+}
+
+.textPreview {
+  text-overflow: ellipsis;
 }

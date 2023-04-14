@@ -6,6 +6,7 @@ import CategoryResults from '../components/CategoryResults';
 import ErrorMessage from '../components/ErrorMessage';
 import axios from 'axios';
 
+
 /*** MATERIAL UI STYLING ***/
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -37,7 +38,8 @@ const ExplorePage = () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
                 setPostsLoaded(response.data)
-                setLatestPosts(response.data.slice(-5))
+                const lastPosts = response.data.slice(-3)
+                setLatestPosts(lastPosts.reverse())
                 setShowLatestPosts(true)
             } catch (error) {
                 console.log(error);
@@ -141,11 +143,12 @@ const ExplorePage = () => {
                     </div>
                 </Grid>
             </Box>
-            {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
-            {showResults && <SearchResults searchResults={searchResults} />}
-            {showCategory && <CategoryResults categoryResults={categoryResults} />}
-            {showErrorMessage && <ErrorMessage />}
-
+            <div className="resultsContainer">
+                {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
+                {showResults && <SearchResults searchResults={searchResults} />}
+                {showCategory && <CategoryResults categoryResults={categoryResults} />}
+                {showErrorMessage && <ErrorMessage />}
+            </div>
         </section>
     )
 }
