@@ -108,7 +108,7 @@ router.get('/post/:postid', (req, res, next) => {
 
 
 // Create Posts
-router.post('/post/newPost', validationMiddleware, (req, res, next) => {
+router.post('/post/newPost', verifyJWT, validationMiddleware, (req, res, next) => {
     const form = formidable({ multiples: true });
     form.uploadDir = path.join(__dirname, "../public/images");
     form.keepExtensions = true;
@@ -194,7 +194,7 @@ router.post('/post/newPost', validationMiddleware, (req, res, next) => {
 
 
 // Update Posts
-router.put('/post/editPost/:postid', validationMiddleware,
+router.put('/post/editPost/:postid', verifyJWT, validationMiddleware,
     (req, res, next) => {
 
         const form = formidable({ multiples: true });
@@ -284,7 +284,7 @@ router.put('/post/editPost/:postid', validationMiddleware,
 
 // Delete Photo from Edit Form
 
-router.put('/post/editPost/deletePhoto/:postid', (req, res, next) => {
+router.put('/post/editPost/deletePhoto/:postid', verifyJWT, (req, res, next) => {
 
     if (req.body) {
         // If there are errors, delete any uploaded files
@@ -316,7 +316,7 @@ router.put('/post/editPost/deletePhoto/:postid', (req, res, next) => {
 
 
 //  Delete Posts with their Comments
-router.delete('/post/deletePost/:postid', (req, res) => {
+router.delete('/post/deletePost/:postid', verifyJWT, (req, res) => {
     CommentService.deleteAll(req.params.postid)
         .then((comment) => {
             res.status(200)
@@ -364,7 +364,7 @@ router.delete('/post/deletePost/:postid', (req, res) => {
 /* Code associated with blog comments */
 
 // List Comments
-router.get('/post/:postid/getComments', (req, res, next) => {
+router.get('/post/:postid/getComments', verifyJWT, (req, res, next) => {
     CommentService.list(req.params.postid)
         .then((comment) => {
             res.status(200)
@@ -377,7 +377,7 @@ router.get('/post/:postid/getComments', (req, res, next) => {
 });
 
 // Find Comment
-router.get('/post/comment/:commentid', (req, res, next) => {
+router.get('/post/comment/:commentid', verifyJWT, (req, res, next) => {
     CommentService.find(req.params.commentid)
         .then((comment) => {
             res.status(200)

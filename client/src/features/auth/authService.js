@@ -5,7 +5,7 @@ const API_URL = process.env.REACT_APP_URL
 // Get User
 const getUser = async (id) => {
 
-    const response = await axios.get(`http://192.241.129.133/api/users/user/${id}`)
+    const response = await axios.get(`${API_URL}/api/users/user/${id}`)
     return response.data
 }
 

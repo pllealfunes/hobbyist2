@@ -15,7 +15,7 @@ const UserService = usersController.UserService
 const User = require('../models/userSchema')
 
 /* Validation */
-const { check, validationResult } = require('express-validator')
+const { check, body, validationResult } = require('express-validator')
 
 /* Verify JWT */
 const verifyJWT = require('../middleware/verifyJWT')
@@ -38,7 +38,21 @@ router.use((req, res, next) => {
 });
 
 
-const validationMiddleware = [
+
+
+
+
+// Create JWT Token 
+const jwt = require('jsonwebtoken')
+
+const createToken = (id) => {
+    return jwt.sign({ id }, process.env.ACCESS_TOKEN, { expiresIn: '5h' })
+}
+
+
+
+/* Create a new user using express validate for the form and bcyrpt to hash passwords */
+router.post("/signup", [
     check("username", "Please enter a username at least 5 characters long")
         .not()
         .bail()
@@ -83,107 +97,42 @@ const validationMiddleware = [
         .isStrongPassword()
         .bail()
         .trim(),
-    check("bio", "Please add a small description of yourself")
+    check("bio", "Please enter a short bio")
         .not()
         .bail()
         .isEmpty()
         .bail()
-        .isLength({ min: 10 })
-        .bail()
         .trim(),
-    check("photo", "A photo is required")
-        .bail()
-        .isEmpty()
-];
-
-
-
-
-// Create JWT Token 
-const jwt = require('jsonwebtoken')
-
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.ACCESS_TOKEN, { expiresIn: '5h' })
-}
-
-
-
-/* Create a new user using express validate for the form and bcyrpt to hash passwords */
-router.post("/signup", validationMiddleware, (req, res, next) => {
-
-    const form = formidable({ multiples: true });
-    form.uploadDir = path.join(__dirname, "../public/images/profile");
-    form.keepExtensions = true;
-    form.parse(req, (err, fields, files) => {
-        if (err) {
-            next(err);
-            return;
-        }
-        const errors = validationResult(fields);
-
-        if (!errors.isEmpty()) {
-            // If there are errors, delete any uploaded files
-            if (files.photo) {
-                fs.unlink(files.photo.filepath, (err) => {
-                    if (err) {
-                        console.error(err);
-                    }
-                });
+], (req, res, next) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    } else {
+        bcrypt.hash(req.body.password.trim(), 10, (err, hashedPassword) => {
+            let newUser = {
+                username: req.body.username.trim(),
+                email: req.body.email.trim(),
+                password: hashedPassword,
+                bio: req.body.bio
             }
-            return res.status(400).json({ errors: errors.array() });
 
-
-        } else {
-            console.log(fields.photo)
-            bcrypt.hash(fields.password.trim(), 10, (err, hashedPassword) => {
-
-                const photoName = files.photo ? files.photo.originalFilename : null;
-                if (photoName && !/\.(jpg|jpeg|png|gif)$/i.test(photoName)) {
-                    fs.unlink(files.photo.filepath, (err) => {
-                        if (err) {
-                            console.error(err);
-                        }
-                    });
-                    return res.status(400).json({ errors: [{ msg: 'Invalid photo format' }] });
-                }
-
-                const newUser = {
-                    user: fields.username,
-                    email: fields.email,
-                    password: hashedPassword,
-                    bio: fields.bio,
-                    photo: files.photo.originalFilename
-                };
-
-                const currentUser = {
-                    user: fields.username,
-                    email: fields.email,
-                    bio: fields.bio,
-                    photo: files.photo.originalFilename,
-                }
-
-
-                UserService.create(newUser)
-                    .then((user) => {
-                        const token = createToken(user._id)
-                        path.join(__dirname, "../public/images/profile", files.photo.originalFilename);
-                        const oldPath = files.photo.filepath;
-                        const newPath = path.join(__dirname, "../public/images/profile", files.photo.originalFilename);
-                        fs.rename(oldPath, newPath, (err) => {
-                            if (err) {
-                                console.error(err);
-                            }
-                        });
-                        res.status(200).json({ currentUser, token })
-                    }).catch((err) => {
-                        res.status(404)
-                        res.end()
-                    })
-            })
-        }
-    });
-
+            let currentUser = {
+                username: req.body.username.trim(),
+                email: req.body.email.trim(),
+                bio: req.body.bio
+            }
+            UserService.create(newUser)
+                .then((user) => {
+                    const token = createToken(user._id)
+                    res.status(200).json({ currentUser, token })
+                }).catch((err) => {
+                    res.status(404)
+                    res.end()
+                })
+        })
+    }
 });
+
 
 
 router.post("/login", async (req, res, next) => {
