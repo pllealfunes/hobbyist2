@@ -10,7 +10,7 @@ import { getUser } from '../features/auth/authSlice'
 // Import other components
 import Modal from "../components/DeleteModal"
 import FollowCategoryBtn from "../components/FollowCategoryBtn";
-
+import { Author } from "./Author";
 
 const PostDetails = () => {
     let btnId = [1, 2];
@@ -173,16 +173,17 @@ const PostDetails = () => {
                 <h1>{post.title}</h1>
                 {user ? <FollowCategoryBtn category={post.category} user={user} /> : <div><div>{post.category}</div> <button onClick={() => (navigate('/login'))}>Follow Category</button></div>}
                 <div className="postContainer">
-                    {post.photo && <img src={`${process.env.REACT_APP_URL}/public/images/${post.photo}`} alt="" height={500} />}
+                    {post.photo && <img src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" height={500} />}
                     <p>{post.post}</p>
-                    <div>
-                        <Link to={`/profile/${post.user}`}><button>{author.username}</button></Link>
-                    </div>
+                    <Author id={post.user} />
                 </div>
-                <Link key={post._id} to={`/post/editPost/${post._id}`}>
-                    <button>Edit Post</button>
-                </Link>
-                <button id="deletePostBtn" onClick={(e) => handleModal(post._id, btnId[0])}>Delete Post</button>
+                {user.currentUser.id === `${post.user}` && <div>
+                    <Link key={post._id} to={`/post/editPost/${post._id}`}>
+                        <button>Edit Post</button>
+                    </Link>
+                    <button id="deletePostBtn" onClick={(e) => handleModal(post._id, btnId[0])}>Delete Post</button>
+                </div>
+                }
             </section >
 
             <section className="commSection">
@@ -211,11 +212,15 @@ const PostDetails = () => {
                 <div className="comments">
                     {comments && comments.map((comment) => (
                         <div key={comment._id}>
+                            <Author id={comment.user} />
                             <p>{comment.comment}</p>
-                            <Link key={comment._id} to={`/post/comment/editComment/${comment._id}`}>
-                                <button>Edit Comment</button>
-                            </Link>
-                            <button id="deleteCommBtn" onClick={(e) => handleModal(comment._id, btnId[1])}>Delete Comment</button>
+                            {user.currentUser.id === `${comment.user}` && <div>
+                                <Link key={comment._id} to={`/post/comment/editComment/${comment._id}`}>
+                                    <button>Edit Comment</button>
+                                </Link>
+                                <button id="deleteCommBtn" onClick={(e) => handleModal(comment._id, btnId[1])}>Delete Comment</button>
+                            </div>
+                            }
                         </div>
                     ))}
                 </div>

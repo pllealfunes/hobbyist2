@@ -11,23 +11,18 @@ const UserService = usersController.UserService
 
 /* Verify JWT */
 const verifyJWT = require('../middleware/verifyJWT')
-const { verify } = require('jsonwebtoken')
+
 
 /* CORS */
-router.use((req, res, next) => {
-    res.set({
-        // allow any domain, allow REST methods we've implemented
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
-        // Set content-type for all api requests
-        'Content-type': 'application/json'
-    });
-    if (req.method == 'OPTIONS') {
-        return res.status(200).end();
-    }
-    next();
-});
+
+const corsOptions = {
+    origin: `${process.env.FRONTEND}`,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}
+router.use(cors(corsOptions))
 
 
 
@@ -60,7 +55,7 @@ router.get('/user/:id', (req, res, next) => {
 
 
 /* Code associated with following categories */
-router.put('/:id/followCategory/:category', (req, res, next) => {
+router.put('/:id/followCategory/:category', verifyJWT, (req, res, next) => {
 
     User.findOneAndUpdate({ _id: req.params.id }, { $addToSet: { categories: req.params.category } })
         .then((updateCategory) => {
@@ -75,7 +70,7 @@ router.put('/:id/followCategory/:category', (req, res, next) => {
 
 
 /* Code associated with unfollowing categories */
-router.put('/:id/unFollowCategory/:category', (req, res, next) => {
+router.put('/:id/unFollowCategory/:category', verifyJWT, (req, res, next) => {
 
     User.findOneAndUpdate({ _id: req.params.id }, { $pull: { categories: req.params.category } })
         .then((updateCategory) => {
@@ -89,7 +84,7 @@ router.put('/:id/unFollowCategory/:category', (req, res, next) => {
 })
 
 /* Code associated with following a user */
-router.put('/:userid/followUser/:id', async (req, res, next) => {
+router.put('/:userid/followUser/:id', verifyJWT, async (req, res, next) => {
 
     User.findOneAndUpdate({ _id: req.params.userid }, { $addToSet: { users: req.params.id } })
         .then((updateCategory) => {
@@ -103,7 +98,7 @@ router.put('/:userid/followUser/:id', async (req, res, next) => {
 })
 
 /* Code associated with unfollowing users */
-router.put('/:userid/unFollowUser/:id', async (req, res, next) => {
+router.put('/:userid/unFollowUser/:id', verifyJWT, async (req, res, next) => {
 
     User.findOneAndUpdate({ _id: req.params.userid }, { $pull: { users: req.params.id } })
         .then((updateCategory) => {

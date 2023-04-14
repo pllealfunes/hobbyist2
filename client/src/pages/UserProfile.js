@@ -64,7 +64,7 @@ const UserProfile = () => {
                 toast.error('You cannot follow yourself')
             } else {
 
-                await axios.put(`http://localhost:5000/api/users/${user.currentUser.id}/followUser/${id}`)
+                await axiosPrivate.put(`/users/${user.currentUser.id}/followUser/${id}`)
                 toast.success(`Following ${userProfile.username}`)
                 setIsFollow(true)
 
@@ -83,7 +83,7 @@ const UserProfile = () => {
                 toast.error('You cannot unfollow yourself')
             } else {
 
-                await axios.put(`http://localhost:5000/api/users/${user.currentUser.id}/unFollowUser/${id}`)
+                await axiosPrivate.put(`/users/${user.currentUser.id}/unFollowUser/${id}`)
                 toast.success(`Unfollowing ${userProfile.username}`)
                 setIsFollow(false)
 
