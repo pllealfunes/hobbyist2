@@ -4,7 +4,7 @@ import { useParams, useNavigate, Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
 import axios from "axios"
 import { toast } from 'react-toastify'
-import axiosPrivate from '../config/interceptor';
+import axiosPrivate from '../config/useAxiosPrivate';
 
 const UserProfile = () => {
     const { user } = useSelector((state) => state.auth)

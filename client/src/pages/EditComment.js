@@ -2,8 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import axiosPrivate from "../config/interceptor";
-import axios from 'axios';
+import axiosPrivate from "../config/useAxiosPrivate";
+
 
 const EditComment = () => {
 

@@ -34,21 +34,14 @@ const verifyJWT = require('../middleware/verifyJWT');
 
 /* CORS */
 
-router.use((req, res, next) => {
-    res.set({
-        // allow any domain, allow REST methods we've implemented
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS',
-        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers",
-        // Set content-type for all api requests
-        'Content-type': 'application/json'
-    });
-    if (req.method == 'OPTIONS') {
-        return res.status(200).end();
-    }
-    next();
-});
-
+const corsOptions = {
+    origin: `${process.env.FRONTEND}`,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}
+router.use(cors(corsOptions))
 
 
 /* Start of Routing */

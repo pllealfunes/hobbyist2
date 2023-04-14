@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import axiosPrivate from "../config/interceptor";
-import axios from 'axios';
+import axiosPrivate from "../config/useAxiosPrivate";
+
 
 /*** MATERIAL UI STYLING ***/
 import Box from '@mui/material/Box';

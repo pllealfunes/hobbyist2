@@ -1,9 +1,8 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from 'react';
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { toast } from 'react-toastify';
-import axiosPrivate from "../config/interceptor";
+import axiosPrivate from "../config/useAxiosPrivate";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from '../features/auth/authSlice'
 
@@ -38,7 +37,7 @@ const PostDetails = () => {
     const fetchComments = useCallback(async () => {
 
         try {
-            let response = await axios.get(`http://localhost:5000/api/blog/post/${id}/getComments`)
+            let response = await axiosPrivate.get(`/blog/post/${id}/getComments`)
             setComments(response.data);
         } catch (error) {
             console.log(error);
@@ -50,7 +49,7 @@ const PostDetails = () => {
 
         const fetchPost = async () => {
             try {
-                let getPosts = await axios.get(`http://localhost:5000/api/blog/post/${id}`);
+                let getPosts = await axiosPrivate.get(`/blog/post/${id}`);
                 setPost(getPosts.data);
             } catch (error) {
                 console.log(error);

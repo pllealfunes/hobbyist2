@@ -4,7 +4,7 @@ import SearchResults from '../components/SearchResults';
 import LatestPosts from '../components/LatestPosts';
 import CategoryResults from '../components/CategoryResults';
 import ErrorMessage from '../components/ErrorMessage';
-import axiosPrivate from '../config/interceptor';
+import axiosPrivate from '../config/useAxiosPrivate';
 
 /*** MATERIAL UI STYLING ***/
 import Box from '@mui/material/Box';

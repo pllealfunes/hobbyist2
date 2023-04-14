@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
-import axiosPrivate from '../config/interceptor'
+import axiosPrivate from '../config/useAxiosPrivate'
 
 
 const Feed = () => {

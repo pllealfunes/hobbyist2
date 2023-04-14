@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import axiosPrivate from "../config/interceptor";
+import axiosPrivate from "../config/useAxiosPrivate";
 import axios from 'axios';
 
 /*** MATERIAL UI STYLING ***/
@@ -57,7 +57,7 @@ const CreatNewPost = () => {
 
         (async () => {
             try {
-                await axios.post(`${process.env.REACT_APP_URL}/api/blog/post/newPost`, formData)
+                await axiosPrivate.post('/blog/post/newPost', formData)
                 toast.success("View your profile for your new post!")
                 reset()
             } catch (error) {

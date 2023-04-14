@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
 import { toast } from 'react-toastify'
-import axiosPrivate from '../config/interceptor'
+import axiosPrivate from '../config/useAxiosPrivate'
 
 function FollowCategoryBtn({ category, user }) {
 
@@ -52,7 +52,7 @@ function FollowCategoryBtn({ category, user }) {
 
     const followCategory = async () => {
         try {
-            await axiosPrivate.put(`http://localhost:5000/api/users/${user.currentUser.id}/followCategory/${category}`)
+            await axiosPrivate.put(`/users/${user.currentUser.id}/followCategory/${category}`)
             toast.success(`Now following ${category}`)
             setIsFollow(true)
         } catch (error) {
@@ -63,7 +63,7 @@ function FollowCategoryBtn({ category, user }) {
 
     const unfollowCategory = async () => {
         try {
-            await axiosPrivate.put(`http://localhost:5000/${user.currentUser.id}/unFollowCategory/${category}`)
+            await axiosPrivate.put(`/users/${user.currentUser.id}/unFollowCategory/${category}`)
             toast.success(`Now unfollowing ${category}`)
             setIsFollow(false)
         } catch (error) {
