@@ -4,7 +4,7 @@ import SearchResults from '../components/SearchResults';
 import LatestPosts from '../components/LatestPosts';
 import CategoryResults from '../components/CategoryResults';
 import ErrorMessage from '../components/ErrorMessage';
-import axiosPrivate from '../config/useAxiosPrivate';
+import axios from 'axios';
 
 /*** MATERIAL UI STYLING ***/
 import Box from '@mui/material/Box';
@@ -35,7 +35,7 @@ const ExplorePage = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                let response = await axiosPrivate.get('/blog/posts')
+                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
                 setPostsLoaded(response.data)
                 setLatestPosts(response.data.slice(-5))
                 setShowLatestPosts(true)
@@ -107,7 +107,7 @@ const ExplorePage = () => {
                         '& button': { my: 3 },
                     }}
                 >
-                    <h2 className="searchTitle">Explore page</h2>
+                    <h2 className="searchTitle">Explore</h2>
                     <Grid
                         className='categoryConatiner'
                         container

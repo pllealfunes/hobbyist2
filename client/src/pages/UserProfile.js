@@ -24,7 +24,7 @@ const UserProfile = () => {
                 let userProfile = await dispatch(getUser(id))
                 console.log(userProfile.payload);
                 setUserProfile(userProfile.payload)
-                let response = await axiosPrivate.get(`/blog/post/user/${id}`)
+                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/user/${id}`)
                 setPosts(response.data)
                 if (id && user) {
                     await dispatch(getUser(user.currentUser.id))

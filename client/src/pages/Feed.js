@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
-import axiosPrivate from '../config/useAxiosPrivate'
+import axios from 'axios'
 
 
 const Feed = () => {
@@ -18,7 +18,7 @@ const Feed = () => {
             try {
                 if (user) {
                     await dispatch(getUser(user.currentUser.id))
-                    let response = await axiosPrivate.get('/blog/posts')
+                    let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
                     setPosts(response.data)
                 }
 

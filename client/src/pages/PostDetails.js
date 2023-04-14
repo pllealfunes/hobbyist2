@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useEffect, useState, useCallback } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
+import axios from "axios";
 import axiosPrivate from "../config/useAxiosPrivate";
 import { useSelector, useDispatch } from "react-redux";
 import { getUser } from '../features/auth/authSlice'
@@ -10,7 +11,7 @@ import { getUser } from '../features/auth/authSlice'
 // Import other components
 import Modal from "../components/DeleteModal"
 import FollowCategoryBtn from "../components/FollowCategoryBtn";
-import { Author } from "./Author";
+import { Author } from "../components/Author";
 
 const PostDetails = () => {
     let btnId = [1, 2];
@@ -37,7 +38,7 @@ const PostDetails = () => {
     const fetchComments = useCallback(async () => {
 
         try {
-            let response = await axiosPrivate.get(`/blog/post/${id}/getComments`)
+            let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}/getComments`)
             setComments(response.data);
         } catch (error) {
             console.log(error);
@@ -49,7 +50,7 @@ const PostDetails = () => {
 
         const fetchPost = async () => {
             try {
-                let getPosts = await axiosPrivate.get(`/blog/post/${id}`);
+                let getPosts = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}`);
                 setPost(getPosts.data);
             } catch (error) {
                 console.log(error);
