@@ -92,6 +92,15 @@ footer {
   border-radius: 5px;
 }
 
+.categoryBtn {
+  background-color: #fccc04;
+  font-weight: bold;
+  color: #0A0909;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: none;
+}
+
 .loginBtn:hover,
 .signupBtn:hover {
   background-color: #a18100;
@@ -99,7 +108,8 @@ footer {
 }
 
 
-.logoutBtn:hover {
+.logoutBtn:hover,
+.categoryBtn:hover {
   background-color: #a18100;
   color: #fff2f2;
 }
@@ -244,7 +254,7 @@ footer {
   color: #f4770e;
 }
 
-/* Search Styling*/
+/* Explore Styling*/
 
 .searchWrapper {
   background-color: #fccc04;
@@ -257,7 +267,7 @@ footer {
 
 .searchContainer {
   box-shadow: 5px;
-  border-radius: 5px;
+  border-radius: 10px;
   background-color: #F5F5F5;
   margin: 3rem;
 }

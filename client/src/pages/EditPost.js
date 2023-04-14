@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import axiosPrivate from "../config/useAxiosPrivate";
+import axios from "axios";
 
 
 /*** MATERIAL UI STYLING ***/
@@ -37,7 +38,7 @@ const EditPost = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                let response = await axiosPrivate.get(`/blog/post/${id}`);
+                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}`);
                 setValue("title", response.data.title);
                 setValue("category", response.data.category);
                 setValue("post", response.data.post);

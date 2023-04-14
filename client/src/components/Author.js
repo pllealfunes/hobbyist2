@@ -22,7 +22,7 @@ export const Author = ({ id }) => {
 
     return (
         <div>
-            <Link to={`/profile/${id}`}><button>{author.username}</button></Link>
+            <Link to={`/profile/${id}`}>{author.username}</Link>
         </div>
     )
 }

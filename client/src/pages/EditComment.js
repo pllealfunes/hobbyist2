@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import axiosPrivate from "../config/useAxiosPrivate";
-
+import axios from "axios";
 
 const EditComment = () => {
 
@@ -15,7 +15,7 @@ const EditComment = () => {
     useEffect(() => {
         const fetchComment = async () => {
             try {
-                let response = await axiosPrivate.get(`/blog/post/comment/${id}`);
+                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/comment/${id}`);
                 setValue("comment", response.data.comment);
             } catch (error) {
                 console.log(error);
