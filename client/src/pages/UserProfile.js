@@ -171,8 +171,8 @@ const UserProfile = () => {
                                 {isFollow ? "Unfollow" : "Follow"}
                             </button>
                             <div>
-                                {userProfile.users?.length > 0 ? <p>Following {userProfile.users.length}</p> : <p>Following 0</p>}
-                                {userProfile.categories?.length > 0 ? <p>Categories {userProfile.categories.length}</p> : <p>Categories 0</p>}
+                                {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
+                                {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
                             </div>
                             <section>
                                 {currentPosts && currentPosts.map((post) => (
@@ -237,8 +237,8 @@ const UserProfile = () => {
                         <p>{userProfile.bio}</p>
                         <Link to={`/editProfile/${userProfile.id}`}><button>Edit Profile</button></Link>
                         <div>
-                            {userProfile.users?.length > 0 ? <p>Following {userProfile.users.length}</p> : <p>Following 0</p>}
-                            {userProfile.categories?.length > 0 ? <p>Categories {userProfile.categories.length}</p> : <p>Categories 0</p>}
+                            {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
+                            {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
                         </div>
                         <section>
                             {currentPosts && currentPosts.map((post) => (
@@ -335,10 +335,10 @@ const UserProfile = () => {
                             <h2>{userProfile.username}</h2>
                             <p>{userProfile.bio}</p>
                             <div>
-                                {userProfile.users?.length > 0 ? <p>Following {userProfile.users.length}</p> : <p>Following 0</p>}
-                                {userProfile.categories?.length > 0 ? <p>Categories {userProfile.categories.length}</p> : <p>Categories 0</p>}
+                                {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
+                                {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
                             </div>
-                            <button onClick={() => (navigate('/login'))}>Follow User</button>
+                            <button className="followBtn" onClick={() => (navigate('/login'))}>Follow User</button>
                         </Grid>
                     </Box>
                     <section className='postsWrapper'>

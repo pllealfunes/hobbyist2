@@ -92,7 +92,7 @@ footer {
   border-radius: 5px;
 }
 
-.categoryBtn {
+.followBtn {
   background-color: #FFBF86;
   font-weight: bold;
   color: #0A0909;
@@ -272,7 +272,8 @@ footer {
 }
 
 .categoryWrapper,
-.resultsWrapper {
+.resultsWrapper,
+.feedWrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -295,7 +296,9 @@ footer {
   margin: 1rem;
 }
 
-.searchContainer {
+.searchContainer,
+.feedContainer,
+.categoryContainer {
   border-radius: 10px;
   background-color: #F5F5F5;
   margin: 3rem;

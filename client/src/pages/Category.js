@@ -71,7 +71,7 @@ function Category() {
             >
                 <Grid
                     container
-                    className="searchContainer"
+                    className="categoryContainer"
                     direction="column"
                     alignItems="center"
                     justifyContent="center"
