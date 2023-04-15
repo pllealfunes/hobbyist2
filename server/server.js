@@ -34,11 +34,11 @@ app.use('/api/auth', auth)
 app.use('/api/users', users)
 
 app.use('/public', express.static(path.join(__dirname, 'public')))
-//app.use(express.static(path.join(__dirname, '/../client', 'build')))
+app.use(express.static(path.join(__dirname, '/../client', 'build')))
 
-/*app.get('*', function (req, res) {
+app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '/../client', 'build', 'index.html'))
-});*/
+});
 
 app.listen(process.env.PORT, () => console.log("Server started!"))
 
