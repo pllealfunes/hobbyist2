@@ -14,7 +14,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
         <nav>
             {pageNumbers.map(number => (
                 <Stack key={number} className='page-item'>
-                    <Page onClick={() => paginate(number)} href='!#' count={number} color="primary" className='page-link'>
+                    <Page onClick={() => paginate(number)} href='!#' count={number} >
                         {number}
                     </Page>
                 </Stack>

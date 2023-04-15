@@ -31,16 +31,16 @@ const latestPosts = ({ latestPosts }) => {
                                 justifyContent="flex-start"
                                 alignitems="center"
                                 sx={{ p: 1 }}
-                                className="postCard"
+                                className="postHeader"
                             >
                                 <AccountCircleIcon
                                     aria-label="account of current user"
                                     sx={{ height: 30, width: 30 }}
                                     className="profilePhoto"
                                 ></AccountCircleIcon>
-                                <Typography color="text.primary" sx={{ py: .5 }}>
-                                    <Author id={post.user} />
-                                </Typography>
+
+                                <Author id={post.user} />
+
                             </Grid>
                             <Link to={`/post/${post._id}`}>
                                 <CardMedia
@@ -64,7 +64,7 @@ const latestPosts = ({ latestPosts }) => {
                                 justifyContent="space-between"
                                 alignitems="center"
                                 sx={{ p: 1 }}
-                                className="postCard"
+                                className="postFooter"
                             >
                                 <Typography component="div" className='postCategory' color="text.primary" sx={{ fontWeight: "bold" }}>{post.category}</Typography>
                                 <Typography variant="caption" color="text.primary" sx={{ p: 0.7 }}>
@@ -82,16 +82,16 @@ const latestPosts = ({ latestPosts }) => {
                                 justifyContent="flex-start"
                                 alignitems="center"
                                 sx={{ p: 2 }}
-                                className="postCard"
+                                className="postHeader"
                             >
                                 <AccountCircleIcon
                                     aria-label="account of current user"
                                     sx={{ height: 30, width: 30 }}
                                     className="profilePhoto"
                                 ></AccountCircleIcon>
-                                <Typography color="text.primary" sx={{ py: .5 }} >
-                                    <Author id={post.user} />
-                                </Typography>
+
+                                <Author id={post.user} />
+
                             </Grid>
                             <Divider />
                             <Link to={`/post/${post._id}`}>
@@ -111,7 +111,7 @@ const latestPosts = ({ latestPosts }) => {
                                 justifyContent="space-between"
                                 alignitems="center"
                                 sx={{ p: 1 }}
-                                className="postCard"
+                                className="postFooter"
                             >
                                 <Typography component="div" className='postCategory' color="text.primary" sx={{ fontWeight: 'bold' }}>{post.category}</Typography>
                                 <Typography variant="caption" color="text.primary" sx={{ p: 1, fontWeight: 'medium' }}>

@@ -22,14 +22,11 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 
 const ExplorePage = () => {
-    const categories = ["Physical", "Creative", "Mental", "Food", "Collecting", "Games/Puzzles"]
     const [postsLoaded, setPostsLoaded] = useState()
     const [latestPosts, setLatestPosts] = useState()
     const [showLatestPosts, setShowLatestPosts] = useState(false)
-    const [searchResults, setSearchResults] = useState('')
+    const [searchResults, setSearchResults] = useState(false)
     const [showResults, setShowResults] = useState(false)
-    const [showCategory, setShowCategory] = useState(false)
-    const [categoryResults, setCategoryResults] = useState('')
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
     const [showErrorMessage, setShowErrorMessage] = useState(false)
 
@@ -46,7 +43,7 @@ const ExplorePage = () => {
             }
         }
         fetchPosts()
-    }, [latestPosts])
+    }, [])
 
 
 
@@ -57,14 +54,12 @@ const ExplorePage = () => {
 
         if (results.length === 0) {
             setShowErrorMessage(true)
-            setShowLatestPosts(false)
+            setShowLatestPosts(true)
             setShowResults(false)
-            setShowCategory(false)
         } else {
             reset()
             setShowErrorMessage(false)
             setShowLatestPosts(false)
-            setShowCategory(false)
             setSearchResults(results.reverse())
             setShowResults(true)
         }

@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { Author } from '../components/Author';
-import Masonry from 'react-masonry-css'
+import Pagination from '../components/Pagination';
+import ErrorMessage from '../components/ErrorMessage';
 
 import {
     Card,
@@ -23,26 +24,47 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 function Category() {
 
     const { category } = useParams()
-    const [posts, setPosts] = useState()
     const [postsLoaded, setPostsLoaded] = useState()
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(10);
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const [currentPosts, setCurrentPosts] = useState('')
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchData = async () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
-                setPosts(response.data)
-                const currentPosts = posts.filter((post) => post.category === category)
-                setPostsLoaded(currentPosts.reverse())
+                let results = response.data.filter(post => {
+                    return post.category === category
+                })
+                setPostsLoaded(results.reverse())
             } catch (error) {
                 console.log(error);
             }
         }
-        fetchPosts()
-    }, [category, posts, postsLoaded])
+
+        fetchData()
+    }, [category])
+
+    useEffect(() => {
+        if (postsLoaded) {
+            setCurrentPosts(postsLoaded.slice(indexOfFirstPost, indexOfLastPost))
+        }
+    }, [indexOfFirstPost, indexOfLastPost, postsLoaded])
+
+    if (!postsLoaded) {
+        return <ErrorMessage />
+    }
+
+
 
 
     return (
-        <section className='postsWrapper'>
+        <section className='categoryWrapper'>
             <Box
                 display="flex"
                 direction="column"
@@ -66,8 +88,8 @@ function Category() {
                 </Grid>
             </Box>
             <section className='postsWrapper'>
-                {postsLoaded && postsLoaded.map((post) => (
-                    <div key={post._id} >
+                {currentPosts && currentPosts.map((post) => (
+                    <div className="postCard" key={post._id} >
                         {post.photo &&
                             <Card sx={{ width: 300, m: 2 }} elevation={5}>
                                 <Grid
@@ -76,16 +98,16 @@ function Category() {
                                     justifyContent="flex-start"
                                     alignitems="center"
                                     sx={{ p: 1 }}
-                                    className="postCard"
+                                    className="postHeader"
                                 >
                                     <AccountCircleIcon
                                         aria-label="account of current user"
                                         sx={{ height: 30, width: 30 }}
                                         className="profilePhoto"
                                     ></AccountCircleIcon>
-                                    <Typography color="text.primary" sx={{ py: .5 }}>
-                                        <Author id={post.user} />
-                                    </Typography>
+
+                                    <Author id={post.user} />
+
                                 </Grid>
                                 <Link to={`/post/${post._id}`}>
                                     <CardMedia
@@ -109,7 +131,7 @@ function Category() {
                                     justifyContent="space-between"
                                     alignitems="center"
                                     sx={{ p: 1 }}
-                                    className="postCard"
+                                    className="postFooter"
                                 >
                                     <Typography component="div" className='postCategory' color="text.primary" sx={{ fontWeight: "bold" }}>{post.category}</Typography>
                                     <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
@@ -127,16 +149,16 @@ function Category() {
                                     justifyContent="flex-start"
                                     alignitems="center"
                                     sx={{ p: 2 }}
-                                    className="postCard"
+                                    className="postHeader"
                                 >
                                     <AccountCircleIcon
                                         aria-label="account of current user"
                                         sx={{ height: 30, width: 30 }}
                                         className="profilePhoto"
                                     ></AccountCircleIcon>
-                                    <Typography color="text.primary" sx={{ py: .5 }}>
-                                        <Author id={post.user} />
-                                    </Typography>
+
+                                    <Author id={post.user} />
+
                                 </Grid>
                                 <Divider />
                                 <Link to={`/post/${post._id}`}>
@@ -156,7 +178,7 @@ function Category() {
                                     justifyContent="space-between"
                                     alignitems="center"
                                     sx={{ p: 1 }}
-                                    className="postCard"
+                                    className="postFooter"
                                 >
                                     <Typography component="div" className='postCategory' color="text.primary" sx={{ fontWeight: 'bold' }}>{post.category}</Typography>
                                     <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
@@ -169,6 +191,13 @@ function Category() {
                 ))
                 }
             </section>
+            <Pagination
+                className="paginationBar"
+                postsPerPage={postsPerPage}
+                totalPosts={postsLoaded.length}
+                paginate={paginate}
+            />
+
         </section >
 
     )

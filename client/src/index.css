@@ -265,6 +265,23 @@ footer {
   width: 100%;
 }
 
+.categoryWrapper,
+.resultsWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.postCard {
+  margin: 10px;
+}
+
+.postAuthor {
+  padding: 5px;
+}
+
 .searchTitle {
   text-align: center;
   margin: 1rem;
@@ -276,7 +293,8 @@ footer {
   margin: 3rem;
 }
 
-.postCard {
+.postHeader,
+.postFooter {
   background-color: #ffb473;
 }
 
@@ -290,6 +308,10 @@ footer {
 
 .postCategory {
   padding: 5px;
+}
+
+.pageLink {
+  background-color: #ffb473;
 }
 
 .my-masonry-grid {

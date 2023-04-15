@@ -21,7 +21,7 @@ export const Author = ({ id }) => {
 
 
     return (
-        <div>
+        <div className="postAuthor">
             <Link to={`/profile/${id}`}>{author.username}</Link>
         </div>
     )
