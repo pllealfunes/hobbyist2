@@ -140,6 +140,7 @@ const CreatNewPost = () => {
                             <MenuItem value="creative">Creative</MenuItem>
                             <MenuItem value="mental">Mental</MenuItem>
                             <MenuItem value="food">Food</MenuItem>
+                            <MenuItem value="musical">Musical</MenuItem>
                             <MenuItem value="collecting">Collecting</MenuItem>
                             <MenuItem value="games+puzzles">Games+Puzzles</MenuItem>
                         </Select>

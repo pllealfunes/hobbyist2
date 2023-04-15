@@ -162,9 +162,30 @@ export default function RootLayout() {
                                                             'aria-labelledby': 'basic-button',
                                                         }}
                                                     >
-                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
-                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                                        <MenuItem component={NavLink} to="/explore">
+                                                            Explore
+                                                        </MenuItem>
+                                                        <MenuItem component={NavLink} to="/category/physical">
+                                                            Physical
+                                                        </MenuItem>
+                                                        <MenuItem component={NavLink} to="/category/creative">
+                                                            Creative
+                                                        </MenuItem>
+                                                        <MenuItem component={NavLink} to="/category/mental">
+                                                            Mental
+                                                        </MenuItem>
+                                                        <MenuItem component={NavLink} to="/category/food">
+                                                            Food
+                                                        </MenuItem>
+                                                        <MenuItem component={NavLink} to="/category/musical">
+                                                            Musical
+                                                        </MenuItem>
+                                                        <MenuItem component={NavLink} to="/category/collecting">
+                                                            Collecting
+                                                        </MenuItem>
+                                                        <MenuItem component={NavLink} to="/category/games+puzzles">
+                                                            Games/Puzzles
+                                                        </MenuItem>
                                                     </Menu>
                                                 </div>
                                                 <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
@@ -235,6 +256,9 @@ export default function RootLayout() {
                                                 </MenuItem>
                                                 <MenuItem component={NavLink} to="/category/food">
                                                     Food
+                                                </MenuItem>
+                                                <MenuItem component={NavLink} to="/category/musical">
+                                                    Musical
                                                 </MenuItem>
                                                 <MenuItem component={NavLink} to="/category/collecting">
                                                     Collecting
@@ -349,6 +373,9 @@ export default function RootLayout() {
                                             <MenuItem component={NavLink} to="/category/food">
                                                 Food
                                             </MenuItem>
+                                            <MenuItem component={NavLink} to="/category/musical">
+                                                Musical
+                                            </MenuItem>
                                             <MenuItem component={NavLink} to="/category/collecting">
                                                 Collecting
                                             </MenuItem>
@@ -420,6 +447,9 @@ export default function RootLayout() {
                                         </MenuItem>
                                         <MenuItem component={NavLink} to="/category/food">
                                             Food
+                                        </MenuItem>
+                                        <MenuItem component={NavLink} to="/category/musical">
+                                            Musical
                                         </MenuItem>
                                         <MenuItem component={NavLink} to="/category/collecting">
                                             Collecting

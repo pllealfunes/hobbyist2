@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Author } from './Author';
-import Masonry from "react-masonry-css"
+
 
 import {
     Card,
@@ -38,7 +38,7 @@ const latestPosts = ({ latestPosts }) => {
                                     sx={{ height: 30, width: 30 }}
                                     className="profilePhoto"
                                 ></AccountCircleIcon>
-                                <Typography variant="h5" color="text.primary">
+                                <Typography color="text.primary" sx={{ py: .5 }}>
                                     <Author id={post.user} />
                                 </Typography>
                             </Grid>
@@ -53,7 +53,7 @@ const latestPosts = ({ latestPosts }) => {
                                         {post.title}
                                     </Typography>
                                     <Typography className="textPreview" variant="body2" color="text.secondary">
-                                        {post.post.split(".", 3)}
+                                        {post.post.split("", 100)}
                                     </Typography>
                                 </CardContent>
                             </Link>
@@ -89,7 +89,7 @@ const latestPosts = ({ latestPosts }) => {
                                     sx={{ height: 30, width: 30 }}
                                     className="profilePhoto"
                                 ></AccountCircleIcon>
-                                <Typography variant="h5" >
+                                <Typography color="text.primary" sx={{ py: .5 }} >
                                     <Author id={post.user} />
                                 </Typography>
                             </Grid>
@@ -100,7 +100,7 @@ const latestPosts = ({ latestPosts }) => {
                                         {post.title}
                                     </Typography>
                                     <Typography variant="body2" color="text.secondary">
-                                        {post.post.split(".", 8)}
+                                        {post.post.split("", 200)}
                                     </Typography>
                                 </CardContent>
                             </Link>

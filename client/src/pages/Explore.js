@@ -46,26 +46,9 @@ const ExplorePage = () => {
             }
         }
         fetchPosts()
-    }, [])
+    }, [latestPosts])
 
 
-    const searchCategory = (event, category) => {
-        event.preventDefault()
-        const results = postsLoaded.filter((post) => post.category.includes(category.toLowerCase()));
-        if (results.length === 0) {
-            setShowErrorMessage(true)
-            setShowLatestPosts(false)
-            setShowResults(false)
-            setShowCategory(false)
-        } else {
-            reset()
-            setShowErrorMessage(false)
-            setShowLatestPosts(false)
-            setShowResults(false)
-            setCategoryResults(results)
-            setShowCategory(true)
-        }
-    }
 
     const searchForm = (data) => {
         const results = postsLoaded.filter(post => {
@@ -100,29 +83,16 @@ const ExplorePage = () => {
                 <Grid
                     container
                     className="searchContainer"
-                    width={700}
-                    direction="row"
+                    direction="column"
                     alignItems="center"
-                    justifyContent="space-evenly"
+                    justifyContent="center"
                     sx={{
                         boxShadow: 2,
                         '& button': { my: 3 },
                     }}
+                    width={700}
                 >
                     <h2 className="searchTitle">Explore</h2>
-                    <Grid
-                        className='categoryConatiner'
-                        container
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="space-evenly"
-                    >
-                        {categories.map((category) => (
-                            <button className="categoryBtn" key={category} onClick={(event) => searchCategory(event, category)}>
-                                <h3>{category}</h3>
-                            </button>
-                        ))}
-                    </Grid>
 
                     <div className="searchFormContainer">
                         <form className="searchForm" onSubmit={handleSubmit(searchForm)}>
@@ -146,7 +116,6 @@ const ExplorePage = () => {
             <div className="resultsContainer">
                 {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
                 {showResults && <SearchResults searchResults={searchResults} />}
-                {showCategory && <CategoryResults categoryResults={categoryResults} />}
                 {showErrorMessage && <ErrorMessage />}
             </div>
         </section>

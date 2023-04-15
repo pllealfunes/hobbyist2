@@ -22,7 +22,7 @@ import NotFound from './pages/NotFound'
 import PersistLogin from './components/PersistLogin'
 import EditProfile from './pages/EditProfile';
 import PrivateRoutes from './utils/PrivateRoutes'
-
+import Category from './pages/Category';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,6 +34,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/post/:id" element={<PostDetails />} />
       <Route path="/profile/:id" element={<UserProfile />} />
+      <Route path="/category/:category" element={<Category />} />
 
       <Route>
         <Route element={<PrivateRoutes />}>
