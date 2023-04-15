@@ -11,10 +11,10 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     }
 
     return (
-        <nav>
+        <nav className='paginationContainer'>
             {pageNumbers.map(number => (
                 <Stack key={number} className='page-item'>
-                    <Page onClick={() => paginate(number)} href='!#' count={number} >
+                    <Page onClick={() => paginate(number)} href='!#' count={number} color="warning" variant="outlined">
                         {number}
                     </Page>
                 </Stack>

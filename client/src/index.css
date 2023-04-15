@@ -159,6 +159,12 @@ footer {
   font-size: 1rem;
 }
 
+.feedContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 
 /* Create and Edit Form Styles */
@@ -276,6 +282,8 @@ footer {
 
 .postCard {
   margin: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .postAuthor {
@@ -312,6 +320,11 @@ footer {
 
 .pageLink {
   background-color: #ffb473;
+}
+
+
+.paginationContainer {
+  margin: 50px;
 }
 
 .my-masonry-grid {

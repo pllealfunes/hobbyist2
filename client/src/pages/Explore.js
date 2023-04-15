@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import SearchResults from '../components/SearchResults';
 import LatestPosts from '../components/LatestPosts';
-import CategoryResults from '../components/CategoryResults';
 import ErrorMessage from '../components/ErrorMessage';
 import axios from 'axios';
 
@@ -10,18 +9,12 @@ import axios from 'axios';
 /*** MATERIAL UI STYLING ***/
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import SendIcon from '@mui/icons-material/Send';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+
 
 const ExplorePage = () => {
+
     const [postsLoaded, setPostsLoaded] = useState()
     const [latestPosts, setLatestPosts] = useState()
     const [showLatestPosts, setShowLatestPosts] = useState(false)
