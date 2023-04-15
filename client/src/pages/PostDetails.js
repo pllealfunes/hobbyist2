@@ -13,7 +13,21 @@ import Modal from "../components/DeleteModal"
 import FollowCategoryBtn from "../components/FollowCategoryBtn";
 import { Author } from "../components/Author";
 
+import {
+    Card,
+    CardContent,
+    CardMedia,
+    Typography,
+    Divider,
+    Grid,
+    Box
+
+} from "@mui/material";
+
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+
 const PostDetails = () => {
+
     let btnId = [1, 2];
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -169,14 +183,25 @@ const PostDetails = () => {
 
 
     return (
-        <div className="container">
-            <section>
-                <h1>{post.title}</h1>
+        <section>
+            <Grid
+                container
+                className="searchContainer"
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                sx={{
+                    boxShadow: 2,
+                    '& button': { my: 3 },
+                }}
+                width={700}
+            >
+                <h2>{post.title}</h2>
+                <Author id={post.user} />
                 {user ? <FollowCategoryBtn category={post.category} user={user} /> : <div><div>{post.category}</div> <button onClick={() => (navigate('/login'))}>Follow Category</button></div>}
                 <div className="postContainer">
                     {post.photo && <img src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" height={300} width={500} />}
                     <p>{post.post}</p>
-                    <Author id={post.user} />
                 </div>
                 {user && user.currentUser.id === `${post.user}` && <div>
                     <Link key={post._id} to={`/post/editPost/${post._id}`}>
@@ -185,7 +210,7 @@ const PostDetails = () => {
                     <button id="deletePostBtn" onClick={(e) => handleModal(post._id, btnId[0])}>Delete Post</button>
                 </div>
                 }
-            </section >
+            </Grid>
 
             <section className="commSection">
                 <h1>Comments</h1>
@@ -228,7 +253,7 @@ const PostDetails = () => {
             </section>
 
             {showModal && <Modal deleteId={deleteId} deleteFunction={deleteFunction} message={message} />}
-        </div >
+        </section >
     );
 }
 
