@@ -19,7 +19,7 @@ import {
     Button,
     Tooltip,
     MenuItem,
-    Divider,
+    Divider
 
 } from "@mui/material";
 import AdbIcon from '@mui/icons-material/Adb';
@@ -27,6 +27,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from '@mui/icons-material/GitHub';
+
 
 export default function RootLayout() {
 
@@ -36,7 +37,7 @@ export default function RootLayout() {
 
     const [anchorElNav, setAnchorElNav] = useState(null)
     const [anchorElUser, setAnchorElUser] = useState(null)
-
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -53,6 +54,15 @@ export default function RootLayout() {
         setAnchorElUser(null);
     };
 
+
+
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
 
 
@@ -109,6 +119,7 @@ export default function RootLayout() {
                                             >
                                                 <MenuIcon />
                                             </IconButton>
+
                                             <Menu
                                                 id="menu-appbar"
                                                 anchorEl={anchorElNav}
@@ -132,7 +143,30 @@ export default function RootLayout() {
                                                 }}
                                             >
                                                 <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                                <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                                <div>
+                                                    <MenuItem
+                                                        id="basic-button"
+                                                        aria-controls={open ? 'basic-menu' : undefined}
+                                                        aria-haspopup="true"
+                                                        aria-expanded={open ? 'true' : undefined}
+                                                        onClick={handleClick}
+                                                    >
+                                                        Search
+                                                    </MenuItem>
+                                                    <Menu
+                                                        id="basic-menu"
+                                                        anchorEl={anchorEl}
+                                                        open={open}
+                                                        onClose={handleClose}
+                                                        MenuListProps={{
+                                                            'aria-labelledby': 'basic-button',
+                                                        }}
+                                                    >
+                                                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                                                        <MenuItem onClick={handleClose}>My account</MenuItem>
+                                                        <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                                    </Menu>
+                                                </div>
                                                 <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
                                                 <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
                                             </Menu>
@@ -167,7 +201,50 @@ export default function RootLayout() {
                                     </Typography>
                                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                         <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                        <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                        <div>
+                                            <MenuItem
+                                                id="basic-button"
+                                                aria-controls={open ? 'basic-menu' : undefined}
+                                                aria-haspopup="true"
+                                                aria-expanded={open ? 'true' : undefined}
+                                                onClick={handleClick}
+                                            >
+                                                Search
+                                            </MenuItem>
+
+                                            <Menu
+                                                id="basic-menu"
+                                                anchorEl={anchorEl}
+                                                open={open}
+                                                onClose={handleClose}
+                                                MenuListProps={{
+                                                    'aria-labelledby': 'basic-button',
+                                                }}
+                                            >
+                                                <MenuItem component={NavLink} to="/explore">
+                                                    Explore
+                                                </MenuItem>
+                                                <MenuItem component={NavLink} to="/category/physical">
+                                                    Physical
+                                                </MenuItem>
+                                                <MenuItem component={NavLink} to="/category/creative">
+                                                    Creative
+                                                </MenuItem>
+                                                <MenuItem component={NavLink} to="/category/mental">
+                                                    Mental
+                                                </MenuItem>
+                                                <MenuItem component={NavLink} to="/category/food">
+                                                    Food
+                                                </MenuItem>
+                                                <MenuItem component={NavLink} to="/category/collecting">
+                                                    Collecting
+                                                </MenuItem>
+                                                <MenuItem component={NavLink} to="/category/games+puzzles">
+                                                    Games/Puzzles
+                                                </MenuItem>
+                                            </Menu>
+                                        </div>
+
                                         <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
                                         <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
                                     </Box>
@@ -237,7 +314,49 @@ export default function RootLayout() {
                                 >
 
                                     <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                    <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                    <div>
+                                        <MenuItem
+                                            id="basic-button"
+                                            aria-controls={open ? 'basic-menu' : undefined}
+                                            aria-haspopup="true"
+                                            aria-expanded={open ? 'true' : undefined}
+                                            onClick={handleClick}
+                                        >
+                                            Search
+                                        </MenuItem>
+
+                                        <Menu
+                                            id="basic-menu"
+                                            anchorEl={anchorEl}
+                                            open={open}
+                                            onClose={handleClose}
+                                            MenuListProps={{
+                                                'aria-labelledby': 'basic-button',
+                                            }}
+                                        >
+                                            <MenuItem component={NavLink} to="/explore">
+                                                Explore
+                                            </MenuItem>
+                                            <MenuItem component={NavLink} to="/category/physical">
+                                                Physical
+                                            </MenuItem>
+                                            <MenuItem component={NavLink} to="/category/creative">
+                                                Creative
+                                            </MenuItem>
+                                            <MenuItem component={NavLink} to="/category/mental">
+                                                Mental
+                                            </MenuItem>
+                                            <MenuItem component={NavLink} to="/category/food">
+                                                Food
+                                            </MenuItem>
+                                            <MenuItem component={NavLink} to="/category/collecting">
+                                                Collecting
+                                            </MenuItem>
+                                            <MenuItem component={NavLink} to="/category/games+puzzles">
+                                                Games/Puzzles
+                                            </MenuItem>
+                                        </Menu>
+                                    </div>
                                     <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
 
                                 </Menu>
@@ -267,7 +386,49 @@ export default function RootLayout() {
                             </Typography>
                             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                                 <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                <MenuItem> <NavLink className="navbar-link" to="/explore">Explore</NavLink></MenuItem>
+                                <div>
+                                    <MenuItem
+                                        id="basic-button"
+                                        aria-controls={open ? 'basic-menu' : undefined}
+                                        aria-haspopup="true"
+                                        aria-expanded={open ? 'true' : undefined}
+                                        onClick={handleClick}
+                                    >
+                                        Search
+                                    </MenuItem>
+
+                                    <Menu
+                                        id="basic-menu"
+                                        anchorEl={anchorEl}
+                                        open={open}
+                                        onClose={handleClose}
+                                        MenuListProps={{
+                                            'aria-labelledby': 'basic-button',
+                                        }}
+                                    >
+                                        <MenuItem component={NavLink} to="/explore">
+                                            Explore
+                                        </MenuItem>
+                                        <MenuItem component={NavLink} to="/category/physical">
+                                            Physical
+                                        </MenuItem>
+                                        <MenuItem component={NavLink} to="/category/creative">
+                                            Creative
+                                        </MenuItem>
+                                        <MenuItem component={NavLink} to="/category/mental">
+                                            Mental
+                                        </MenuItem>
+                                        <MenuItem component={NavLink} to="/category/food">
+                                            Food
+                                        </MenuItem>
+                                        <MenuItem component={NavLink} to="/category/collecting">
+                                            Collecting
+                                        </MenuItem>
+                                        <MenuItem component={NavLink} to="/category/games+puzzles">
+                                            Games/Puzzles
+                                        </MenuItem>
+                                    </Menu>
+                                </div>
                                 <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
                             </Box>
 
