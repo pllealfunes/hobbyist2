@@ -5,7 +5,6 @@ import { getUser } from '../features/auth/authSlice'
 import axios from 'axios'
 
 import { Author } from '../components/Author';
-import ErrorMessage from '../components/ErrorMessage';
 import Pagination from '../components/Pagination'
 
 import {
