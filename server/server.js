@@ -33,6 +33,7 @@ app.use('/api/blog', blogAPI)
 app.use('/api/auth', auth)
 app.use('/api/users', users)
 
+app.use('/public', express.static(path.join(__dirname, 'public')))
 
 app.use(express.static(path.join(__dirname, '/../client', 'build')))
 
