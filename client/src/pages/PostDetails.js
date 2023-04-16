@@ -4,8 +4,7 @@ import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import axios from "axios";
 import axiosPrivate from "../config/useAxiosPrivate";
-import { useSelector, useDispatch } from "react-redux";
-import { getUser } from '../features/auth/authSlice'
+import { useSelector } from "react-redux";
 
 
 // Import other components
@@ -14,13 +13,7 @@ import FollowCategoryBtn from "../components/FollowCategoryBtn";
 import { Author } from "../components/Author";
 
 import {
-    Card,
-    CardContent,
-    CardMedia,
-    Typography,
-    Divider,
-    Grid,
-    Box
+    Grid
 
 } from "@mui/material";
 
@@ -29,12 +22,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 const PostDetails = () => {
 
     let btnId = [1, 2];
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     const { id } = useParams()
     const { user } = useSelector((state) => state.auth)
     const [post, setPost] = useState([])
-    const [author, setAuthor] = useState('')
     const [comments, setComments] = useState([])
     const [errorsServer, setErrorsServer] = useState('')
     const [showModal, setShowModal] = useState(false)
@@ -77,23 +68,6 @@ const PostDetails = () => {
 
     }, [id, fetchComments, navigate])
 
-
-    useEffect(() => {
-
-        const fetchAuthor = async () => {
-            try {
-                if (post.user) {
-                    let response = await dispatch(getUser(post.user))
-                    setAuthor(response.payload)
-                }
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        fetchAuthor()
-
-    }, [post.user])
 
 
     // Function to create a new comment and display new comment by calling fetchComments
