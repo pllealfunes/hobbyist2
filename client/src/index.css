@@ -167,6 +167,13 @@ footer {
 }
 
 
+.searchPhoto,
+.feedPhoto {
+  height: 800px;
+  width: 800px;
+}
+
+
 /* Create and Edit Form Styles */
 
 .newpostContainer,

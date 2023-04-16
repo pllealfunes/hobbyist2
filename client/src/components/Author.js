@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getUser } from '../features/auth/authSlice'
 import { useDispatch } from "react-redux";
 
-export const Author = ({ id }) => {
+export const Author = ({ userId }) => {
 
     const [author, setAuthor] = useState('')
     const dispatch = useDispatch()
@@ -11,18 +11,18 @@ export const Author = ({ id }) => {
     useEffect(() => {
         (async () => {
             try {
-                let response = await dispatch(getUser(id))
+                let response = await dispatch(getUser(userId))
                 setAuthor(response.payload)
             } catch (error) {
                 console.log(error);
             }
         })();
-    }, [id, dispatch])
+    }, [userId])
 
 
     return (
         <div className="postAuthor">
-            <Link to={`/profile/${id}`}>{author.username}</Link>
+            <Link to={`/profile/${userId}`}>{author.username}</Link>
         </div>
     )
 }

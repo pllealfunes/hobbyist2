@@ -1,13 +1,11 @@
 /** MUI STYLING **/
 import {
     Box,
-    Container,
-    Button,
     Grid,
-    List,
-    ListItemText,
     Typography
 } from "@mui/material";
+
+
 
 const Home = () => {
 

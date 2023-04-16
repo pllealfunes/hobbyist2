@@ -32,7 +32,10 @@ router.get('/users', (req, res, next) => {
         .then((users) => {
             res.status(200)
             res.json(users)
-        })
+        }).catch((err) => {
+            res.status(404)
+            res.end()
+        });
 })
 
 
@@ -49,7 +52,10 @@ router.get('/user/:id', (req, res, next) => {
             }
             res.status(200)
             res.json(getUser)
-        })
+        }).catch((err) => {
+            res.status(404)
+            res.end()
+        });
 })
 
 

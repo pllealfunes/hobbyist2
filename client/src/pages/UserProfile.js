@@ -7,7 +7,7 @@ import { toast } from 'react-toastify'
 import axiosPrivate from '../config/useAxiosPrivate';
 import Pagination from '../components/Pagination';
 import { Author } from '../components/Author';
-import ErrorMessage from '../components/ErrorMessage';
+import EmptyProfile from "../components/EmptyProfile";
 
 
 import {
@@ -89,8 +89,8 @@ const UserProfile = () => {
 
     }, [singleUser, id])
 
-    if (!posts) {
-        return <ErrorMessage />
+    if (!currentPosts) {
+        return <EmptyProfile />
     }
 
     const followUser = async () => {
@@ -137,110 +137,48 @@ const UserProfile = () => {
             {user ?
 
                 user.currentUser.id !== id ?
-                    <Box
-                        display="flex"
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                        className="searchWrapper"
-                    >
-                        <Grid
-                            container
-                            className="searchContainer"
+                    <div>
+                        <Box
+                            display="flex"
                             direction="column"
                             alignItems="center"
                             justifyContent="center"
-                            sx={{
-                                boxShadow: 2,
-                                '& button': { my: 3 },
-                            }}
-                            width={700}
+                            className="searchWrapper"
                         >
-                            <h2>{userProfile.username}</h2>
-                            <p>{userProfile.bio}</p>
-                            <button
-                                className="followBtn"
-                                onClick={() => {
-                                    if (isFollow) {
-                                        unfollowUser();
-                                    } else {
-                                        followUser();
-                                    }
+                            <Grid
+                                container
+                                className="searchContainer"
+                                direction="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{
+                                    boxShadow: 2,
+                                    '& button': { my: 3 },
                                 }}
+                                width={700}
                             >
-                                {isFollow ? "Unfollow" : "Follow"}
-                            </button>
-                            <div>
-                                {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
-                                {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
-                            </div>
-                            <section>
-                                {currentPosts && currentPosts.map((post) => (
-                                    <Card sx={{ width: 300, m: 2 }} elevation={5}>
-                                        <Grid
-                                            container
-                                            flexDirection="row"
-                                            justifyContent="flex-start"
-                                            alignitems="center"
-                                            sx={{ p: 1 }}
-                                            className="postHeader"
-                                        >
-                                            <AccountCircleIcon
-                                                aria-label="account of current user"
-                                                sx={{ height: 30, width: 30 }}
-                                                className="profilePhoto"
-                                            ></AccountCircleIcon>
-
-                                            <Author id={post.user} />
-
-                                        </Grid>
-                                        <Link to={`/post/${post._id}`}>
-                                            <CardMedia
-                                                component="div"
-                                                sx={{ height: 140 }}
-                                                image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`}
-                                            />
-                                            <CardContent>
-                                                <Typography gutterBottom variant="h5" component="div">
-                                                    {post.title}
-                                                </Typography>
-                                                <Typography className="textPreview" variant="body2" color="text.secondary">
-                                                    {post.post.split("", 100)}
-                                                </Typography>
-                                            </CardContent>
-                                        </Link>
-                                        <Divider />
-                                        <Grid
-                                            container
-                                            flexDirection="row"
-                                            justifyContent="space-between"
-                                            alignitems="center"
-                                            sx={{ p: 1 }}
-                                            className="postFooter"
-                                        >
-                                            <Typography component="div" className='postCategory' color="text.primary" sx={{ fontWeight: "bold" }}>{post.category}</Typography>
-                                            <Typography variant="caption" color="text.primary" sx={{ p: 0.7 }}>
-                                                {post.timestamp}
-                                            </Typography>
-                                        </Grid>
-                                    </Card>
-                                ))}
-                            </section>
-
-                        </Grid>
-                    </Box>
-
-                    :
-
-                    <div>
-                        <h2>{userProfile.username}</h2>
-                        <p>{userProfile.bio}</p>
-                        <Link to={`/editProfile/${userProfile.id}`}><button>Edit Profile</button></Link>
-                        <div>
-                            {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
-                            {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
-                        </div>
-                        <section>
+                                <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
+                                <h2>{userProfile.username}</h2>
+                                <p>{userProfile.bio}</p>
+                                <div>
+                                    {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
+                                    {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
+                                </div>
+                                <button
+                                    className="followBtn"
+                                    onClick={() => {
+                                        if (isFollow) {
+                                            unfollowUser();
+                                        } else {
+                                            followUser();
+                                        }
+                                    }}
+                                >
+                                    {isFollow ? "Unfollow" : "Follow"}
+                                </button>
+                            </Grid>
+                        </Box>
+                        <section className='postsWrapper'>
                             {currentPosts && currentPosts.map((post) => (
                                 <div className="postCard" key={post._id} >
                                     {post.photo &&
@@ -249,7 +187,7 @@ const UserProfile = () => {
                                             <div>
                                                 <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
-                                                    <Author id={post.user} />
+                                                    {post.user && <Author userId={post.user} />}
                                                 </Grid>
                                                 <Link to={`/post/${post._id}`}>
                                                     <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
@@ -280,7 +218,110 @@ const UserProfile = () => {
                                             <div>
                                                 <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
-                                                    <Author id={post.user} />
+                                                    {post.user && <Author userId={post.user} />}
+                                                </Grid>
+                                                <Link to={`/post/${post._id}`}>
+
+                                                    <CardContent>
+                                                        <Typography gutterBottom variant="h5" component="div">
+                                                            {post.title}
+                                                        </Typography>
+                                                        <Typography className="textPreview" variant="body2" color="text.secondary">
+                                                            {post.post.split(".", 6)}
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Link>
+                                            </div>
+                                            <Grid container flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ py: .5 }} className="postFooter">
+                                                <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
+                                                    {post.category}
+                                                </Typography>
+                                                <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
+                                                    {post.timestamp.split(",", 1)}
+                                                </Typography>
+                                            </Grid>
+                                        </Card>
+                                    }
+                                </div>
+                            ))}
+                        </section>
+                    </div>
+
+                    :
+
+                    <div>
+                        <Box
+                            display="flex"
+                            direction="column"
+                            alignItems="center"
+                            justifyContent="center"
+                            className="searchWrapper"
+                        >
+                            <Grid
+                                container
+                                className="searchContainer"
+                                direction="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{
+                                    boxShadow: 2,
+                                    '& button': { my: 3 },
+                                }}
+                                width={700}
+                            >
+                                <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
+                                <h2>{userProfile.username}</h2>
+                                <p>{userProfile.bio}</p>
+
+                                <div>
+                                    {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
+                                    {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
+                                </div>
+                                <Link to={`/editProfile/${userProfile.id}`}><button className="followBtn">Edit Profile</button></Link>
+                            </Grid>
+                        </Box>
+                        <section className='postsWrapper'>
+
+                            {currentPosts && currentPosts.map((post) => (
+                                <div className="postCard" key={post._id} >
+                                    {post.photo &&
+                                        <Card
+                                            className='postCard' sx={{ width: 300, height: 400, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={5}>
+                                            <div>
+                                                <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                                    <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
+                                                    {post.user && <Author userId={post.user} />}
+                                                </Grid>
+                                                <Link to={`/post/${post._id}`}>
+                                                    <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
+                                                    <CardContent>
+                                                        <Typography gutterBottom variant="h5" component="div">
+                                                            {post.title}
+                                                        </Typography>
+                                                        <Typography className="textPreview" variant="body2" color="text.secondary">
+                                                            {post.post.split("", 100)}
+                                                        </Typography>
+                                                    </CardContent>
+                                                </Link>
+                                            </div>
+                                            <Grid container flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ py: .5 }} className="postFooter">
+                                                <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
+                                                    {post.category}
+                                                </Typography>
+                                                <Typography variant="caption" color="text.primary">
+                                                    {post.timestamp}
+                                                </Typography>
+                                            </Grid>
+                                        </Card>
+
+                                    }
+
+                                    {!post.photo &&
+                                        <Card className='postCard' sx={{ width: 300, height: 400, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={5}>
+                                            <div>
+                                                <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                                    <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
+                                                    {post.user && <Author userId={post.user} />}s
                                                 </Grid>
                                                 <Link to={`/post/${post._id}`}>
 
@@ -350,7 +391,7 @@ const UserProfile = () => {
                                         <div>
                                             <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
                                                 <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
-                                                <Author id={post.user} />
+                                                {post.user && <Author userId={post.user} />}
                                             </Grid>
                                             <Link to={`/post/${post._id}`}>
                                                 <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
@@ -381,7 +422,7 @@ const UserProfile = () => {
                                         <div>
                                             <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
                                                 <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
-                                                <Author id={post.user} />
+                                                {post.user && <Author userId={post.user} />}
                                             </Grid>
                                             <Link to={`/post/${post._id}`}>
 

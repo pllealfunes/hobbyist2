@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import NoResults from '../components/NoResults';
 
 
 const ExplorePage = () => {
@@ -21,7 +22,7 @@ const ExplorePage = () => {
     const [searchResults, setSearchResults] = useState(false)
     const [showResults, setShowResults] = useState(false)
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
-    const [showErrorMessage, setShowErrorMessage] = useState(false)
+    const [showEmptyResults, setShowEmptyResults] = useState(false)
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -46,12 +47,12 @@ const ExplorePage = () => {
         })
 
         if (results.length === 0) {
-            setShowErrorMessage(true)
+            setShowEmptyResults(true)
             setShowLatestPosts(true)
             setShowResults(false)
         } else {
             reset()
-            setShowErrorMessage(false)
+            setShowEmptyResults(false)
             setShowLatestPosts(false)
             setSearchResults(results.reverse())
             setShowResults(true)
@@ -104,7 +105,7 @@ const ExplorePage = () => {
             <div className="resultsContainer">
                 {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
                 {showResults && <SearchResults searchResults={searchResults} />}
-                {showErrorMessage && <ErrorMessage />}
+                {showEmptyResults && <NoResults />}
             </div>
         </section>
     )

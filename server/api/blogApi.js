@@ -74,7 +74,10 @@ router.get('/posts', (req, res, next) => {
         .then((posts) => {
             res.status(200)
             res.json(posts)
-        })
+        }).catch((err) => {
+            res.status(404)
+            res.end()
+        });
 })
 
 // Find Posts by User
@@ -83,7 +86,10 @@ router.get('/post/user/:userid', (req, res, next) => {
         .then((posts) => {
             res.status(200);
             res.json(posts);
-        })
+        }).catch((err) => {
+            res.status(404)
+            res.end()
+        });
 })
 
 // Find Posts

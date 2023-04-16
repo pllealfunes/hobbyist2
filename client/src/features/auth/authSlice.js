@@ -112,3 +112,4 @@ export const { reset } = authSlice.actions
 export default authSlice.reducer
 export const user = (state) => state.auth.user
 export const singleUser = (state) => state.auth.singleUser
+

@@ -170,8 +170,10 @@ const PostDetails = () => {
                 }}
                 width={700}
             >
-                <h2>{post.title}</h2>
-                <Author id={post.user} />
+                <div>
+                    <h2>{post.title}</h2>
+                    {post.user && <Author userId={post.user} />}
+                </div>
                 {user ? <FollowCategoryBtn category={post.category} user={user} /> : <div><div>{post.category}</div> <button onClick={() => (navigate('/login'))}>Follow Category</button></div>}
                 <div className="postContainer">
                     {post.photo && <img src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" height={300} width={500} />}
@@ -212,7 +214,7 @@ const PostDetails = () => {
                 <div className="comments">
                     {comments && comments.map((comment) => (
                         <div key={comment._id}>
-                            <Author id={comment.user} />
+                            {comment.user && <Author userId={comment.user} />}
                             <p>{comment.comment}</p>
                             {user && user.currentUser.id === `${comment.user}` && <div>
                                 <Link key={comment._id} to={`/post/comment/editComment/${comment._id}`}>
