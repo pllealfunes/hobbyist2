@@ -15,7 +15,6 @@ import {
     CardContent,
     CardMedia,
     Typography,
-    Divider,
     Grid,
     Box
 
