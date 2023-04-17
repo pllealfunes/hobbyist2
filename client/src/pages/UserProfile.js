@@ -29,7 +29,7 @@ const UserProfile = () => {
     const { id } = useParams()
     const [userProfile, setUserProfile] = useState('')
     const [isFollow, setIsFollow] = useState('')
-    const [posts, setPosts] = useState([])
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -38,6 +38,7 @@ const UserProfile = () => {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const [currentPosts, setCurrentPosts] = useState('')
+    const [currentUser, setCurrentUser] = useState('')
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -47,10 +48,9 @@ const UserProfile = () => {
 
                 let userProfile = await dispatch(getUser(id))
                 setUserProfile(userProfile.payload)
-                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/user/${id}`)
-                setPosts(response.data.reverse())
                 if (id && user) {
-                    await dispatch(getUser(user.currentUser.id))
+                    let currentUser = await dispatch(getUser(user.currentUser.id))
+                    setCurrentUser(currentUser.payload)
                 }
 
             } catch (error) {
@@ -63,20 +63,12 @@ const UserProfile = () => {
 
 
     useEffect(() => {
-        if (posts) {
-            setCurrentPosts(posts.slice(indexOfFirstPost, indexOfLastPost))
-        }
-    }, [indexOfFirstPost, indexOfLastPost, posts])
-
-
-
-    useEffect(() => {
         (async () => {
             try {
-                if (singleUser) {
-                    if (singleUser.users.includes(id)) {
+                if (currentUser) {
+                    if (currentUser.users.includes(id)) {
                         setIsFollow(true)
-                    } else if (!singleUser.users.includes(id)) {
+                    } else {
                         setIsFollow(false)
                     }
                 }
@@ -87,11 +79,25 @@ const UserProfile = () => {
 
         })();
 
-    }, [singleUser, id])
+    }, [currentUser, isFollow, id])
 
-    if (!currentPosts) {
-        return <EmptyProfile />
-    }
+    useEffect(() => {
+        (async () => {
+            try {
+                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/user/${id}`)
+                let posts = response.data.reverse()
+                setCurrentPosts(posts.slice(indexOfFirstPost, indexOfLastPost))
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        })();
+
+    }, [indexOfFirstPost, indexOfLastPost, id])
+
+
+
 
     const followUser = async () => {
         try {
@@ -132,8 +138,10 @@ const UserProfile = () => {
     }
 
 
+
+
     return (
-        <section className="feedContainer">
+        <section className="profileWrapper">
             {user ?
 
                 user.currentUser.id !== id ?
@@ -453,10 +461,10 @@ const UserProfile = () => {
                 </div>
 
             }
-            {posts && <Pagination
+            {currentPosts && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
-                totalPosts={posts.length}
+                totalPosts={currentPosts.length}
                 paginate={paginate}
             />}
         </section >

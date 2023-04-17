@@ -128,7 +128,7 @@ const EditPost = () => {
                 {photo ?
                     <div>
                         <div>
-                            <img className="currentPhoto" src={`http://localhost:5000/public/images/${photo}`} alt={`${photo}`} />
+                            <img className="currentPhoto" src={`${process.env.REACT_APP_URL}/public/images/posts/${photo}`} alt={`${photo}`} />
                             <button onClick={deletePhoto}>
                                 Delete Photo
                             </button>

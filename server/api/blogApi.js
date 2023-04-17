@@ -288,7 +288,7 @@ router.put('/post/editPost/deletePhoto/:postid', verifyJWT, (req, res, next) => 
     if (req.body) {
         // If there are errors, delete any uploaded files
         if (req.body.photo) {
-            fs.unlink("./public/images/" + req.body.photo, (err) => {
+            fs.unlink("./public/images/posts" + req.body.photo, (err) => {
                 if (err) {
                     console.error(err);
                 }

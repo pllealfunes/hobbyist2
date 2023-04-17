@@ -170,6 +170,8 @@ const PostDetails = () => {
                 }}
                 width={700}
             >
+
+                {showModal && <Modal deleteId={deleteId} deleteFunction={deleteFunction} message={message} />}
                 <div>
                     <h2>{post.title}</h2>
                     {post.user && <Author userId={post.user} />}
@@ -227,8 +229,6 @@ const PostDetails = () => {
                     ))}
                 </div>
             </section>
-
-            {showModal && <Modal deleteId={deleteId} deleteFunction={deleteFunction} message={message} />}
         </section >
     );
 }

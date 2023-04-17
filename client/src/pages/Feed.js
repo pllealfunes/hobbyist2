@@ -44,7 +44,7 @@ const Feed = () => {
                 if (user) {
                     await dispatch(getUser(user.currentUser.id))
                     let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
-                    setPosts(response.data.reverse())
+                    setPosts(response.data)
                 }
 
             } catch (error) {

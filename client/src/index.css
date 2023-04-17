@@ -280,7 +280,8 @@ footer {
 
 .categoryWrapper,
 .resultsWrapper,
-.feedWrapper {
+.feedWrapper,
+.profileWrapper {
   width: 100%;
   display: flex;
   flex-direction: column;

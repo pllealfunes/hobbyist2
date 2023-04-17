@@ -46,7 +46,7 @@ router.use((req, res, next) => {
 const jwt = require('jsonwebtoken')
 
 const createToken = (id) => {
-    return jwt.sign({ id }, process.env.ACCESS_TOKEN, { expiresIn: '5h' })
+    return jwt.sign({ id }, process.env.ACCESS_TOKEN)
 }
 
 

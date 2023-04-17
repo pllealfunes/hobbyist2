@@ -97,7 +97,7 @@ router.put('/:userid/followUser/:id', verifyJWT, async (req, res, next) => {
             res.status(200)
             res.json(updateCategory)
         }).catch((error) => {
-            res.status(404).send({ message: "Cannot unfollow user" })
+            res.status(404).send({ message: "Cannot follow user" })
             res.end()
         });
 
