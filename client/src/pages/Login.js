@@ -3,15 +3,27 @@ import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { login } from '../features/auth/authSlice'
 import { useForm } from "react-hook-form";
+import { useState } from 'react';
 
-/*** MATERIAL UI STYLING ***/
+
+/** MUI STYLING **/
+import {
+    Box,
+    Grid,
+    Button,
+    Alert,
+    AlertTitle,
+    FormControl,
+    InputLabel,
+    InputAdornment,
+    TextField,
+    FilledInput
+} from "@mui/material";
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Grid from '@mui/material/Grid';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 
 const Login = () => {
@@ -26,7 +38,14 @@ const Login = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const [showPassword, setShowPassword] = useState(false);
 
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
 
     const loginUser = async (data) => {
         try {
@@ -78,26 +97,37 @@ const Login = () => {
                         margin="normal"
                     />
 
-                    <TextField
-                        id="password"
-                        name="password"
-                        label="Password"
-                        placeholder="Password"
-                        {...register("password", {
-                            required: true,
-                            validate: {
-                                checkLength: (value) => value.length >= 8,
-                                matchPattern: (value) =>
-                                    /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/.test(
-                                        value
-                                    )
+                    <FormControl variant="filled" fullWidth margin="normal">
+                        <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+                        <FilledInput
+                            id="password"
+                            name="password"
+                            fullWidth
+                            type={showPassword ? 'text' : 'password'}
+                            {...register("password", {
+                                required: true,
+                                validate: {
+                                    checkLength: (value) => value.length >= 8,
+                                    matchPattern: (value) =>
+                                        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/.test(
+                                            value
+                                        )
+                                }
+                            })}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
                             }
-                        })}
-                        variant="filled"
-                        margin="normal"
-                        fullWidth
-                    />
-
+                        />
+                    </FormControl>
 
                     <Button className="loginBtn" type="submit" color="success" variant="contained" fullWidth>Submit</Button>
 

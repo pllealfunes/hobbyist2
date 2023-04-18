@@ -385,6 +385,7 @@ export default function RootLayout() {
                                         </Menu>
                                     </div>
                                     <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
+                                    <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
 
                                 </Menu>
                             </Box>
@@ -460,6 +461,7 @@ export default function RootLayout() {
                                     </Menu>
                                 </div>
                                 <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
+                                <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
                             </Box>
 
                             <Box sx={{ flexGrow: 0 }}>
@@ -495,7 +497,6 @@ export default function RootLayout() {
                                     <Divider />
                                     <NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}><MenuItem>Profile</MenuItem></NavLink>
                                     <MenuItem>Favorites</MenuItem>
-                                    <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
                                     <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
                                 </Menu>
                             </Box>
@@ -524,41 +525,14 @@ export default function RootLayout() {
                             <Typography variant="caption2">
                                 Hobbyist was built with the MERN stack alogn with
                                 Redux React Router, and MUI for the
-                                2023 Harvard Extension School Capstone project.
-                                If you see an issues or havy
-                                any questions please let me know. Thanks!
+                                2023 Harvard Extension School Capstone project. This project is my copyright material and using it will attract legal action.
                             </Typography>
                             <Box
                                 sx={{
                                     mt: 4,
                                 }}
                             >
-                                <a href="https://github.com/pllealfunes/hobbyist2" target="blank">
-                                    <GitHubIcon sx={{ mr: 1 }} />
-                                </a>
-                                <TwitterIcon sx={{ mr: 1 }} />
-                                <InstagramIcon />
                             </Box>
-                        </Grid>
-                        <Grid item md={3} lg={2}>
-                            <h4 variant="body1">Information</h4>
-                            <List>
-                                <ListItemText>
-                                    <Typography lineHeight={2} variant="caption2">
-                                        Privacy &amp; Policy
-                                    </Typography>
-                                </ListItemText>
-                                <ListItemText>
-                                    <Typography lineHeight={2} variant="caption2">
-                                        Terms &amp; Conditions
-                                    </Typography>
-                                </ListItemText>
-                                <ListItemText>
-                                    <Typography lineHeight={2} variant="caption2">
-                                        Contact Us
-                                    </Typography>
-                                </ListItemText>
-                            </List>
                         </Grid>
                         <Grid item md={3} lg={2}>
                             <h4 variant="body1">My Account</h4>
@@ -585,7 +559,7 @@ export default function RootLayout() {
                                     <div>
                                         <ListItemText>
                                             <Typography lineHeight={2} variant="caption2">
-                                                <Link to={`/profile/${user.currentUser.id}`}>
+                                                <Link className="footerProfile" to={`/profile/${user.currentUser.id}`}>
                                                     Profile
                                                 </Link>
                                             </Typography>

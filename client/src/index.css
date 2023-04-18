@@ -20,7 +20,7 @@ code {
 }
 
 
-nav [aria-current] {
+AppBar [aria-current] {
   border-bottom: 0.125em solid #0A0909;
 }
 
@@ -35,7 +35,11 @@ nav [aria-current] {
   border-bottom: 0.125em solid #F5F5F5;
 }
 
-.navbar-link {
+.navbar-link,
+.footerProfile,
+.postTitle,
+.cardLink,
+.userLink {
   text-decoration: none;
 }
 

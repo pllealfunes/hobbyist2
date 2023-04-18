@@ -22,7 +22,7 @@ export const Author = ({ userId }) => {
 
     return (
         <div className="postAuthor">
-            <Link to={`/profile/${userId}`}>{author.username}</Link>
+            <Link to={`/profile/${userId}`} className="userLink">{author.username}</Link>
         </div>
     )
 }

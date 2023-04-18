@@ -196,7 +196,7 @@ const UserProfile = () => {
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                     {post.user && <Author userId={post.user} />}
                                                 </Grid>
-                                                <Link to={`/post/${post._id}`}>
+                                                <Link to={`/post/${post._id}`} className='cardLink'>
                                                     <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
                                                     <CardContent>
                                                         <Typography gutterBottom variant="h5" component="div">
@@ -227,7 +227,7 @@ const UserProfile = () => {
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                     {post.user && <Author userId={post.user} />}
                                                 </Grid>
-                                                <Link to={`/post/${post._id}`}>
+                                                <Link to={`/post/${post._id}`} className='cardLink'>
 
                                                     <CardContent>
                                                         <Typography gutterBottom variant="h5" component="div">
@@ -299,7 +299,7 @@ const UserProfile = () => {
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                     {post.user && <Author userId={post.user} />}
                                                 </Grid>
-                                                <Link to={`/post/${post._id}`}>
+                                                <Link to={`/post/${post._id}`} className='cardLink'>
                                                     <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
                                                     <CardContent>
                                                         <Typography gutterBottom variant="h5" component="div">
@@ -328,9 +328,9 @@ const UserProfile = () => {
                                             <div>
                                                 <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
-                                                    {post.user && <Author userId={post.user} />}s
+                                                    {post.user && <Author userId={post.user} />}
                                                 </Grid>
-                                                <Link to={`/post/${post._id}`}>
+                                                <Link to={`/post/${post._id}`} className='cardLink'>
 
                                                     <CardContent>
                                                         <Typography gutterBottom variant="h5" component="div">
@@ -400,7 +400,7 @@ const UserProfile = () => {
                                                 <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                 {post.user && <Author userId={post.user} />}
                                             </Grid>
-                                            <Link to={`/post/${post._id}`}>
+                                            <Link to={`/post/${post._id}`} className='cardLink'>
                                                 <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
                                                 <CardContent>
                                                     <Typography gutterBottom variant="h5" component="div">
@@ -431,7 +431,7 @@ const UserProfile = () => {
                                                 <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                 {post.user && <Author userId={post.user} />}
                                             </Grid>
-                                            <Link to={`/post/${post._id}`}>
+                                            <Link to={`/post/${post._id}`} className='cardLink'>
 
                                                 <CardContent>
                                                     <Typography gutterBottom variant="h5" component="div">

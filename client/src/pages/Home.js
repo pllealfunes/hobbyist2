@@ -145,30 +145,6 @@ const Home = () => {
                 </Box>
 
             </article>
-            <article className="getstartedSection">
-                <Box
-                    sx={{
-                        py: 10,
-                        px: 10,
-                    }}
-                >
-                    <Grid
-                        container
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                    >
-                        <Typography variant="h3" component="h3" gutterBottom={true}>
-                            <Typography variant="h3" component="span">Get Started Today</Typography>
-                        </Typography>
-
-                        <div className="btnContainer">
-                            <button className="loginBtn">Login</button>
-                            <button className="signupBtn">Signup</button>
-                        </div>
-                    </Grid>
-                </Box>
-            </article>
         </section >
     )
 }

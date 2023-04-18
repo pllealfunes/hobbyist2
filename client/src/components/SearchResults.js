@@ -78,7 +78,7 @@ const SearchResults = ({ searchResults }) => {
                                         <AccountCircleIcon aria-label="user profile photo" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                         {post.user && <Author userId={post.user} />}
                                     </Grid>
-                                    <Link to={`/post/${post._id}`}>
+                                    <Link to={`/post/${post._id}`} className='cardLink'>
 
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="div">
