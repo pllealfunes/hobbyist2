@@ -88,12 +88,14 @@ footer {
 
 
 .logoutBtn {
-  background-color: #fccc04;
+  background-color: #FFBF86;
   font-weight: bold;
   color: #0A0909;
   padding: 5px 10px;
-  border: 1px solid #0A0909;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 .followBtn {
@@ -103,12 +105,8 @@ footer {
   padding: 10px 10px;
   border-radius: 5px;
   border: none;
-}
-
-.loginBtn:hover,
-.signupBtn:hover {
-  background-color: #a18100;
-  color: #fff2f2;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -199,6 +197,17 @@ footer {
   height: 100px;
 }
 
+.removePhoto {
+  background-color: #FFBF86;
+  font-weight: bold;
+  color: #0A0909;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
 .editCommContainer {
   padding: 32px;
   display: flex;
@@ -271,7 +280,7 @@ footer {
   color: #f4770e;
 }
 
-/* Explore Styling*/
+/* Explore and Category Styling*/
 
 .latestTitle {
   margin-bottom: 5rem;
@@ -340,28 +349,4 @@ footer {
 
 .paginationContainer {
   margin: 50px;
-}
-
-.my-masonry-grid {
-  display: -webkit-box;
-  /* Not needed if autoprefixing */
-  display: -ms-flexbox;
-  /* Not needed if autoprefixing */
-  display: flex;
-  margin-left: -30px;
-  /* gutter size offset */
-  width: auto;
-}
-
-.my-masonry-grid_column {
-  padding-left: 30px;
-  /* gutter size */
-  background-clip: padding-box;
-}
-
-/* Style your items */
-.my-masonry-grid_column>div {
-  /* change div to reference your elements you put in <Masonry> */
-  background: grey;
-  margin-bottom: 30px;
 }

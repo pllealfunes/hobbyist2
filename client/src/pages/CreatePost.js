@@ -35,15 +35,15 @@ const CreatNewPost = () => {
     });
 
     const [errorsServer, setErrorsServer] = useState("")
-    const [selectedPhoto, setSelectedPhoto] = useState("")
+    const [photoExists, setPhotoExists] = useState(false)
     const [selectedPhotoPreview, setSelectedPhotoPreview] = useState("")
 
 
 
 
-    const handlePhoto = (e) => {
-        setSelectedPhoto(e.target.files[0])
-
+    const removePhoto = () => {
+        reset({ photo: "" })
+        setPhotoExists(false)
     }
 
 
@@ -112,8 +112,13 @@ const CreatNewPost = () => {
                             name="photo"
                             className="photoInput"
                             {...register("photo")}
+                            onChange={() => {
+                                setPhotoExists(true);
+                            }}
                         />
                     </label>
+
+                    {photoExists && <button type="button" variant="contained" onClick={removePhoto} className="removePhoto">Remove Photo</button>}
 
                     <TextField
                         className="title"
