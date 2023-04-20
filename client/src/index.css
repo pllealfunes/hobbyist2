@@ -178,14 +178,21 @@ footer {
 
 /* Create and Edit Form Styles */
 
-.newpostContainer,
-.editpostContainer {
-  background-color: #fccc04;
+.newpostWrapper,
+.editpostWrapper {
+  background-color: #FFBF86;
 }
 
-.formpostContainer,
-.formeditContainer {
+.newpostContainer {
   padding: 3rem;
+  box-shadow: 5px;
+  border-radius: 10px;
+  background-color: #F5F5F5;
+  margin: 3rem;
+}
+
+
+.editCommContainer {
   box-shadow: 5px;
   border-radius: 10px;
   background-color: #F5F5F5;
@@ -208,36 +215,29 @@ footer {
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
-.editCommContainer {
-  padding: 32px;
-  display: flex;
-  flex-flow: column wrap;
-  margin: auto;
-  border-radius: 0.8px;
-  border: 1px solid #ccc;
-  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-  width: 50%;
-}
-
-
-.editCommForm {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 12px;
-}
-
 .createTitle,
-.editPostTitle,
-.editCommTitle {
+.editPostTitle {
   text-align: center;
   margin-bottom: 2rem;
+}
+
+.editCommTitle {
+  text-align: center;
+  margin: 20px;
 }
 
 .photoInput {
   margin: 30px;
 }
+
+.editCommForm {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 
 
 .commFormContainer {
@@ -274,11 +274,6 @@ footer {
   height: 16px;
 }
 
-.loginTitle {
-  text-align: center;
-  margin: 1rem;
-  color: #f4770e;
-}
 
 /* Explore and Category Styling*/
 
@@ -349,4 +344,23 @@ footer {
 
 .paginationContainer {
   margin: 50px;
+}
+
+
+/* Login & Signup Page*/
+
+.loginWrapper,
+.signupWrapper {
+  background-color: #FFBF86;
+}
+
+.loginContainer,
+.signupContainer {
+  background-color: #F5F5F5;
+}
+
+.loginTitle {
+  text-align: center;
+  margin: 1rem;
+  color: #FFBF86;
 }

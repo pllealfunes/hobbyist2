@@ -5,6 +5,22 @@ import { toast } from 'react-toastify';
 import axiosPrivate from "../config/useAxiosPrivate";
 import axios from "axios";
 
+
+/*** MATERIAL UI STYLING ***/
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import SendIcon from '@mui/icons-material/Send';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
+
 const EditComment = () => {
 
     const navigate = useNavigate
@@ -42,27 +58,49 @@ const EditComment = () => {
     }
 
     return (
-        <div className="container">
-            <div className='editCommContainer'>
-                <h1 className="editCommTitle">Edit Comment</h1>
+        <Box
+            display="flex"
+            direction="column"
+            alignItems="center"
+            justifyContent="center"
+            className="editpostWrapper"
+        >
+
+            <Grid
+                container
+                width={600}
+                direction="column"
+                alignItems="center"
+                justifyContent="center"
+                className="editCommContainer"
+                sx={{
+                    boxShadow: 2,
+                    '& button': { my: 3 },
+                }}
+            >
+                <h2 className="editCommTitle">Edit Comment</h2>
                 <form className="editCommForm" onSubmit={handleSubmit(submitEditComment)}>
-                    <label htmlFor='editCommentBox'></label>
                     {errorsServer && errorsServer.map((error) => (
                         <div className="errorMsg" key={error.param}>
                             <div>{error.msg}</div>
                         </div>
                     ))}
                     {errors.comment && <span>Comments must be at least 5 characters long</span>}
-                    <textarea
+                    <TextField
                         name="comment"
-                        placeholder="Edit Comment"
-                        rows={20}
+                        rows={10}
+                        label="Edit Comment Box"
+                        className="editCommentBox"
+                        multiline
+                        margin="normal"
+                        id="editCommentBox"
+                        InputProps={{ sx: { width: { xs: 350, md: 500 } } }}
                         {...register("comment", { required: true, minLength: 5 })}
                     />
-                    <button className="submitFormBtn" type="submit">Submit</button>
+                    <Button className="submitFormBtn" type="submit" variant="contained" color="success" fullWidth>Submit</Button>
                 </form>
-            </div>
-        </div>
+            </Grid>
+        </Box>
     )
 }
 

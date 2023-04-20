@@ -48,11 +48,15 @@ const Signup = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            className="signupWrapper"
+            sx={{
+                p: 7
+            }}
         >
             <Grid
                 width={700}
                 container
-                className="container"
+                className="signupContainer"
                 direction="column"
                 justifyContent="center"
                 alignItems="center"

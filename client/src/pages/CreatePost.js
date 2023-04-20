@@ -75,7 +75,7 @@ const CreatNewPost = () => {
             direction="column"
             alignItems="center"
             justifyContent="center"
-            className="newpostContainer"
+            className="newpostWrapper"
         >
 
             <Grid
@@ -84,14 +84,14 @@ const CreatNewPost = () => {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                className="formpostContainer"
+                className="newpostContainer"
                 sx={{
                     boxShadow: 2,
                     '& button': { my: 3 },
                 }}
             >
 
-                <h1 className="createTitle">New Post</h1>
+                <h2 className="createTitle">New Post</h2>
 
                 <form className="postForm" onSubmit={handleSubmit(submitNewPost)}>
                     {errorsServer && errorsServer.map((error) => (

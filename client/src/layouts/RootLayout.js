@@ -112,8 +112,8 @@ export default function RootLayout() {
                                         >
                                             <IconButton
                                                 size="large"
-                                                aria-label="account of current user"
-                                                aria-controls="menu-appbar"
+                                                aria-label="no user mobile view"
+                                                aria-controls="menu-appbar-mobile-nouser"
                                                 aria-haspopup="true"
                                                 onClick={handleOpenNavMenu}
                                             >
@@ -121,7 +121,7 @@ export default function RootLayout() {
                                             </IconButton>
 
                                             <Menu
-                                                id="menu-appbar"
+                                                classanme="menu-appbar"
                                                 anchorEl={anchorElNav}
                                                 anchorOrigin={{
                                                     vertical: 'bottom',
@@ -143,9 +143,9 @@ export default function RootLayout() {
                                                 }}
                                             >
                                                 <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                                <div>
+                                                <Menu>
                                                     <MenuItem
-                                                        id="basic-button"
+                                                        className="basic-button"
                                                         aria-controls={open ? 'basic-menu' : undefined}
                                                         aria-haspopup="true"
                                                         aria-expanded={open ? 'true' : undefined}
@@ -154,7 +154,7 @@ export default function RootLayout() {
                                                         Search
                                                     </MenuItem>
                                                     <Menu
-                                                        id="basic-menu"
+                                                        className="basic-menu"
                                                         anchorEl={anchorEl}
                                                         open={open}
                                                         onClose={handleClose}
@@ -187,7 +187,7 @@ export default function RootLayout() {
                                                             Games/Puzzles
                                                         </MenuItem>
                                                     </Menu>
-                                                </div>
+                                                </Menu>
                                                 <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
                                                 <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
                                             </Menu>
@@ -220,11 +220,11 @@ export default function RootLayout() {
                                     >
                                         Hobbyist
                                     </Typography>
-                                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                                         <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                        <div>
+                                        <Menu>
                                             <MenuItem
-                                                id="basic-button"
+                                                className="basic-button"
                                                 aria-controls={open ? 'basic-menu' : undefined}
                                                 aria-haspopup="true"
                                                 aria-expanded={open ? 'true' : undefined}
@@ -234,7 +234,7 @@ export default function RootLayout() {
                                             </MenuItem>
 
                                             <Menu
-                                                id="basic-menu"
+                                                className="basic-menu"
                                                 anchorEl={anchorEl}
                                                 open={open}
                                                 onClose={handleClose}
@@ -267,7 +267,7 @@ export default function RootLayout() {
                                                     Games/Puzzles
                                                 </MenuItem>
                                             </Menu>
-                                        </div>
+                                        </Menu>
 
                                         <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
                                         <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
@@ -308,15 +308,15 @@ export default function RootLayout() {
                             }}>
                                 <IconButton
                                     size="large"
-                                    aria-label="account of current user"
-                                    aria-controls="menu-appbar"
+                                    aria-label="no user web view"
+                                    aria-controls="menu-appbar-web-nouser"
                                     aria-haspopup="true"
                                     onClick={handleOpenNavMenu}
                                 >
                                     <MenuIcon />
                                 </IconButton>
                                 <Menu
-                                    id="menu-appbar"
+                                    className="menu-appbar"
                                     anchorEl={anchorElNav}
                                     anchorOrigin={{
                                         vertical: 'bottom',
@@ -338,9 +338,9 @@ export default function RootLayout() {
                                 >
 
                                     <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                    <div>
+                                    <Menu>
                                         <MenuItem
-                                            id="basic-button"
+                                            className="basic-button"
                                             aria-controls={open ? 'basic-menu' : undefined}
                                             aria-haspopup="true"
                                             aria-expanded={open ? 'true' : undefined}
@@ -350,7 +350,7 @@ export default function RootLayout() {
                                         </MenuItem>
 
                                         <Menu
-                                            id="basic-menu"
+                                            className="basic-menu"
                                             anchorEl={anchorEl}
                                             open={open}
                                             onClose={handleClose}
@@ -383,7 +383,7 @@ export default function RootLayout() {
                                                 Games/Puzzles
                                             </MenuItem>
                                         </Menu>
-                                    </div>
+                                    </Menu>
                                     <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
                                     <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
 
@@ -412,11 +412,11 @@ export default function RootLayout() {
                             >
                                 Hobbyist
                             </Typography>
-                            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                                 <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                <div>
+                                <Menu>
                                     <MenuItem
-                                        id="basic-button"
+                                        className="basic-button"
                                         aria-controls={open ? 'basic-menu' : undefined}
                                         aria-haspopup="true"
                                         aria-expanded={open ? 'true' : undefined}
@@ -426,7 +426,7 @@ export default function RootLayout() {
                                     </MenuItem>
 
                                     <Menu
-                                        id="basic-menu"
+                                        className="basic-menu"
                                         anchorEl={anchorEl}
                                         open={open}
                                         onClose={handleClose}
@@ -459,7 +459,7 @@ export default function RootLayout() {
                                             Games/Puzzles
                                         </MenuItem>
                                     </Menu>
-                                </div>
+                                </Menu>
                                 <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
                                 <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
                             </Box>
@@ -479,7 +479,7 @@ export default function RootLayout() {
                                 </Grid>
                                 <Menu
                                     sx={{ mt: '45px', p: 5 }}
-                                    id="menu-appbar"
+                                    className="menu-appbar"
                                     anchorEl={anchorElUser}
                                     anchorOrigin={{
                                         vertical: 'top',
@@ -521,7 +521,7 @@ export default function RootLayout() {
                 >
                     <Grid container spacing={2} justifyContent="space-between">
                         <Grid item md={6} lg={4}>
-                            <h4 variant="body1">About us</h4>
+                            <Typography variant="h5">About us</Typography>
                             <Typography variant="caption2">
                                 Hobbyist was built with the MERN stack alogn with
                                 Redux React Router, and MUI for the
@@ -535,43 +535,41 @@ export default function RootLayout() {
                             </Box>
                         </Grid>
                         <Grid item md={3} lg={2}>
-                            <h4 variant="body1">My Account</h4>
-                            <List>
-                                {!user &&
-                                    <div>
-                                        <ListItemText>
-                                            <Typography lineHeight={2} variant="caption2">
-                                                <Link to="/login">
-                                                    Login
-                                                </Link>
-                                            </Typography>
-                                        </ListItemText>
-                                        <ListItemText>
-                                            <Typography lineHeight={2} variant="caption2">
-                                                <Link to="/signup">
-                                                    Signup
-                                                </Link>
-                                            </Typography>
-                                        </ListItemText>
-                                    </div>
-                                }
-                                {user &&
-                                    <div>
-                                        <ListItemText>
-                                            <Typography lineHeight={2} variant="caption2">
-                                                <Link className="footerProfile" to={`/profile/${user.currentUser.id}`}>
-                                                    Profile
-                                                </Link>
-                                            </Typography>
-                                        </ListItemText>
-                                        <ListItemText>
-                                            <Typography lineHeight={2} variant="caption2">
-                                                <LogoutBtn className="footerLogout" to="/logout" />
-                                            </Typography>
-                                        </ListItemText>
-                                    </div>
-                                }
-                            </List>
+                            <Typography variant="h5">My Account</Typography>
+                            {!user &&
+                                <List>
+                                    <ListItemText>
+                                        <Typography lineHeight={2} variant="caption2">
+                                            <Link to="/login">
+                                                Login
+                                            </Link>
+                                        </Typography>
+                                    </ListItemText>
+                                    <ListItemText>
+                                        <Typography lineHeight={2} variant="caption2">
+                                            <Link to="/signup">
+                                                Signup
+                                            </Link>
+                                        </Typography>
+                                    </ListItemText>
+                                </List>
+                            }
+                            {user &&
+                                <List>
+                                    <ListItemText>
+                                        <Typography lineHeight={2} variant="caption2">
+                                            <Link className="footerProfile" to={`/profile/${user.currentUser.id}`}>
+                                                Profile
+                                            </Link>
+                                        </Typography>
+                                    </ListItemText>
+                                    <ListItemText>
+                                        <Typography lineHeight={2} variant="caption2">
+                                            <LogoutBtn className="footerLogout" to="/logout" />
+                                        </Typography>
+                                    </ListItemText>
+                                </List>
+                            }
                         </Grid>
                     </Grid>
                 </Box>

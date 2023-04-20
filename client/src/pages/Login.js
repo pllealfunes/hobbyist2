@@ -63,12 +63,16 @@ const Login = () => {
             display="flex"
             alignItems="center"
             justifyContent="center"
+            className="loginWrapper"
+            sx={{
+                p: 6
+            }}
         >
 
             <Grid
                 width={700}
                 container
-                className="container"
+                className="loginContainer"
                 direction="column"
                 justifyContent="center"
                 alignItems="center"
