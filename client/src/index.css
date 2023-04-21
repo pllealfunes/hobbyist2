@@ -290,8 +290,7 @@ footer {
 
 .categoryWrapper,
 .resultsWrapper,
-.feedWrapper,
-.profileWrapper {
+.feedWrapper {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -370,6 +369,13 @@ footer {
 
 /* Profile Page Styling */
 
+.profileSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 .profileContainer {
   border-radius: 10px;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axiosPrivate from "../config/useAxiosPrivate";
 import axios from 'axios';
@@ -23,8 +24,9 @@ import AlertTitle from '@mui/material/AlertTitle';
 const CreatNewPost = () => {
 
     const { user } = useSelector((state) => state.auth)
+    const navigate = useNavigate()
 
-    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm({
+    const { register, handleSubmit, reset, watch, resetField, formState: { errors } } = useForm({
         defaultValues: {
             user: user ? user.currentUser.id : null,
             title: "",
@@ -42,7 +44,7 @@ const CreatNewPost = () => {
 
 
     const removePhoto = () => {
-        reset({ photo: "" })
+        resetField("photo")
         setPhotoExists(false)
     }
 
@@ -58,8 +60,10 @@ const CreatNewPost = () => {
         (async () => {
             try {
                 await axiosPrivate.post('/blog/post/newPost', formData)
-                toast.success("View your profile for your new post!")
+                toast.success("Post Created")
+                setPhotoExists(false)
                 reset()
+                navigate(`/profile/${user.currentUser.id}`)
             } catch (error) {
                 if (error.response) setErrorsServer(error.response.data.errors);
                 toast.error("Unable to create new post")
@@ -103,7 +107,7 @@ const CreatNewPost = () => {
 
                     {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
                     {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
-                    {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
+                    {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 500 characters long</span></Alert>}
 
 
                     <label htmlFor="photo">Upload Photo:
@@ -160,7 +164,7 @@ const CreatNewPost = () => {
                         multiline
                         margin="normal"
                         rows={20}
-                        {...register("post", { required: true, minLength: 5 })}
+                        {...register("post", { required: true, minLength: 500 })}
                     />
 
                     <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>

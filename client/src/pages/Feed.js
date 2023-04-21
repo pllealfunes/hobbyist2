@@ -67,54 +67,44 @@ const Feed = () => {
 
                     if (singleUser.categories.length > 0 && singleUser.users.length > 0) {
 
-                        if (singleUser.categories.length > 0 && singleUser.users.length > 0) {
+                        const categoryArray = posts.filter(post =>
+                            singleUser.categories.includes(post.category)
+                        );
 
-                            const categoryArray = singleUser.categories.flatMap(category =>
-                                posts.filter(post => post.category === category)
-                            );
+                        const userArray = posts.filter(post =>
+                            singleUser.users.includes(post.user)
+                        );
 
-                            const userArray = singleUser.users.flatMap(user =>
-                                posts.filter(post => post.user === user)
-                            );
+                        const removeDuplicates = categoryArray
+                            .concat(userArray)
+                            .reduce((prev, curr) => {
+                                if (!prev.find(post => post.id === curr.id)) {
+                                    prev.push(curr);
+                                }
+                                return prev;
+                            }, []);
 
-                            const removeDuplicates = [...new Set([...categoryArray, ...userArray])];
+                        setFeed(removeDuplicates);
 
-                            const sortedFeed = removeDuplicates.sort((a, b) => {
-                                const dateA = new Date(a.timestamp);
-                                const dateB = new Date(b.timestamp);
-                                return dateB - dateA;
-                            });
-
-                            setFeed(sortedFeed);
-                        }
 
                     } else if (singleUser.categories.length > 0 && !singleUser.users.length) {
 
-                        const categoryArray = singleUser.categories.flatMap(category =>
-                            posts.filter(post => post.catgeory === category)
+                        const categoryArray = posts.filter(post =>
+                            singleUser.categories.includes(post.category)
                         );
 
-                        const sortedFeed = categoryArray.sort((a, b) => {
-                            const dateA = new Date(a.timestamp);
-                            const dateB = new Date(b.timestamp);
-                            return dateB - dateA;
-                        });
 
-                        setFeed(sortedFeed)
+                        setFeed(categoryArray)
+                        console.log(categoryArray)
 
                     } else if (!singleUser.categories.length && singleUser.users.length > 0) {
 
-                        const userArray = singleUser.users.flatMap(user =>
-                            posts.filter(post => post.user === user)
+                        const userArray = posts.filter(post =>
+                            singleUser.users.includes(post.user)
                         );
 
-                        const sortedFeed = userArray.sort((a, b) => {
-                            const dateA = new Date(a.timestamp);
-                            const dateB = new Date(b.timestamp);
-                            return dateB - dateA;
-                        });
 
-                        setFeed(sortedFeed)
+                        setFeed(userArray)
                     }
 
                 }
@@ -132,7 +122,16 @@ const Feed = () => {
 
     useEffect(() => {
         if (feed) {
-            setCurrentPosts(feed.slice(indexOfFirstPost, indexOfLastPost))
+            let slicedFeed = feed.slice(indexOfFirstPost, indexOfLastPost)
+            let newFeed = slicedFeed.sort((a, b) => {
+                const dateA = new Date(a.createdAt)
+                const dateB = new Date(b.createdAt)
+                return dateB - dateA
+            })
+            newFeed.forEach(post => {
+                post.createdAt = new Date(post.createdAt).toLocaleString();
+            });
+            setCurrentPosts(newFeed)
         }
     }, [indexOfFirstPost, indexOfLastPost, feed])
 
@@ -193,8 +192,8 @@ const Feed = () => {
                                     <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                         {post.category}
                                     </Typography>
-                                    <Typography variant="caption" color="text.primary">
-                                        {post.timestamp}
+                                    <Typography variant="caption" color="text.primary" sx={{ mr: 1 }}>
+                                        {post.createdAt}
                                     </Typography>
                                 </Grid>
                             </Card>
@@ -224,8 +223,8 @@ const Feed = () => {
                                     <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                         {post.category}
                                     </Typography>
-                                    <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
-                                        {post.timestamp.split(",", 1)}
+                                    <Typography variant="caption" color="text.primary" sx={{ mr: 1 }}>
+                                        {post.createdAt}
                                     </Typography>
                                 </Grid>
                             </Card>
@@ -234,12 +233,12 @@ const Feed = () => {
                 ))
                 }
             </section>
-            <Pagination
+            {currentPosts.length > 0 && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={feed.length}
                 paginate={paginate}
-            />
+            />}
         </section >
     )
 }

@@ -122,7 +122,7 @@ const PostDetails = () => {
                 try {
                     await axiosPrivate.delete(`/blog/post/deletePost/${postId}`);
                     toast.success('Deleted Post')
-                    navigate("/profile")
+                    navigate(`/profile/${user.currentUser.id}`)
                 } catch (error) {
                     toast.success('Unable to Delete Post')
                     if (error.response) setErrorsServer(error.response.data.errors)

@@ -8,7 +8,7 @@ let postSchema = new Schema({
     title: { type: String, minLength: 5, required: true },
     category: { type: String, required: true },
     photo: { type: String },
-    post: { type: String, minLength: 5, required: true }
+    post: { type: String, minLength: 500, required: true }
 }, { timestamps: true })
 
 

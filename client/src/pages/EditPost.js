@@ -143,7 +143,7 @@ const EditPost = () => {
 
                             {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
                             {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
-                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
+                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 500 characters long</span></Alert>}
 
                             <TextField
                                 className="title"

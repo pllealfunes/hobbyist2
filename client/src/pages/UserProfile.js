@@ -141,6 +141,7 @@ const UserProfile = () => {
 
     return (
         <section className="profileSection">
+
             {user ?
 
                 user.currentUser.id !== id ?
@@ -213,7 +214,7 @@ const UserProfile = () => {
                                                     {post.category}
                                                 </Typography>
                                                 <Typography variant="caption" color="text.primary">
-                                                    {post.timestamp}
+                                                    {post.createdAt}
                                                 </Typography>
                                             </Grid>
                                         </Card>
@@ -244,7 +245,7 @@ const UserProfile = () => {
                                                     {post.category}
                                                 </Typography>
                                                 <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
-                                                    {post.timestamp.split(",", 1)}
+                                                    {post.createdAt}
                                                 </Typography>
                                             </Grid>
                                         </Card>
@@ -273,7 +274,7 @@ const UserProfile = () => {
 
                     :
 
-                    <div className="profileWrapper">
+                    <div>
                         <Box
                             display="flex"
                             direction="column"
@@ -335,7 +336,7 @@ const UserProfile = () => {
                                                     {post.category}
                                                 </Typography>
                                                 <Typography variant="caption" color="text.primary">
-                                                    {post.timestamp}
+                                                    {post.createdAt}
                                                 </Typography>
                                             </Grid>
                                         </Card>
@@ -366,7 +367,7 @@ const UserProfile = () => {
                                                     {post.category}
                                                 </Typography>
                                                 <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
-                                                    {post.timestamp.split(",", 1)}
+                                                    {post.createdAt}
                                                 </Typography>
                                             </Grid>
                                         </Card>
@@ -520,6 +521,7 @@ const UserProfile = () => {
                 totalPosts={currentPosts.length}
                 paginate={paginate}
             />}
+
         </section >
 
     )
