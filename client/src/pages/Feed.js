@@ -67,35 +67,28 @@ const Feed = () => {
 
                     if (singleUser.categories.length > 0 && singleUser.users.length > 0) {
 
-                        const categoryArray = posts.filter(post =>
-                            singleUser.categories.includes(post.category)
-                        );
+                        categoryArray = singleUser.categories.map((category) => (
+                            posts.filter((post) => post.category === category)
+                        )).reduce((prev, curr) =>
+                            [...prev, ...curr])
 
-                        const userArray = posts.filter(post =>
-                            singleUser.users.includes(post.user)
-                        );
+                        userArray = singleUser.users.map((user) => (
+                            posts.filter((post) => post.user === user)
+                        )).reduce((prev, curr) =>
+                            [...prev, ...curr])
 
-                        const removeDuplicates = categoryArray
-                            .concat(userArray)
-                            .reduce((prev, curr) => {
-                                if (!prev.find(post => post.id === curr.id)) {
-                                    prev.push(curr);
-                                }
-                                return prev;
-                            }, []);
-
-                        setFeed(removeDuplicates);
+                        removeDuplicates = [...new Set([...categoryArray, ...userArray])]
+                        setFeed(removeDuplicates)
+                    }
 
 
-                    } else if (singleUser.categories.length > 0 && !singleUser.users.length) {
+                    else if (singleUser.categories.length > 0 && !singleUser.users.length) {
 
                         const categoryArray = posts.filter(post =>
                             singleUser.categories.includes(post.category)
                         );
-
 
                         setFeed(categoryArray)
-                        console.log(categoryArray)
 
                     } else if (!singleUser.categories.length && singleUser.users.length > 0) {
 
