@@ -8,7 +8,7 @@ import axiosPrivate from '../config/useAxiosPrivate';
 import Pagination from '../components/Pagination';
 import { Author } from '../components/Author';
 import EmptyProfile from "../components/EmptyProfile";
-
+import FollowUserBtn from '../components/FollowUserBtn'
 
 import {
     Card,
@@ -61,24 +61,6 @@ const UserProfile = () => {
     }, [id, dispatch, user])
 
 
-    useEffect(() => {
-        (async () => {
-            try {
-                if (currentUser) {
-                    if (currentUser.users.includes(id)) {
-                        setIsFollow(true)
-                    } else {
-                        setIsFollow(false)
-                    }
-                }
-
-            } catch (error) {
-                console.log(error);
-            }
-
-        })();
-
-    }, [currentUser, isFollow, id])
 
     useEffect(() => {
         (async () => {
@@ -98,43 +80,6 @@ const UserProfile = () => {
 
 
 
-    const followUser = async () => {
-        try {
-            if (user.currentUser.id === id) {
-                toast.error('You cannot follow yourself')
-            } else {
-
-                await axiosPrivate.put(`/users/${user.currentUser.id}/followUser/${id}`)
-                toast.success(`Following ${userProfile.username}`)
-                setIsFollow(true)
-
-            }
-
-        } catch (error) {
-            toast.error("Try again later")
-        }
-
-    }
-
-
-    const unfollowUser = async () => {
-        try {
-            if (user.currentUser.id === id) {
-                toast.error('You cannot unfollow yourself')
-            } else {
-
-                await axiosPrivate.put(`/users/${user.currentUser.id}/unFollowUser/${id}`)
-                toast.success(`Unfollowing ${userProfile.username}`)
-                setIsFollow(false)
-
-            }
-
-        } catch (error) {
-
-            toast.error("Try again later")
-        }
-
-    }
 
 
 
@@ -172,18 +117,7 @@ const UserProfile = () => {
                                     {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
                                     {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
                                 </div>
-                                <button
-                                    className="followBtn"
-                                    onClick={() => {
-                                        if (isFollow) {
-                                            unfollowUser();
-                                        } else {
-                                            followUser();
-                                        }
-                                    }}
-                                >
-                                    {isFollow ? "Unfollow" : "Follow"}
-                                </button>
+                                <FollowUserBtn currentUser={currentUser} id={id} user={user} userProfile={userProfile} />
                             </Grid>
                         </Box>
                         {currentPosts.length > 0 ? <section className='postsWrapper'>
@@ -515,7 +449,7 @@ const UserProfile = () => {
                 </div>
 
             }
-            {currentPosts.length > 0 && <Pagination
+            {currentPosts.length > 10 && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={currentPosts.length}
