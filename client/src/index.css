@@ -131,7 +131,8 @@ footer {
 
 /* Feed Page styling */
 
-.postsWrapper {
+.postsWrapper,
+.emptyPostsWrapper {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
@@ -281,7 +282,8 @@ footer {
   margin-bottom: 5rem;
 }
 
-.searchWrapper {
+.searchWrapper,
+.profileWrapper {
   background-color: #FFBF86;
   width: 100%;
 }
@@ -363,4 +365,27 @@ footer {
   text-align: center;
   margin: 1rem;
   color: #FFBF86;
+}
+
+
+/* Profile Page Styling */
+
+
+.profileContainer {
+  border-radius: 10px;
+  background-color: #F5F5F5;
+  margin: 50px;
+}
+
+.emptyPostsWrapper {
+  background-color: #F5F5F5;
+  width: 100%;
+}
+
+.emptyPostsContainer {
+  border-radius: 10px;
+  background-color: #FFBF86;
+  color: #0A0909;
+  margin: 50px;
+  padding: 20px;
 }

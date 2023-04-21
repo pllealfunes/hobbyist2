@@ -39,6 +39,7 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [showPassword, setShowPassword] = useState(false);
+    const [failLogin, setFailLogin] = useState(false);
 
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -52,9 +53,8 @@ const Login = () => {
             await dispatch(login(data)).unwrap()
             toast.success('You are logged in')
             navigate('/feed')
-            console.log()
         } catch (error) {
-            toast.error(`${error}. Please try again.`)
+            setFailLogin(true)
         }
     }
 
@@ -89,6 +89,7 @@ const Login = () => {
 
                     {errors.username && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Username must be 5 characters long</span></Alert>}
                     {errors.password && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A password must contain at least 8 Characters, 1 Uppercase Character, 1 lowercase character, 1 Number, and 1 Special Character</span></Alert>}
+                    {failLogin && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Unable to Login. Please be sure Username and Password are Correct.</span></Alert>}
 
                     <TextField
                         id="username"

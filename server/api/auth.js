@@ -116,14 +116,16 @@ router.post("/signup", [
                 bio: req.body.bio
             }
 
-            let currentUser = {
-                username: req.body.username.trim(),
-                email: req.body.email.trim(),
-                bio: req.body.bio
-            }
+
             UserService.create(newUser)
                 .then((user) => {
                     const token = createToken(user._id)
+                    let currentUser = {
+                        id: user._id,
+                        username: req.body.username.trim(),
+                        email: req.body.email.trim(),
+                        bio: req.body.bio
+                    }
                     res.status(200).json({ currentUser, token })
                 }).catch((err) => {
                     res.status(404)

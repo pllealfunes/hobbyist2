@@ -57,6 +57,8 @@ const PostDetails = () => {
             try {
                 let getPosts = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}`);
                 setPost(getPosts.data);
+
+
             } catch (error) {
                 console.log(error);
                 navigate("*")

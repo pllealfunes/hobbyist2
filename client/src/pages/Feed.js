@@ -66,38 +66,55 @@ const Feed = () => {
                 if (singleUser) {
 
                     if (singleUser.categories.length > 0 && singleUser.users.length > 0) {
-                        categoryArray = singleUser.categories.map((category) => (
-                            posts.filter((post) => post.category === category)
-                        )).reduce((prev, curr) =>
-                            [...prev, ...curr])
 
-                        userArray = singleUser.users.map((user) => (
-                            posts.filter((post) => post.user === user)
-                        )).reduce((prev, curr) =>
-                            [...prev, ...curr])
+                        if (singleUser.categories.length > 0 && singleUser.users.length > 0) {
 
+                            const categoryArray = singleUser.categories.flatMap(category =>
+                                posts.filter(post => post.category === category)
+                            );
 
-                        removeDuplicates = [...new Set([...categoryArray, ...userArray])]
-                        setFeed(removeDuplicates)
+                            const userArray = singleUser.users.flatMap(user =>
+                                posts.filter(post => post.user === user)
+                            );
+
+                            const removeDuplicates = [...new Set([...categoryArray, ...userArray])];
+
+                            const sortedFeed = removeDuplicates.sort((a, b) => {
+                                const dateA = new Date(a.timestamp);
+                                const dateB = new Date(b.timestamp);
+                                return dateB - dateA;
+                            });
+
+                            setFeed(sortedFeed);
+                        }
 
                     } else if (singleUser.categories.length > 0 && !singleUser.users.length) {
-                        categoryArray = singleUser.categories.map((category) => (
-                            posts.filter((post) => post.category === category)
-                        )).reduce((prev, curr) =>
-                            [...prev, ...curr])
 
-                        removeDuplicates = categoryArray
-                        setFeed(removeDuplicates)
+                        const categoryArray = singleUser.categories.flatMap(category =>
+                            posts.filter(post => post.catgeory === category)
+                        );
+
+                        const sortedFeed = categoryArray.sort((a, b) => {
+                            const dateA = new Date(a.timestamp);
+                            const dateB = new Date(b.timestamp);
+                            return dateB - dateA;
+                        });
+
+                        setFeed(sortedFeed)
 
                     } else if (!singleUser.categories.length && singleUser.users.length > 0) {
 
-                        userArray = singleUser.users.map((user) => (
-                            posts.filter((post) => post.user === user)
-                        )).reduce((prev, curr) =>
-                            [...prev, ...curr])
+                        const userArray = singleUser.users.flatMap(user =>
+                            posts.filter(post => post.user === user)
+                        );
 
-                        removeDuplicates = userArray
-                        setFeed(removeDuplicates)
+                        const sortedFeed = userArray.sort((a, b) => {
+                            const dateA = new Date(a.timestamp);
+                            const dateB = new Date(b.timestamp);
+                            return dateB - dateA;
+                        });
+
+                        setFeed(sortedFeed)
                     }
 
                 }

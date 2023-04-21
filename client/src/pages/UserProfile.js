@@ -140,7 +140,7 @@ const UserProfile = () => {
 
 
     return (
-        <section className="profileWrapper">
+        <section className="profileSection">
             {user ?
 
                 user.currentUser.id !== id ?
@@ -150,11 +150,11 @@ const UserProfile = () => {
                             direction="column"
                             alignItems="center"
                             justifyContent="center"
-                            className="searchWrapper"
+                            className="profileWrapper"
                         >
                             <Grid
                                 container
-                                className="searchContainer"
+                                className="profileContainer"
                                 direction="column"
                                 alignItems="center"
                                 justifyContent="center"
@@ -162,7 +162,7 @@ const UserProfile = () => {
                                     boxShadow: 2,
                                     '& button': { my: 3 },
                                 }}
-                                width={700}
+
                             >
                                 <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
                                 <h2>{userProfile.username}</h2>
@@ -185,7 +185,7 @@ const UserProfile = () => {
                                 </button>
                             </Grid>
                         </Box>
-                        <section className='postsWrapper'>
+                        {currentPosts.length > 0 ? <section className='postsWrapper'>
                             {currentPosts && currentPosts.map((post) => (
                                 <div className="postCard" key={post._id} >
                                     {post.photo &&
@@ -251,22 +251,39 @@ const UserProfile = () => {
                                     }
                                 </div>
                             ))}
-                        </section>
+                        </section> :
+                            <section className='emptyPostsWrapper'>
+                                <Grid
+                                    container
+                                    className="emptyPostsContainer"
+                                    direction="column"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                    sx={{
+                                        boxShadow: 2,
+                                        '& button': { my: 3 },
+                                    }}
+                                    width={700}
+                                >
+                                    <Typography variant="h5">Welcome to {userProfile.username}'s Profile</Typography>
+                                    <Typography variant="subtitle1">Stay Tuned for Future Posts</Typography>
+                                </Grid>
+                            </section>}
                     </div>
 
                     :
 
-                    <div>
+                    <div className="profileWrapper">
                         <Box
                             display="flex"
                             direction="column"
                             alignItems="center"
                             justifyContent="center"
-                            className="searchWrapper"
+                            className="profileWrapper"
                         >
                             <Grid
                                 container
-                                className="searchContainer"
+                                className="profileContainer"
                                 direction="column"
                                 alignItems="center"
                                 justifyContent="center"
@@ -274,7 +291,8 @@ const UserProfile = () => {
                                     boxShadow: 2,
                                     '& button': { my: 3 },
                                 }}
-                                width={700}
+
+
                             >
                                 <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
                                 <h2>{userProfile.username}</h2>
@@ -287,7 +305,8 @@ const UserProfile = () => {
                                 <Link to={`/editProfile/${userProfile.id}`}><button className="followBtn">Edit Profile</button></Link>
                             </Grid>
                         </Box>
-                        <section className='postsWrapper'>
+
+                        {currentPosts.length > 0 ? <section className='postsWrapper'>
 
                             {currentPosts && currentPosts.map((post) => (
                                 <div className="postCard" key={post._id} >
@@ -354,7 +373,24 @@ const UserProfile = () => {
                                     }
                                 </div>
                             ))}
-                        </section>
+                        </section> :
+                            <section className='emptyPostsWrapper'>
+                                <Grid
+                                    container
+                                    className="emptyPostsContainer"
+                                    direction="column"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                    sx={{
+                                        boxShadow: 2,
+                                        '& button': { my: 3 },
+                                    }}
+                                    width={700}
+                                >
+                                    <Typography variant="h5">Welcome to your Profile!</Typography>
+                                    <Typography variant="subtitle1">Create a New Post To See it Here</Typography>
+                                </Grid>
+                            </section>}
                     </div>
 
 
@@ -365,11 +401,11 @@ const UserProfile = () => {
                         direction="column"
                         alignItems="center"
                         justifyContent="center"
-                        className="searchWrapper"
+                        className="profileWrapper"
                     >
                         <Grid
                             container
-                            className="searchContainer"
+                            className="profileContainer"
                             direction="column"
                             alignItems="center"
                             justifyContent="center"
@@ -377,7 +413,8 @@ const UserProfile = () => {
                                 boxShadow: 2,
                                 '& button': { my: 3 },
                             }}
-                            width={700}
+
+
                         >
                             <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
                             <h2>{userProfile.username}</h2>
@@ -389,7 +426,7 @@ const UserProfile = () => {
                             <button className="followBtn" onClick={() => (navigate('/login'))}>Follow User</button>
                         </Grid>
                     </Box>
-                    <section className='postsWrapper'>
+                    {currentPosts.length > 0 ? <section className='postsWrapper'>
                         {currentPosts && currentPosts.map((post) => (
                             <div className="postCard" key={post._id} >
                                 {post.photo &&
@@ -456,11 +493,28 @@ const UserProfile = () => {
                             </div>
 
                         ))}
-                    </section>
+                    </section> :
+                        <section className='emptyPostsWrapper'>
+                            <Grid
+                                container
+                                className="emptyPostsContainer"
+                                direction="column"
+                                alignItems="center"
+                                justifyContent="center"
+                                sx={{
+                                    boxShadow: 2,
+                                    '& button': { my: 3 },
+                                }}
+                                width={700}
+                            >
+                                <Typography variant="h5">Welcome to {userProfile.username}'s Profile</Typography>
+                                <Typography variant="subtitle1">Stay Tuned for Future Posts</Typography>
+                            </Grid>
+                        </section>}
                 </div>
 
             }
-            {currentPosts && <Pagination
+            {currentPosts.length > 0 && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={currentPosts.length}

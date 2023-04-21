@@ -37,7 +37,7 @@ export default function RootLayout() {
 
     const [anchorElNav, setAnchorElNav] = useState(null)
     const [anchorElUser, setAnchorElUser] = useState(null)
-    const [anchorEl, setAnchorEl] = useState(null);
+
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -54,15 +54,6 @@ export default function RootLayout() {
         setAnchorElUser(null);
     };
 
-
-
-    const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
 
 
 
@@ -142,54 +133,10 @@ export default function RootLayout() {
 
                                                 }}
                                             >
-                                                <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                                <Menu>
-                                                    <MenuItem
-                                                        className="basic-button"
-                                                        aria-controls={open ? 'basic-menu' : undefined}
-                                                        aria-haspopup="true"
-                                                        aria-expanded={open ? 'true' : undefined}
-                                                        onClick={handleClick}
-                                                    >
-                                                        Search
-                                                    </MenuItem>
-                                                    <Menu
-                                                        className="basic-menu"
-                                                        anchorEl={anchorEl}
-                                                        open={open}
-                                                        onClose={handleClose}
-                                                        MenuListProps={{
-                                                            'aria-labelledby': 'basic-button',
-                                                        }}
-                                                    >
-                                                        <MenuItem component={NavLink} to="/explore">
-                                                            Explore
-                                                        </MenuItem>
-                                                        <MenuItem component={NavLink} to="/category/physical">
-                                                            Physical
-                                                        </MenuItem>
-                                                        <MenuItem component={NavLink} to="/category/creative">
-                                                            Creative
-                                                        </MenuItem>
-                                                        <MenuItem component={NavLink} to="/category/mental">
-                                                            Mental
-                                                        </MenuItem>
-                                                        <MenuItem component={NavLink} to="/category/food">
-                                                            Food
-                                                        </MenuItem>
-                                                        <MenuItem component={NavLink} to="/category/musical">
-                                                            Musical
-                                                        </MenuItem>
-                                                        <MenuItem component={NavLink} to="/category/collecting">
-                                                            Collecting
-                                                        </MenuItem>
-                                                        <MenuItem component={NavLink} to="/category/games+puzzles">
-                                                            Games/Puzzles
-                                                        </MenuItem>
-                                                    </Menu>
-                                                </Menu>
-                                                <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
-                                                <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
+                                                <NavLink className="navbar-link" to="/"><MenuItem> Home</MenuItem></NavLink>
+                                                <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
+                                                <NavLink className="navbar-link" to="/login"><MenuItem>Login</MenuItem></NavLink>
+                                                <NavLink className="navbar-link" to="/signup"><MenuItem>Signup</MenuItem></NavLink>
                                             </Menu>
                                         </Box>
                                     </div>
@@ -221,56 +168,10 @@ export default function RootLayout() {
                                         Hobbyist
                                     </Typography>
                                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                        <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                        <Menu>
-                                            <MenuItem
-                                                className="basic-button"
-                                                aria-controls={open ? 'basic-menu' : undefined}
-                                                aria-haspopup="true"
-                                                aria-expanded={open ? 'true' : undefined}
-                                                onClick={handleClick}
-                                            >
-                                                Search
-                                            </MenuItem>
-
-                                            <Menu
-                                                className="basic-menu"
-                                                anchorEl={anchorEl}
-                                                open={open}
-                                                onClose={handleClose}
-                                                MenuListProps={{
-                                                    'aria-labelledby': 'basic-button',
-                                                }}
-                                            >
-                                                <MenuItem component={NavLink} to="/explore">
-                                                    Explore
-                                                </MenuItem>
-                                                <MenuItem component={NavLink} to="/category/physical">
-                                                    Physical
-                                                </MenuItem>
-                                                <MenuItem component={NavLink} to="/category/creative">
-                                                    Creative
-                                                </MenuItem>
-                                                <MenuItem component={NavLink} to="/category/mental">
-                                                    Mental
-                                                </MenuItem>
-                                                <MenuItem component={NavLink} to="/category/food">
-                                                    Food
-                                                </MenuItem>
-                                                <MenuItem component={NavLink} to="/category/musical">
-                                                    Musical
-                                                </MenuItem>
-                                                <MenuItem component={NavLink} to="/category/collecting">
-                                                    Collecting
-                                                </MenuItem>
-                                                <MenuItem component={NavLink} to="/category/games+puzzles">
-                                                    Games/Puzzles
-                                                </MenuItem>
-                                            </Menu>
-                                        </Menu>
-
-                                        <MenuItem> <NavLink className="navbar-link" to="/login">Login</NavLink></MenuItem>
-                                        <MenuItem> <NavLink className="navbar-link" to="/signup">Signup</NavLink></MenuItem>
+                                        <NavLink className="navbar-link" to="/"><MenuItem>Home</MenuItem></NavLink>
+                                        <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
+                                        <NavLink className="navbar-link" to="/login"><MenuItem>Login</MenuItem></NavLink>
+                                        <NavLink className="navbar-link" to="/signup"><MenuItem>Signup</MenuItem></NavLink>
                                     </Box>
                                 </Grid>
                             </Toolbar>
@@ -279,9 +180,12 @@ export default function RootLayout() {
                 </Box>
             }
             {user &&
-                <AppBar className="muiNav" position="static" color="default">
+                <AppBar position="static" color="default">
                     <Container maxWidth="xl">
                         <Toolbar disableGutters>
+
+
+
                             <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                             <Typography
                                 variant="h6"
@@ -301,22 +205,21 @@ export default function RootLayout() {
                                 Hobbyist
                             </Typography>
 
-                            <Box sx={{
-                                flexGrow: 1, display: { xs: 'flex' }, visibility: {
-                                    md: 'hidden'
-                                }
-                            }}>
+
+                            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                                 <IconButton
                                     size="large"
-                                    aria-label="no user web view"
-                                    aria-controls="menu-appbar-web-nouser"
+                                    aria-label="user web view"
+                                    aria-controls="menu-appbar-web-user"
                                     aria-haspopup="true"
                                     onClick={handleOpenNavMenu}
                                 >
                                     <MenuIcon />
                                 </IconButton>
+
+
                                 <Menu
-                                    className="menu-appbar"
+                                    id="menu-appbar-loggedin"
                                     anchorEl={anchorElNav}
                                     anchorOrigin={{
                                         vertical: 'bottom',
@@ -330,176 +233,90 @@ export default function RootLayout() {
                                     open={Boolean(anchorElNav)}
                                     onClose={handleCloseNavMenu}
                                     sx={{
-                                        display: { xs: 'block' },
-                                        visibility: {
-                                            md: 'hidden'
-                                        }
+                                        display: { xs: 'block', md: 'none' },
                                     }}
                                 >
 
-                                    <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                    <Menu>
-                                        <MenuItem
-                                            className="basic-button"
-                                            aria-controls={open ? 'basic-menu' : undefined}
-                                            aria-haspopup="true"
-                                            aria-expanded={open ? 'true' : undefined}
-                                            onClick={handleClick}
-                                        >
-                                            Search
-                                        </MenuItem>
-
-                                        <Menu
-                                            className="basic-menu"
-                                            anchorEl={anchorEl}
-                                            open={open}
-                                            onClose={handleClose}
-                                            MenuListProps={{
-                                                'aria-labelledby': 'basic-button',
-                                            }}
-                                        >
-                                            <MenuItem component={NavLink} to="/explore">
-                                                Explore
-                                            </MenuItem>
-                                            <MenuItem component={NavLink} to="/category/physical">
-                                                Physical
-                                            </MenuItem>
-                                            <MenuItem component={NavLink} to="/category/creative">
-                                                Creative
-                                            </MenuItem>
-                                            <MenuItem component={NavLink} to="/category/mental">
-                                                Mental
-                                            </MenuItem>
-                                            <MenuItem component={NavLink} to="/category/food">
-                                                Food
-                                            </MenuItem>
-                                            <MenuItem component={NavLink} to="/category/musical">
-                                                Musical
-                                            </MenuItem>
-                                            <MenuItem component={NavLink} to="/category/collecting">
-                                                Collecting
-                                            </MenuItem>
-                                            <MenuItem component={NavLink} to="/category/games+puzzles">
-                                                Games/Puzzles
-                                            </MenuItem>
-                                        </Menu>
-                                    </Menu>
-                                    <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
+                                    <NavLink className="navbar-link" to="/"><MenuItem>Home</MenuItem></NavLink>
+                                    <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
+                                    <NavLink className="navbar-link" to="/feed"><MenuItem>Feed</MenuItem></NavLink>
                                     <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
 
                                 </Menu>
                             </Box>
-                            <AdbIcon sx={{
-                                display: { xs: 'flex' }, mr: 1, visibility: {
-                                    md: 'hidden'
-                                }
-                            }} />
-                            <Typography
-                                variant="h5"
-                                noWrap
-                                component="a"
-                                href=""
-                                sx={{
-                                    mr: 2,
-                                    display: { xs: 'flex', md: 'none' },
-                                    flexGrow: 1,
-                                    fontFamily: 'monospace',
-                                    fontWeight: 700,
-                                    letterSpacing: '.3rem',
-                                    color: 'inherit',
-                                    textDecoration: 'none',
-                                }}
+
+
+
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="flex-end"
                             >
-                                Hobbyist
-                            </Typography>
-                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                <MenuItem> <NavLink className="navbar-link" to="/">Home</NavLink></MenuItem>
-                                <Menu>
-                                    <MenuItem
-                                        className="basic-button"
-                                        aria-controls={open ? 'basic-menu' : undefined}
-                                        aria-haspopup="true"
-                                        aria-expanded={open ? 'true' : undefined}
-                                        onClick={handleClick}
-                                    >
-                                        Search
-                                    </MenuItem>
+                                <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                                <Typography
+                                    variant="h5"
+                                    noWrap
+                                    component="a"
+                                    href=""
+                                    sx={{
+                                        mr: 2,
+                                        display: { xs: 'flex', md: 'none' },
+                                        flexGrow: 1,
+                                        fontFamily: 'monospace',
+                                        fontWeight: 700,
+                                        letterSpacing: '.3rem',
+                                        color: 'inherit',
+                                        textDecoration: 'none',
+                                    }}
+                                >
+                                    Hobbyist
+                                </Typography>
+                                <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, }}>
+                                    <NavLink className="navbar-link" to="/"><MenuItem>Home</MenuItem></NavLink>
+                                    <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
+                                    <NavLink className="navbar-link" to="/feed"><MenuItem>Feed</MenuItem></NavLink>
+                                    <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
+                                </Box>
 
+                                <Box sx={{ flexGrow: 0 }}>
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        alignItems="center"
+                                        justifyContent="center"
+                                    >
+                                        <Tooltip title="Open settings">
+                                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                                <Avatar alt="Doesn't have profile photo" />
+                                            </IconButton>
+                                        </Tooltip>
+                                    </Grid>
                                     <Menu
-                                        className="basic-menu"
-                                        anchorEl={anchorEl}
-                                        open={open}
-                                        onClose={handleClose}
-                                        MenuListProps={{
-                                            'aria-labelledby': 'basic-button',
+                                        sx={{ mt: '45px', p: 5 }}
+                                        className="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
                                         }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'right',
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
                                     >
-                                        <MenuItem component={NavLink} to="/explore">
-                                            Explore
-                                        </MenuItem>
-                                        <MenuItem component={NavLink} to="/category/physical">
-                                            Physical
-                                        </MenuItem>
-                                        <MenuItem component={NavLink} to="/category/creative">
-                                            Creative
-                                        </MenuItem>
-                                        <MenuItem component={NavLink} to="/category/mental">
-                                            Mental
-                                        </MenuItem>
-                                        <MenuItem component={NavLink} to="/category/food">
-                                            Food
-                                        </MenuItem>
-                                        <MenuItem component={NavLink} to="/category/musical">
-                                            Musical
-                                        </MenuItem>
-                                        <MenuItem component={NavLink} to="/category/collecting">
-                                            Collecting
-                                        </MenuItem>
-                                        <MenuItem component={NavLink} to="/category/games+puzzles">
-                                            Games/Puzzles
-                                        </MenuItem>
+                                        <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
+                                        <Divider />
+                                        <NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}><MenuItem>Profile</MenuItem></NavLink>
+                                        <MenuItem>Favorites</MenuItem>
+                                        <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
                                     </Menu>
-                                </Menu>
-                                <MenuItem> <NavLink className="navbar-link" to="/feed">Feed</NavLink></MenuItem>
-                                <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
-                            </Box>
+                                </Box>
 
-                            <Box sx={{ flexGrow: 0 }}>
-                                <Grid
-                                    container
-                                    direction="row"
-                                    alignItems="center"
-                                    justifyContent="center"
-                                >
-                                    <Tooltip title="Open settings">
-                                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                            <Avatar alt="Doesn't have profile photo" />
-                                        </IconButton>
-                                    </Tooltip>
-                                </Grid>
-                                <Menu
-                                    sx={{ mt: '45px', p: 5 }}
-                                    className="menu-appbar"
-                                    anchorEl={anchorElUser}
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    open={Boolean(anchorElUser)}
-                                    onClose={handleCloseUserMenu}
-                                >
-                                    <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
-                                    <Divider />
-                                    <NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}><MenuItem>Profile</MenuItem></NavLink>
-                                    <MenuItem>Favorites</MenuItem>
-                                    <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
-                                </Menu>
-                            </Box>
+                            </Grid>
                         </Toolbar>
                     </Container>
                 </AppBar>

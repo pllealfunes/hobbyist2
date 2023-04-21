@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-let moment = require('moment')
+
 
 
 const Schema = mongoose.Schema
@@ -8,9 +8,8 @@ let postSchema = new Schema({
     title: { type: String, minLength: 5, required: true },
     category: { type: String, required: true },
     photo: { type: String },
-    post: { type: String, minLength: 5, required: true },
-    timestamp: { type: String, default: () => moment().format("MMMM Do YYYY, h:mm:ss a") }
-})
+    post: { type: String, minLength: 5, required: true }
+}, { timestamps: true })
 
 
 module.exports = mongoose.model("Post", postSchema)
