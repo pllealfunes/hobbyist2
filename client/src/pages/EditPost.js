@@ -107,7 +107,7 @@ const EditPost = () => {
             direction="column"
             alignItems="center"
             justifyContent="center"
-            className="editpostContainer"
+            className="editpostWrapper"
         >
 
             <Grid
@@ -116,7 +116,7 @@ const EditPost = () => {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                className="formeditContainer"
+                className="editpostContainer"
                 sx={{
                     boxShadow: 2,
                     '& button': { my: 3 },
