@@ -24,10 +24,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const UserProfile = () => {
     const { user } = useSelector((state) => state.auth)
-    const { singleUser } = useSelector((state) => state.auth)
     const { id } = useParams()
     const [userProfile, setUserProfile] = useState('')
-    const [isFollow, setIsFollow] = useState('')
+
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -66,8 +65,17 @@ const UserProfile = () => {
         (async () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/user/${id}`)
-                let posts = response.data.reverse()
-                setCurrentPosts(posts.slice(indexOfFirstPost, indexOfLastPost))
+                let posts = response.data
+                let slicedPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
+                let newFeed = slicedPosts.sort((a, b) => {
+                    const dateA = new Date(a.createdAt)
+                    const dateB = new Date(b.createdAt)
+                    return dateB - dateA
+                })
+                newFeed.forEach(post => {
+                    post.createdAt = new Date(post.createdAt).toLocaleString();
+                });
+                setCurrentPosts(newFeed)
 
             } catch (error) {
                 console.log(error);
@@ -110,13 +118,21 @@ const UserProfile = () => {
                                 }}
 
                             >
-                                <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
-                                <h2>{userProfile.username}</h2>
-                                <p>{userProfile.bio}</p>
-                                <div>
+                                <div className='profileBio'>
+                                    <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
+                                    <h2>{userProfile.username}</h2>
+                                    <p>{userProfile.bio}</p>
+                                </div>
+                                <Grid
+                                    container
+                                    className="followContainer"
+                                    direction="row"
+                                    alignItems="center"
+                                    justifyContent="space-evenly"
+                                >
                                     {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
                                     {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
-                                </div>
+                                </Grid>
                                 <FollowUserBtn currentUser={currentUser} id={id} user={user} userProfile={userProfile} />
                             </Grid>
                         </Box>
@@ -229,15 +245,21 @@ const UserProfile = () => {
 
 
                             >
-                                <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
-                                <h2>{userProfile.username}</h2>
-                                <p>{userProfile.bio}</p>
-
-                                <div>
+                                <div className='profileBio'>
+                                    <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
+                                    <h2>{userProfile.username}</h2>
+                                    <p>{userProfile.bio}</p>
+                                </div>
+                                <Grid
+                                    container
+                                    className="followContainer"
+                                    direction="row"
+                                    alignItems="center"
+                                    justifyContent="space-evenly"
+                                >
                                     {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
                                     {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
-                                </div>
-                                <Link to={`/editProfile/${userProfile.id}`}><button className="followBtn">Edit Profile</button></Link>
+                                </Grid>
                             </Grid>
                         </Box>
 
@@ -351,13 +373,21 @@ const UserProfile = () => {
 
 
                         >
-                            <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
-                            <h2>{userProfile.username}</h2>
-                            <p>{userProfile.bio}</p>
-                            <div>
+                            <div className='profileBio'>
+                                <AccountCircleIcon aria-label="user profile photo" sx={{ height: 100, width: 100 }} />
+                                <h2>{userProfile.username}</h2>
+                                <p>{userProfile.bio}</p>
+                            </div>
+                            <Grid
+                                container
+                                className="followContainer"
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="space-evenly"
+                            >
                                 {userProfile.users?.length > 0 ? <p>Following: {userProfile.users.length}</p> : <p>Following: 0</p>}
                                 {userProfile.categories?.length > 0 ? <p>Categories: {userProfile.categories.length}</p> : <p>Categories: 0</p>}
-                            </div>
+                            </Grid>
                             <button className="followBtn" onClick={() => (navigate('/login'))}>Follow User</button>
                         </Grid>
                     </Box>

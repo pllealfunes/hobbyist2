@@ -129,10 +129,6 @@ const Feed = () => {
     }, [indexOfFirstPost, indexOfLastPost, feed])
 
 
-    if (!feed) {
-        return <EmptyFeed />
-    }
-
 
     return (
         <section className='feedWrapper'>
@@ -159,7 +155,7 @@ const Feed = () => {
                 </Grid>
             </Box>
             <section className='postsWrapper'>
-                {currentPosts && currentPosts.map((post) => (
+                {currentPosts ? currentPosts.map((post) => (
                     <div className="postCard" key={post._id} >
                         {post.photo &&
                             <Card
@@ -224,9 +220,27 @@ const Feed = () => {
                         }
                     </div>
                 ))
+                    :
+                    <section className='emptyPostsWrapper'>
+                        <Grid
+                            container
+                            className="emptyPostsContainer"
+                            direction="column"
+                            alignItems="center"
+                            justifyContent="center"
+                            sx={{
+                                boxShadow: 2,
+                                '& button': { my: 3 },
+                            }}
+                            width={700}
+                        >
+                            <Typography variant="h5">Welcome to your Feed!</Typography>
+                            <Typography variant="subtitle1">Follow Users and Categories to see their posts Here!</Typography>
+                        </Grid>
+                    </section>
                 }
             </section>
-            {currentPosts.length > 0 && <Pagination
+            {currentPosts.length > 10 && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={feed.length}

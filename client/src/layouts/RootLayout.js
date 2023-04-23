@@ -73,23 +73,25 @@ export default function RootLayout() {
                                     container
                                 >
                                     <div>
-                                        <Typography
-                                            variant="h6"
-                                            noWrap
-                                            component="a"
-                                            href="/"
-                                            sx={{
-                                                mr: 2,
-                                                display: { xs: 'none', md: 'flex' },
-                                                fontFamily: 'monospace',
-                                                fontWeight: 700,
-                                                letterSpacing: '.3rem',
-                                                color: 'inherit',
-                                                textDecoration: 'none',
-                                            }}
-                                        >
-                                            Hobbyist
-                                        </Typography>
+                                        <Tooltip title="home" placement="bottom-start">
+                                            <Typography
+                                                variant="h6"
+                                                noWrap
+                                                component="a"
+                                                href="/"
+                                                sx={{
+                                                    mr: 2,
+                                                    display: { xs: 'none', md: 'flex' },
+                                                    fontFamily: 'monospace',
+                                                    fontWeight: 700,
+                                                    letterSpacing: '.3rem',
+                                                    color: 'inherit',
+                                                    textDecoration: 'none',
+                                                }}
+                                            >
+                                                Hobbyist
+                                            </Typography>
+                                        </Tooltip>
                                     </div>
                                     <div>
                                         <Box
@@ -133,7 +135,6 @@ export default function RootLayout() {
 
                                                 }}
                                             >
-                                                <NavLink className="navbar-link" to="/"><MenuItem> Home</MenuItem></NavLink>
                                                 <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
                                                 <NavLink className="navbar-link" to="/login"><MenuItem>Login</MenuItem></NavLink>
                                                 <NavLink className="navbar-link" to="/signup"><MenuItem>Signup</MenuItem></NavLink>
@@ -146,29 +147,30 @@ export default function RootLayout() {
                                             md: 'hidden'
                                         }
                                     }} />
-                                    <Typography
-                                        variant="h5"
-                                        noWrap
-                                        component="a"
-                                        href=""
-                                        sx={{
-                                            mr: 2,
-                                            display: { xs: 'flex' },
-                                            visibility: {
-                                                md: 'hidden'
-                                            },
-                                            flexGrow: 1,
-                                            fontFamily: 'monospace',
-                                            fontWeight: 700,
-                                            letterSpacing: '.3rem',
-                                            color: 'inherit',
-                                            textDecoration: 'none',
-                                        }}
-                                    >
-                                        Hobbyist
-                                    </Typography>
+                                    <Tooltip title="home" placement="bottom-start">
+                                        <Typography
+                                            variant="h5"
+                                            noWrap
+                                            component="a"
+                                            href="/"
+                                            sx={{
+                                                mr: 2,
+                                                display: { xs: 'flex' },
+                                                visibility: {
+                                                    md: 'hidden'
+                                                },
+                                                flexGrow: 1,
+                                                fontFamily: 'monospace',
+                                                fontWeight: 700,
+                                                letterSpacing: '.3rem',
+                                                color: 'inherit',
+                                                textDecoration: 'none',
+                                            }}
+                                        >
+                                            Hobbyist
+                                        </Typography>
+                                    </Tooltip>
                                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                                        <NavLink className="navbar-link" to="/"><MenuItem>Home</MenuItem></NavLink>
                                         <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
                                         <NavLink className="navbar-link" to="/login"><MenuItem>Login</MenuItem></NavLink>
                                         <NavLink className="navbar-link" to="/signup"><MenuItem>Signup</MenuItem></NavLink>
@@ -187,24 +189,25 @@ export default function RootLayout() {
 
 
                             <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                            <Typography
-                                variant="h6"
-                                noWrap
-                                component="a"
-                                href="/"
-                                sx={{
-                                    mr: 2,
-                                    display: { xs: 'none', md: 'flex' },
-                                    fontFamily: 'monospace',
-                                    fontWeight: 700,
-                                    letterSpacing: '.3rem',
-                                    color: 'inherit',
-                                    textDecoration: 'none',
-                                }}
-                            >
-                                Hobbyist
-                            </Typography>
-
+                            <Tooltip title="home" placement="bottom-start">
+                                <Typography
+                                    variant="h6"
+                                    noWrap
+                                    component="a"
+                                    href="/"
+                                    sx={{
+                                        mr: 2,
+                                        display: { xs: 'none', md: 'flex' },
+                                        fontFamily: 'monospace',
+                                        fontWeight: 700,
+                                        letterSpacing: '.3rem',
+                                        color: 'inherit',
+                                        textDecoration: 'none',
+                                    }}
+                                >
+                                    Hobbyist
+                                </Typography>
+                            </Tooltip>
 
                             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                                 <IconButton
@@ -236,12 +239,10 @@ export default function RootLayout() {
                                         display: { xs: 'block', md: 'none' },
                                     }}
                                 >
-
-                                    <NavLink className="navbar-link" to="/"><MenuItem>Home</MenuItem></NavLink>
                                     <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
                                     <NavLink className="navbar-link" to="/feed"><MenuItem>Feed</MenuItem></NavLink>
                                     <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
-
+                                    <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
                                 </Menu>
                             </Box>
 
@@ -254,29 +255,31 @@ export default function RootLayout() {
                                 justifyContent="flex-end"
                             >
                                 <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-                                <Typography
-                                    variant="h5"
-                                    noWrap
-                                    component="a"
-                                    href=""
-                                    sx={{
-                                        mr: 2,
-                                        display: { xs: 'flex', md: 'none' },
-                                        flexGrow: 1,
-                                        fontFamily: 'monospace',
-                                        fontWeight: 700,
-                                        letterSpacing: '.3rem',
-                                        color: 'inherit',
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    Hobbyist
-                                </Typography>
+                                <Tooltip title="home" placement="bottom-start">
+                                    <Typography
+                                        variant="h5"
+                                        noWrap
+                                        component="a"
+                                        href="/"
+                                        sx={{
+                                            mr: 2,
+                                            display: { xs: 'flex', md: 'none' },
+                                            flexGrow: 1,
+                                            fontFamily: 'monospace',
+                                            fontWeight: 700,
+                                            letterSpacing: '.3rem',
+                                            color: 'inherit',
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        Hobbyist
+                                    </Typography>
+                                </Tooltip>
                                 <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, }}>
-                                    <NavLink className="navbar-link" to="/"><MenuItem>Home</MenuItem></NavLink>
                                     <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
                                     <NavLink className="navbar-link" to="/feed"><MenuItem>Feed</MenuItem></NavLink>
                                     <NavLink className="navbar-link" to="/createNewPost"><MenuItem>NewPost</MenuItem></NavLink>
+                                    <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
                                 </Box>
 
                                 <Box sx={{ flexGrow: 0 }}>
@@ -286,34 +289,15 @@ export default function RootLayout() {
                                         alignItems="center"
                                         justifyContent="center"
                                     >
-                                        <Tooltip title="Open settings">
-                                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                                <Avatar alt="Doesn't have profile photo" />
-                                            </IconButton>
+                                        <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
+                                        <Tooltip title="profile">
+                                            <NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}>
+                                                <IconButton sx={{ p: 0 }}>
+                                                    <Avatar alt="Doesn't have profile photo" />
+                                                </IconButton>
+                                            </NavLink>
                                         </Tooltip>
                                     </Grid>
-                                    <Menu
-                                        sx={{ mt: '45px', p: 5 }}
-                                        className="menu-appbar"
-                                        anchorEl={anchorElUser}
-                                        anchorOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        keepMounted
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'right',
-                                        }}
-                                        open={Boolean(anchorElUser)}
-                                        onClose={handleCloseUserMenu}
-                                    >
-                                        <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
-                                        <Divider />
-                                        <NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}><MenuItem>Profile</MenuItem></NavLink>
-                                        <MenuItem>Favorites</MenuItem>
-                                        <MenuItem><LogoutBtn className="navbar-link" to="/logout" /></MenuItem>
-                                    </Menu>
                                 </Box>
 
                             </Grid>

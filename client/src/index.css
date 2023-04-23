@@ -371,13 +371,7 @@ footer {
 
 /* Profile Page Styling */
 
-.profileSection {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .profileContainer {
   border-radius: 10px;
@@ -385,8 +379,19 @@ footer {
   margin: 50px;
 }
 
+.profileBio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.followContainer {
+  padding: 40px;
+}
+
 .emptyPostsWrapper {
-  background-color: #F5F5F5;
   width: 100%;
 }
 
