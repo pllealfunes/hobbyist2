@@ -52,6 +52,7 @@ const Login = () => {
         try {
             await dispatch(login(data)).unwrap()
             toast.success('You are logged in')
+            setFailLogin(false)
             navigate('/feed')
         } catch (error) {
             setFailLogin(true)

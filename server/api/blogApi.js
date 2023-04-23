@@ -109,7 +109,7 @@ router.get('/post/:postid', (req, res, next) => {
 // Create Posts
 router.post('/post/newPost', verifyJWT, validationMiddleware, (req, res, next) => {
     const form = formidable({ multiples: true });
-    form.uploadDir = path.join(__dirname, "../public/images/posts");
+    form.uploadDir = path.join(__dirname, "../public/images/posts/");
     form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
         if (err) {
@@ -157,9 +157,9 @@ router.post('/post/newPost', verifyJWT, validationMiddleware, (req, res, next) =
                 PostService.create(post)
                     .then((post) => {
                         console.log(post)
-                        path.join(__dirname, "../public/images/posts", files.photo.originalFilename);
+                        path.join(__dirname, "../public/images/posts/", files.photo.originalFilename);
                         const oldPath = files.photo.filepath;
-                        const newPath = path.join(__dirname, "../public/images/posts", files.photo.originalFilename);
+                        const newPath = path.join(__dirname, "../public/images/posts/", files.photo.originalFilename);
                         fs.rename(oldPath, newPath, (err) => {
                             if (err) {
                                 console.error(err);
@@ -244,9 +244,9 @@ router.put('/post/editPost/:postid', verifyJWT, validationMiddleware,
                     PostService.update(req.params.postid, post)
                         .then((post) => {
                             console.log(post)
-                            path.join(__dirname, "../public/images", files.photo.originalFilename);
+                            path.join(__dirname, "../public/images/posts/", files.photo.originalFilename);
                             const oldPath = files.photo.filepath;
-                            const newPath = path.join(__dirname, "../public/images/posts", files.photo.originalFilename);
+                            const newPath = path.join(__dirname, "../public/images/posts/", files.photo.originalFilename);
                             fs.rename(oldPath, newPath, (err) => {
                                 if (err) {
                                     console.error(err);
