@@ -16,17 +16,12 @@ import {
     Menu,
     Container,
     Avatar,
-    Button,
     Tooltip,
     MenuItem,
-    Divider
 
 } from "@mui/material";
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import GitHubIcon from '@mui/icons-material/GitHub';
 
 
 export default function RootLayout() {
@@ -36,23 +31,18 @@ export default function RootLayout() {
     )
 
     const [anchorElNav, setAnchorElNav] = useState(null)
-    const [anchorElUser, setAnchorElUser] = useState(null)
 
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
+
 
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+
 
 
 
@@ -189,25 +179,27 @@ export default function RootLayout() {
 
 
                             <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-                            <Tooltip title="home" placement="bottom-start">
-                                <Typography
-                                    variant="h6"
-                                    noWrap
-                                    component="a"
-                                    href="/"
-                                    sx={{
-                                        mr: 2,
-                                        display: { xs: 'none', md: 'flex' },
-                                        fontFamily: 'monospace',
-                                        fontWeight: 700,
-                                        letterSpacing: '.3rem',
-                                        color: 'inherit',
-                                        textDecoration: 'none',
-                                    }}
-                                >
-                                    Hobbyist
-                                </Typography>
-                            </Tooltip>
+                            <div>
+                                <Tooltip title="home" placement="bottom-start">
+                                    <Typography
+                                        variant="h6"
+                                        noWrap
+                                        component="a"
+                                        href="/"
+                                        sx={{
+                                            mr: 2,
+                                            display: { xs: 'none', md: 'flex' },
+                                            fontFamily: 'monospace',
+                                            fontWeight: 700,
+                                            letterSpacing: '.3rem',
+                                            color: 'inherit',
+                                            textDecoration: 'none',
+                                        }}
+                                    >
+                                        Hobbyist
+                                    </Typography>
+                                </Tooltip>
+                            </div>
 
                             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                                 <IconButton
