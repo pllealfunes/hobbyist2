@@ -141,6 +141,7 @@ const EditPost = () => {
                                 </div>
                             ))}
 
+                            {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Only Images are Allowed</span></Alert>}
                             {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
                             {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
                             {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 500 characters long</span></Alert>}
@@ -205,6 +206,7 @@ const EditPost = () => {
                                 </div>
                             ))}
 
+                            {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Only Images are Allowed</span></Alert>}
                             {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
                             {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
                             {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
@@ -214,6 +216,7 @@ const EditPost = () => {
                                     type="file"
                                     name="photo"
                                     className="photoInput"
+                                    accept="image/*"
                                     {...register("photo")}
                                 />
                             </label>
