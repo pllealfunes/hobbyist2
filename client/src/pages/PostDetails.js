@@ -159,7 +159,7 @@ const PostDetails = () => {
 
 
     return (
-        <section>
+        <section className="postsdetailsSection">
             <Grid
                 container
                 className="searchContainer"
@@ -168,7 +168,7 @@ const PostDetails = () => {
                 justifyContent="center"
                 sx={{
                     boxShadow: 2,
-                    '& button': { my: 3 },
+                    '& button': { my: 3 }
                 }}
                 width={700}
             >

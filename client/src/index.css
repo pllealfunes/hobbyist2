@@ -19,6 +19,9 @@ code {
     monospace;
 }
 
+main {
+  min-height: 100vh;
+}
 
 AppBar [aria-current] {
   border-bottom: 0.125em solid #0A0909;
@@ -53,7 +56,6 @@ footer {
   clear: both;
   z-index: 1;
   position: static;
-  margin-top: 20px;
 }
 
 /* Home STYLING */
@@ -178,6 +180,11 @@ footer {
   width: 800px;
 }
 
+/* Post Details Page */
+
+.postsdetailsSection {
+  margin-bottom: 50px;
+}
 
 /* Create and Edit Form Styles */
 
