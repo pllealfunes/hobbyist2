@@ -197,7 +197,7 @@ router.put('/post/editPost/:postid', verifyJWT, validationMiddleware,
     (req, res, next) => {
 
         const form = formidable({ multiples: true });
-        form.uploadDir = path.join(__dirname, "../public/images/posts");
+        form.uploadDir = path.join(__dirname, "../public/images/posts/");
         form.keepExtensions = true;
         form.parse(req, (err, fields, files) => {
             if (err) {
@@ -288,7 +288,7 @@ router.put('/post/editPost/deletePhoto/:postid', verifyJWT, (req, res, next) => 
     if (req.body) {
         // If there are errors, delete any uploaded files
         if (req.body.photo) {
-            fs.unlink("./public/images/posts" + req.body.photo, (err) => {
+            fs.unlink("./public/images/posts/" + req.body.photo, (err) => {
                 if (err) {
                     console.error(err);
                 }

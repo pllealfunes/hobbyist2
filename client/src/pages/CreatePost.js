@@ -38,14 +38,21 @@ const CreatNewPost = () => {
 
     const [errorsServer, setErrorsServer] = useState("")
     const [photoExists, setPhotoExists] = useState(false)
-    const [selectedPhotoPreview, setSelectedPhotoPreview] = useState("")
+    const [selectedImages, setSelectedImages] = useState("");
+    const [selectedFile, setSelectedFile] = useState("")
 
+    const onSelectFile = (event) => {
+        setPhotoExists(true);
+        setSelectedFile(event.target.files[0]);
+        setSelectedImages(URL.createObjectURL(event.target.files[0]));
+    };
 
 
 
     const removePhoto = () => {
-        resetField("photo")
         setPhotoExists(false)
+        setSelectedImages("")
+        setSelectedFile("")
     }
 
 
@@ -55,7 +62,7 @@ const CreatNewPost = () => {
         formData.append('title', data.title);
         formData.append('category', data.category);
         formData.append('post', data.post);
-        formData.append('photo', data.photo[0]);
+        formData.append('photo', selectedFile);
 
         (async () => {
             try {
@@ -109,19 +116,17 @@ const CreatNewPost = () => {
                     {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
                     {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 500 characters long</span></Alert>}
 
-
-                    <label htmlFor="photo">Upload Photo:
-                        <input
-                            type="file"
-                            name="photo"
-                            className="photoInput"
-                            accept="image/*"
-                            {...register("photo")}
-                            onChange={() => {
-                                setPhotoExists(true);
-                            }}
-                        />
-                    </label>
+                    {selectedImages ? <img className="currentPhoto" src={`${selectedImages}`} alt={`${selectedImages}`} /> :
+                        <label htmlFor="photo">Upload Photo:
+                            <input
+                                type="file"
+                                name="photo"
+                                className="photoInput"
+                                accept="image/*"
+                                {...register("photo")}
+                                onChange={onSelectFile}
+                            />
+                        </label>}
 
                     {photoExists && <button type="button" variant="contained" onClick={removePhoto} className="removePhoto">Remove Photo</button>}
 

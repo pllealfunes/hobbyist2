@@ -27,6 +27,9 @@ const EditPost = () => {
     const navigate = useNavigate
     const { id } = useParams()
     const [photo, setPhoto] = useState('')
+    const [photoExists, setPhotoExists] = useState(false)
+    const [selectedImages, setSelectedImages] = useState("");
+    const [selectedFile, setSelectedFile] = useState("")
     const [errorsServer, setErrorsServer] = useState('')
     const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
         defaultValues: {
@@ -58,6 +61,17 @@ const EditPost = () => {
 
     }, [id, setValue, navigate])
 
+    const removePhoto = () => {
+        setPhotoExists(false)
+        setSelectedImages("")
+        setSelectedFile("")
+    }
+
+    const onSelectFile = (event) => {
+        setPhotoExists(true);
+        setSelectedFile(event.target.files[0]);
+        setSelectedImages(URL.createObjectURL(event.target.files[0]));
+    };
 
     const deletePhoto = () => {
         (async () => {
@@ -65,6 +79,9 @@ const EditPost = () => {
                 await axiosPrivate.put(`/blog/post/editPost/deletePhoto/${id}`, { photo: photo });
                 toast.success("Your photo was deleted")
                 setPhoto('')
+                setSelectedFile("")
+                setSelectedImages("")
+                setPhotoExists(false)
             } catch (error) {
                 if (error.response) setErrorsServer(error.response.data.errors);
                 toast.error("Unable to delete photo")
@@ -83,15 +100,15 @@ const EditPost = () => {
         formData.append('post', data.post);
 
 
-        if (data.photo) {
-            formData.append('photo', data.photo[0]);
+        if (selectedFile) {
+            formData.append('photo', selectedFile);
         }
 
         (async () => {
             try {
                 await axiosPrivate.put(`/blog/post/editPost/${id}`, formData);
                 toast.success("Updated post!")
-                setPhoto(data.photo[0].name)
+                setPhoto(selectedFile.name)
             } catch (error) {
                 if (error.response) setErrorsServer(error.response.data.errors);
                 toast.error("Unable to update post")
@@ -211,16 +228,18 @@ const EditPost = () => {
                             {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
                             {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
 
-                            <label htmlFor="photo">Upload Photo:
-                                <input
-                                    type="file"
-                                    name="photo"
-                                    className="photoInput"
-                                    accept="image/*"
-                                    {...register("photo")}
-                                />
-                            </label>
-
+                            {selectedImages ? <img className="currentPhoto" src={`${selectedImages}`} alt={`${selectedImages}`} /> :
+                                <label htmlFor="photo">Upload Photo:
+                                    <input
+                                        type="file"
+                                        name="photo"
+                                        className="photoInput"
+                                        accept="image/*"
+                                        {...register("photo")}
+                                        onChange={onSelectFile}
+                                    />
+                                </label>}
+                            {photoExists && <button type="button" variant="contained" onClick={removePhoto} className="removePhoto">Remove Photo</button>}
 
                             <TextField
                                 className="title"
