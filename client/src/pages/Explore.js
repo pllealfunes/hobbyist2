@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import SearchResults from '../components/SearchResults';
 import LatestPosts from '../components/LatestPosts';
+import CategoryResults from '../components/CategoryResults';
 import ErrorMessage from '../components/ErrorMessage';
 import axios from 'axios';
 
@@ -16,11 +17,14 @@ import NoResults from '../components/NoResults';
 
 const ExplorePage = () => {
 
+    const categories = ["Physical", "Creative", "Mental", "Food", "Collecting", "Games/Puzzles"]
     const [postsLoaded, setPostsLoaded] = useState()
     const [latestPosts, setLatestPosts] = useState()
     const [showLatestPosts, setShowLatestPosts] = useState(false)
     const [searchResults, setSearchResults] = useState(false)
     const [showResults, setShowResults] = useState(false)
+    const [showCategory, setShowCategory] = useState(false)
+    const [categoryResults, setCategoryResults] = useState('')
     const { register, handleSubmit, reset, formState: { errors } } = useForm()
     const [showEmptyResults, setShowEmptyResults] = useState(false)
 
@@ -40,6 +44,21 @@ const ExplorePage = () => {
     }, [])
 
 
+    const searchCategory = (event, category) => {
+        event.preventDefault()
+        const results = postsLoaded.filter((post) => post.category.includes(category.toLowerCase()));
+        if (results.length === 0) {
+            setShowLatestPosts(false)
+            setShowResults(false)
+            setShowCategory(false)
+        } else {
+            reset()
+            setShowLatestPosts(false)
+            setShowResults(false)
+            setCategoryResults(results)
+            setShowCategory(true)
+        }
+    }
 
     const searchForm = (data) => {
         const results = postsLoaded.filter(post => {
@@ -50,6 +69,7 @@ const ExplorePage = () => {
             setShowEmptyResults(true)
             setShowLatestPosts(true)
             setShowResults(false)
+            setShowCategory(false)
         } else {
             reset()
             setShowEmptyResults(false)
@@ -90,9 +110,8 @@ const ExplorePage = () => {
                             <TextField
                                 id="searchBox"
                                 type='text'
-                                label="search bar"
+                                label="Search"
                                 name="search"
-                                placeholder="Search"
                                 fullWidth
                                 margin="normal"
                                 {...register("search", { required: true })}
@@ -100,11 +119,28 @@ const ExplorePage = () => {
                             <Button className="submitFormBtn" type="submit" variant="contained" color="success" fullWidth>Submit</Button>
                         </form>
                     </div>
+                    <Box>
+                        <Grid
+                            className='categorybtnContainer'
+                            container
+                            alignItems="center"
+                            justifyContent="space-evenly"
+                            columns={{ xs: 4, sm: 8, md: 12 }}
+                            sx={{ flexDirection: { xs: "column", md: "row" } }}
+                        >
+                            {categories.map((category) => (
+                                <button className="categoryBtn" key={category} onClick={(event) => searchCategory(event, category)}>
+                                    <h3>{category}</h3>
+                                </button>
+                            ))}
+                        </Grid>
+                    </Box>
                 </Grid>
             </Box>
             <div className="resultsContainer">
                 {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
                 {showResults && <SearchResults searchResults={searchResults} />}
+                {showCategory && <CategoryResults categoryResults={categoryResults} />}
                 {showEmptyResults && <NoResults />}
             </div>
         </section>
