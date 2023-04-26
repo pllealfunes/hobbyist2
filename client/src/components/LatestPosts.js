@@ -18,10 +18,22 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const latestPosts = ({ latestPosts }) => {
 
+
+    let newFeed = latestPosts.sort((a, b) => {
+        const dateA = new Date(a.createdAt)
+        const dateB = new Date(b.createdAt)
+        return dateB - dateA
+    })
+    newFeed.forEach(post => {
+        post.createdAt = new Date(post.createdAt).toLocaleString();
+    });
+
+    let currentPosts = newFeed
+
     return (
         <section className='postsWrapper'>
 
-            {latestPosts && latestPosts.map((post) => (
+            {currentPosts && currentPosts.map((post) => (
                 <div key={post._id} >
                     {post.photo &&
                         <Card

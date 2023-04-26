@@ -12,12 +12,19 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import SearchIcon from '@mui/icons-material/Search';
 import NoResults from '../components/NoResults';
+import { Typography } from '@mui/material';
 
 
 const ExplorePage = () => {
 
-    const categories = ["Physical", "Creative", "Mental", "Food", "Collecting", "Games/Puzzles"]
+
     const [postsLoaded, setPostsLoaded] = useState()
     const [latestPosts, setLatestPosts] = useState()
     const [showLatestPosts, setShowLatestPosts] = useState(false)
@@ -25,8 +32,9 @@ const ExplorePage = () => {
     const [showResults, setShowResults] = useState(false)
     const [showCategory, setShowCategory] = useState(false)
     const [categoryResults, setCategoryResults] = useState('')
-    const { register, handleSubmit, reset, formState: { errors } } = useForm()
     const [showEmptyResults, setShowEmptyResults] = useState(false)
+
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm()
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -61,17 +69,58 @@ const ExplorePage = () => {
     }
 
     const searchForm = (data) => {
-        const results = postsLoaded.filter(post => {
-            return post.title.toLowerCase().includes(data.search.toLowerCase())
-        })
+        const { search, category } = data
+        let categoryArray
+        let searchArray
+        let lowercaseSearch = search.toLowerCase()
+        let lowercaseCategory = category.toLowerCase()
+        let results
+
+
+        if (category && search) {
+
+            searchArray = postsLoaded.filter((post) => post.title.toLowerCase().includes(lowercaseSearch));
+            categoryArray = searchArray.filter((post) => post.category.includes(lowercaseCategory));
+
+            if (lowercaseCategory !== "all" && categoryArray.length > 0) {
+                results = categoryArray
+            }
+
+            else if (lowercaseCategory === "all") {
+                searchArray = postsLoaded.filter((post) => post.title.toLowerCase().includes(lowercaseSearch));
+                results = searchArray
+            }
+            else {
+                results = []
+            }
+
+        }
+        else if (category && search === "") {
+
+            if (lowercaseCategory === "all") {
+                results = postsLoaded
+            } else {
+                categoryArray = postsLoaded.filter((post) => post.category.includes(lowercaseCategory));
+
+                results = categoryArray
+            }
+
+        } else if (search && category === "") {
+
+            searchArray = postsLoaded.filter((post) => post.title.toLowerCase().includes(lowercaseSearch));
+
+            results = searchArray
+        } else {
+            results = []
+        }
+
 
         if (results.length === 0) {
             setShowEmptyResults(true)
-            setShowLatestPosts(true)
+            setShowLatestPosts(false)
             setShowResults(false)
             setShowCategory(false)
         } else {
-            reset()
             setShowEmptyResults(false)
             setShowLatestPosts(false)
             setSearchResults(results.reverse())
@@ -97,51 +146,82 @@ const ExplorePage = () => {
                     justifyContent="center"
                     sx={{
                         boxShadow: 2,
-                        '& button': { my: 3 },
+                        '& button': { my: 3 }
                     }}
-                    width={700}
                 >
-                    <h2 className="searchTitle">Explore</h2>
-
-                    <div className="searchFormContainer">
-                        <form className="searchForm" onSubmit={handleSubmit(searchForm)}>
-                            <label htmlFor="searchBox"></label>
-                            {errors.search && <span>Search box cannot be empty when doing a search</span>}
-                            <TextField
-                                id="searchBox"
-                                type='text'
-                                label="Search"
-                                name="search"
-                                fullWidth
-                                margin="normal"
-                                {...register("search", { required: true })}
-                            />
-                            <Button className="submitFormBtn" type="submit" variant="contained" color="success" fullWidth>Submit</Button>
-                        </form>
+                    <div className='searchTitle'>
+                        <Typography variant="h4" className="searchTitle">Explore</Typography>
+                        <Typography variant='subtitle1'>By Search,Category, or Both</Typography>
                     </div>
-                    <Box>
-                        <Grid
-                            className='categorybtnContainer'
-                            container
-                            alignItems="center"
-                            justifyContent="space-evenly"
-                            columns={{ xs: 4, sm: 8, md: 12 }}
-                            sx={{ flexDirection: { xs: "column", md: "row" } }}
-                        >
-                            {categories.map((category) => (
-                                <button className="categoryBtn" key={category} onClick={(event) => searchCategory(event, category)}>
-                                    <h3>{category}</h3>
-                                </button>
-                            ))}
-                        </Grid>
-                    </Box>
+
+                    <form className="searchForm" onSubmit={handleSubmit(searchForm)}>
+
+                        <TextField
+                            id="searchBox"
+                            type="text"
+                            label="Search"
+                            name="search"
+                            fullWidth
+                            margin="normal"
+                            {...register('search')}
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <SearchIcon aria-label="search magnify glass" edge="end" />
+                                    </InputAdornment>
+                                )
+                            }}
+                        />
+
+
+                        <FormControl fullWidth margin="dense">
+                            <InputLabel id="categorySelect" htmlFor="category" >Category...</InputLabel>
+                            <Select
+                                label="Category"
+                                labelId='categorySelect'
+                                name="category"
+                                className="category"
+                                variant="outlined"
+                                margin='normal'
+                                value={watch("category") || ""}
+                                {...register("category")}
+                            >
+                                <MenuItem value="all">All</MenuItem>
+                                <MenuItem value="physical">Physical</MenuItem>
+                                <MenuItem value="creative">Creative</MenuItem>
+                                <MenuItem value="mental">Mental</MenuItem>
+                                <MenuItem value="food">Food</MenuItem>
+                                <MenuItem value="musical">Musical</MenuItem>
+                                <MenuItem value="collecting">Collecting</MenuItem>
+                                <MenuItem value="games+puzzles">Games+Puzzles</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <Button className="submitFormBtn" type="submit" variant="contained" color="success" fullWidth>Submit</Button>
+                    </form>
+
                 </Grid>
             </Box>
             <div className="resultsContainer">
                 {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
                 {showResults && <SearchResults searchResults={searchResults} />}
-                {showCategory && <CategoryResults categoryResults={categoryResults} />}
-                {showEmptyResults && <NoResults />}
+                {showEmptyResults && <section className='emptyPostsWrapper'>
+                    <Grid
+                        container
+                        className="emptyPostsContainer"
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        sx={{
+                            boxShadow: 2,
+                            '& button': { my: 3 },
+                        }}
+                        width={700}
+                    >
+                        <Typography variant="h5">No Posts to Display</Typography>
+                        <Typography variant="subtitle1">Try a New Search</Typography>
+                    </Grid>
+                </section>}
             </div>
         </section>
     )

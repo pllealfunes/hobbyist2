@@ -32,6 +32,7 @@ const SearchResults = ({ searchResults }) => {
     return (
         <section className='resultsWrapper'>
             <Grid
+                container
                 className='postsWrapper'
                 direction="row"
                 alignItems="space-between"
@@ -105,12 +106,13 @@ const SearchResults = ({ searchResults }) => {
                 ))
                 }
             </Grid>
-            <Pagination
+            {currentPosts.length > 10 && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={searchResults.length}
                 paginate={paginate}
             />
+            }
         </section>
     )
 }

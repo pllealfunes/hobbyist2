@@ -62,7 +62,10 @@ const CreatNewPost = () => {
         formData.append('title', data.title);
         formData.append('category', data.category);
         formData.append('post', data.post);
-        formData.append('photo', selectedFile);
+
+        if (selectedFile) {
+            formData.append('photo', selectedFile);
+        }
 
         (async () => {
             try {
@@ -143,10 +146,12 @@ const CreatNewPost = () => {
 
 
                     <FormControl fullWidth margin="normal">
-                        <InputLabel htmlFor="category" >Select...</InputLabel>
+                        <InputLabel htmlFor="category" >Category...</InputLabel>
                         <Select
                             name="category"
                             className="category"
+                            label="Category"
+                            labelId='categorySelect'
                             variant="outlined"
                             value={watch("category") || ""}
                             {...register("category", { required: true })}

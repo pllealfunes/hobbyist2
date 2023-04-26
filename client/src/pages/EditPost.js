@@ -177,11 +177,12 @@ const EditPost = () => {
 
 
                             <FormControl fullWidth margin="normal">
-                                <InputLabel htmlFor="category" >Category</InputLabel>
+                                <InputLabel htmlFor="category" >Category...</InputLabel>
                                 <Select
                                     name="category"
                                     className="category"
                                     label="Category"
+                                    labelId='categorySelect'
                                     value={watch('category') || ''}
                                     {...register("category", { required: true })}
                                 >
