@@ -202,27 +202,41 @@ const ExplorePage = () => {
 
                 </Grid>
             </Box>
-            <div className="resultsContainer">
-                {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
-                {showResults && <SearchResults searchResults={searchResults} />}
-                {showEmptyResults && <section className='emptyPostsWrapper'>
-                    <Grid
-                        container
-                        className="emptyPostsContainer"
-                        direction="column"
-                        alignItems="center"
-                        justifyContent="center"
-                        sx={{
-                            boxShadow: 2,
-                            '& button': { my: 3 },
-                        }}
-                        width={700}
-                    >
-                        <Typography variant="h5">No Posts to Display</Typography>
-                        <Typography variant="subtitle1">Try a New Search</Typography>
-                    </Grid>
-                </section>}
-            </div>
+            <Grid
+                container
+                display="flex"
+                direction="column"
+                alignItems="flex-start"
+                justifyContent="center"
+                sx={{
+                    m: 3
+                }}
+            >
+                <Typography variant='h5'>Latest Posts</Typography>
+            </Grid>
+            <Grid>
+                <div className="resultsContainer">
+                    {showLatestPosts && <LatestPosts latestPosts={latestPosts} />}
+                    {showResults && <SearchResults searchResults={searchResults} />}
+                    {showEmptyResults && <section className='emptyPostsWrapper'>
+                        <Grid
+                            container
+                            className="emptyPostsContainer"
+                            direction="column"
+                            alignItems="center"
+                            justifyContent="center"
+                            sx={{
+                                boxShadow: 2,
+                                '& button': { my: 3 },
+                            }}
+                            width={700}
+                        >
+                            <Typography variant="h5">No Posts to Display</Typography>
+                            <Typography variant="subtitle1">Try a New Search</Typography>
+                        </Grid>
+                    </section>}
+                </div>
+            </Grid>
         </section>
     )
 }
