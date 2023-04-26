@@ -6,33 +6,25 @@ import {
 
 
 
-const EmptyProfile = () => {
+const EmptyProfile = ({ userProfile }) => {
     return (
-        <Box
-            display="flex"
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-        >
+        <section className='emptyPostsWrapper'>
             <Grid
                 container
+                className="emptyPostsContainer"
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
+                sx={{
+                    boxShadow: 2,
+                    '& button': { my: 3 },
+                }}
+                width={700}
             >
-                <Typography variant="h4" gutterBottom>No Posts to Display</Typography>
-                <Typography variant="subtitle1" gutterBottom>Create a New Post to See It Here</Typography>
+                <Typography variant="h5">Welcome to {userProfile.username}'s Profile</Typography>
+                <Typography variant="subtitle1">Stay Tuned for Future Posts</Typography>
             </Grid>
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-            >
-                <img className="emptyPhoto" src="../images/Typing-cuate.png" alt="Write Blogs about hobbies" />
-                <a href="https://storyset.com/work">Work illustrations by Storyset</a>
-            </Grid>
-        </Box >
+        </section>
     )
 }
 

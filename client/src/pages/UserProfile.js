@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
 import axios from "axios"
-import { toast } from 'react-toastify'
 import axiosPrivate from '../config/useAxiosPrivate';
 import Pagination from '../components/Pagination';
 import { Author } from '../components/Author';
@@ -203,23 +202,9 @@ const UserProfile = () => {
                                 </div>
                             ))}
                         </section> :
-                            <section className='emptyPostsWrapper'>
-                                <Grid
-                                    container
-                                    className="emptyPostsContainer"
-                                    direction="column"
-                                    alignItems="center"
-                                    justifyContent="center"
-                                    sx={{
-                                        boxShadow: 2,
-                                        '& button': { my: 3 },
-                                    }}
-                                    width={700}
-                                >
-                                    <Typography variant="h5">Welcome to {userProfile.username}'s Profile</Typography>
-                                    <Typography variant="subtitle1">Stay Tuned for Future Posts</Typography>
-                                </Grid>
-                            </section>}
+
+                            <EmptyProfile userProfile={userProfile} />
+                        }
                     </div>
 
                     :
@@ -419,7 +404,7 @@ const UserProfile = () => {
                                                 {post.category}
                                             </Typography>
                                             <Typography variant="caption" color="text.primary">
-                                                {post.timestamp}
+                                                {post.createdAt}
                                             </Typography>
                                         </Grid>
                                     </Card>
@@ -450,7 +435,7 @@ const UserProfile = () => {
                                                 {post.category}
                                             </Typography>
                                             <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
-                                                {post.timestamp.split(",", 1)}
+                                                {post.createdAt}
                                             </Typography>
                                         </Grid>
                                     </Card>
@@ -459,23 +444,8 @@ const UserProfile = () => {
 
                         ))}
                     </section> :
-                        <section className='emptyPostsWrapper'>
-                            <Grid
-                                container
-                                className="emptyPostsContainer"
-                                direction="column"
-                                alignItems="center"
-                                justifyContent="center"
-                                sx={{
-                                    boxShadow: 2,
-                                    '& button': { my: 3 },
-                                }}
-                                width={700}
-                            >
-                                <Typography variant="h5">Welcome to {userProfile.username}'s Profile</Typography>
-                                <Typography variant="subtitle1">Stay Tuned for Future Posts</Typography>
-                            </Grid>
-                        </section>}
+                        <EmptyProfile userProfile={userProfile} />
+                    }
                 </div>
 
             }
