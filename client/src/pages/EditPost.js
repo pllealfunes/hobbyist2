@@ -210,9 +210,8 @@ const EditPost = () => {
                                 {...register("post", { required: true, minLength: 5 })}
                             />
 
+                            <button className="submitFormBtn" type="submit">Submit</button>
 
-
-                            <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>
                         </form>
                     </div>
                     :
@@ -287,9 +286,7 @@ const EditPost = () => {
                                 {...register("post", { required: true, minLength: 5 })}
                             />
 
-
-
-                            <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>
+                            <button className="submitFormBtn" type="submit">Submit</button>
                         </form>
                     </div>
                 }

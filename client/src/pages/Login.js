@@ -135,11 +135,11 @@ const Login = () => {
                         />
                     </FormControl>
 
-                    <Button className="loginBtn" type="submit" color="success" variant="contained" fullWidth>Submit</Button>
+                    <button className="loginBtn" type="submit">Submit</button>
 
                 </form>
                 <div>
-                    <Link to={"/signup"}>
+                    <Link to={"/signup"} className='signupLink'>
                         Don't have an account? Create an Account
                     </Link>
                 </div>

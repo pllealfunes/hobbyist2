@@ -38,8 +38,13 @@ AppBar [aria-current] {
 .footerProfile,
 .postTitle,
 .cardLink,
-.userLink {
+.userLink,
+.signupFooter,
+.loginFooter,
+.loginLink,
+.signupLink {
   text-decoration: none;
+  color: #0A0909;
 }
 
 .profileName {
@@ -82,14 +87,22 @@ footer {
 
 .loginBtn,
 .signupBtn {
-  background-color: #fff2f2;
+  width: 100%;
+  background-color: #FFBF86;
   font-weight: bold;
-  font-size: medium;
   color: #0A0909;
-  padding: 15px 25px;
-  border: 1px solid #0A0909;
+  font-size: medium;
+  padding: 10px 10px;
   border-radius: 5px;
-  margin: 15px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.loginBtn:hover,
+.signupBtn:hover {
+  background-color: #a18100;
+  color: #fff2f2;
 }
 
 
@@ -377,6 +390,11 @@ footer {
   box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
 }
 
+.removePhoto:hover {
+  background-color: #a18100;
+  color: #fff2f2;
+}
+
 .createTitle,
 .editPostTitle {
   text-align: center;
@@ -400,7 +418,23 @@ footer {
   flex-direction: column;
 }
 
+.submitFormBtn {
+  width: 100%;
+  background-color: #FFBF86;
+  font-weight: bold;
+  color: #0A0909;
+  font-size: medium;
+  padding: 10px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
 
+.submitFormBtn:hover {
+  background-color: #a18100;
+  color: #fff2f2;
+}
 
 /* Explore and Category Styling*/
 

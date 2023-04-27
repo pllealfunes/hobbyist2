@@ -144,10 +144,11 @@ const Signup = () => {
                         {...register("bio", { required: true, minLength: 10 })}
                     />
 
-                    <Button className="signupBtn" type="submit" color="success" variant="contained" fullWidth>Submit</Button>
+                    <button className="signupBtn" type="submit">Submit</button>
+
                 </form>
                 <div>
-                    <Link to={"/login"}>
+                    <Link to={"/login"} className='loginLink'>
                         Have an account? Login Now
                     </Link>
                 </div>

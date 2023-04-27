@@ -333,14 +333,14 @@ export default function RootLayout() {
                                 <List>
                                     <ListItemText>
                                         <Typography lineHeight={2} variant="caption2">
-                                            <Link to="/login">
+                                            <Link to="/login" className="loginFooter">
                                                 Login
                                             </Link>
                                         </Typography>
                                     </ListItemText>
                                     <ListItemText>
                                         <Typography lineHeight={2} variant="caption2">
-                                            <Link to="/signup">
+                                            <Link to="/signup" className="signupFooter">
                                                 Signup
                                             </Link>
                                         </Typography>

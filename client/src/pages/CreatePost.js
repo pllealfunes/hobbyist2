@@ -177,7 +177,7 @@ const CreatNewPost = () => {
                         {...register("post", { required: true, minLength: 500 })}
                     />
 
-                    <Button className="submitFormBtn" type="submit" variant="contained" color="success" endIcon={<SendIcon />} fullWidth>Submit</Button>
+                    <button className="submitFormBtn" type="submit">Submit</button>
 
                 </form>
 
