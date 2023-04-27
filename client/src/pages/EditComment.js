@@ -80,11 +80,6 @@ const EditComment = () => {
             >
                 <h2 className="editCommTitle">Edit Comment</h2>
                 <form className="editCommForm" onSubmit={handleSubmit(submitEditComment)}>
-                    {errorsServer && errorsServer.map((error) => (
-                        <div className="errorMsg" key={error.param}>
-                            <div>{error.msg}</div>
-                        </div>
-                    ))}
                     {errors.comment && <span>Comments must be at least 5 characters long</span>}
                     <TextField
                         name="comment"

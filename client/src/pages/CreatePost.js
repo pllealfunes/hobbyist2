@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,6 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import SendIcon from '@mui/icons-material/Send';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';

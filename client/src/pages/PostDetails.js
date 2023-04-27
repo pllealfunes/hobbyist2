@@ -11,9 +11,16 @@ import { useSelector } from "react-redux";
 import Modal from "../components/DeleteModal"
 import FollowCategoryBtn from "../components/FollowCategoryBtn";
 import { Author } from "../components/Author";
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+
 
 import {
-    Grid
+    Grid,
+    Box,
+    Button,
+    Typography,
+    TextField
 
 } from "@mui/material";
 
@@ -26,6 +33,9 @@ const PostDetails = () => {
     const { id } = useParams()
     const { user } = useSelector((state) => state.auth)
     const [post, setPost] = useState([])
+    const [paragraph, setParagraph] = useState([])
+    const [createdAt, setCreatedAt] = useState("")
+    const [updatedAt, setUpdatedAt] = useState("")
     const [comments, setComments] = useState([])
     const [errorsServer, setErrorsServer] = useState('')
     const [showModal, setShowModal] = useState(false)
@@ -57,7 +67,14 @@ const PostDetails = () => {
             try {
                 let getPosts = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}`);
                 setPost(getPosts.data);
-
+                let data = getPosts.data
+                if (data.post.includes('\n')) {
+                    setParagraph(data.post.split('\n'));
+                } else {
+                    setParagraph([data.post]);
+                }
+                setCreatedAt(new Date(data.createdAt).toLocaleString())
+                setUpdatedAt(new Date(data.createdAt).toLocaleString())
 
             } catch (error) {
                 console.log(error);
@@ -76,17 +93,15 @@ const PostDetails = () => {
     const submitComment = (data) => {
         (async () => {
             try {
-                await axiosPrivate.post(`/blog/post/${id}/comment/newComment`, { ...data, user: user.currentUser.id, postid: id })
+                await axiosPrivate.post(`/blog/post/${id}/comment/newComment`, { ...data, user: user.currentUser.id })
                 console.log("new comment");
                 fetchComments()
                 toast.success("You added a new comment!")
+                reset()
             } catch (error) {
-                if (error.response) setErrorsServer(error.response.data.errors)
                 toast.error("Unable to create a new comment")
             }
         })();
-        reset()
-        if (errorsServer) setErrorsServer('')
     }
 
 
@@ -160,77 +175,130 @@ const PostDetails = () => {
 
     return (
         <section className="postsdetailsSection">
-            <Grid
-                container
-                className="searchContainer"
+            <Box
+                display="flex"
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                sx={{
-                    boxShadow: 2,
-                    '& button': { my: 3 }
-                }}
-                width={700}
             >
+                <Grid
+                    container
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    sx={{
+                        '& button': { my: 3 }
+                    }}
+                    width={1000}
+                >
 
-                {showModal && <Modal deleteId={deleteId} deleteFunction={deleteFunction} message={message} />}
-                <div>
-                    <h2>{post.title}</h2>
-                    {post.user && <Author userId={post.user} />}
-                </div>
-                {user ? <FollowCategoryBtn category={post.category} user={user} /> : <div><div>{post.category}</div> <button onClick={() => (navigate('/login'))}>Follow Category</button></div>}
-                <div className="postContainer">
-                    {post.photo && <img src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" height={300} width={500} />}
-                    <p>{post.post}</p>
-                </div>
-                {user && user.currentUser.id === `${post.user}` && <div>
-                    <Link key={post._id} to={`/post/editPost/${post._id}`}>
-                        <button>Edit Post</button>
-                    </Link>
-                    <button id="deletePostBtn" onClick={(e) => handleModal(post._id, btnId[0])}>Delete Post</button>
-                </div>
-                }
-            </Grid>
+                    {showModal && <Modal deleteId={deleteId} deleteFunction={deleteFunction} message={message} />}
+                    <Grid
+                        container
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        className="postInfo"
+                    >
 
-            <section className="commSection">
-                <h1>Comments</h1>
+                        <Typography variant="h3">{post.title}</Typography>
+                        <div className="postDetails">
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <p>By:</p> {post.user && <Author userId={post.user} />}
+                            </Grid>
+                            {user ? <FollowCategoryBtn category={post.category} user={user} /> : <div>Category: {post.category}</div>}
+                        </div>
+
+                        <Grid
+                            container
+                            direction="row"
+                            alignItems="center"
+                            justifyContent="center"
+                        >
+                            <p>Created: {createdAt}</p>
+                            {user && user.currentUser.id === `${post.user}` &&
+                                <div>
+                                    <button className="deletePostBtn" onClick={(e) => handleModal(post._id, btnId[0])}>Delete Post</button>
+                                    <button className="editPostBtn"><Link className="editPostLink" key={post._id} to={`/post/editPost/${post._id}`}>Edit Post</Link></button>
+                                </div>
+                            }
+                            <p>Updated: {updatedAt}</p>
+                        </Grid>
+
+                    </Grid>
+                    <Box sx={{ p: 3 }}>
+                        {post.photo && <img className="postPhoto" src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" />}
+                        <div className="contentContainer">
+                            {paragraph.map((paragraph, index) => (
+                                <p className="postContent" key={index}>
+                                    {paragraph}
+                                </p>
+                            ))}
+                        </div>
+                    </Box>
+                </Grid>
+            </Box>
+
+            <div className="commSection">
+                <Typography variant="h5" sx={{ mx: 3, my: 5 }}>Comments</Typography>
                 <div className="commFormContainer">
                     <form className="commentForm" onSubmit={handleSubmit(submitComment)}>
 
                         <label htmlFor="commentBox"></label>
-                        {errorsServer && errorsServer.map((error) => (
-                            <div className="errorMsg" key={error.param}>
-                                <div>{error.msg}</div>
-                            </div>
-                        ))}
-                        {errors.comment && <span>Comments must be at least 5 characters long</span>}
+                        {errors.comment && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Comments must be at least 5 characters long</span></Alert>}
                         <textarea
                             id="commentBox"
+                            className="commentBox"
                             name="comment"
                             placeholder="Comment"
                             rows={10}
                             {...register("comment", { required: true, minLength: 5 })}
                         />
-                        <button className="submitCommBtn" type="submit">Submit</button>
+                        {user ?
+                            <button className="submitCommBtn" type="submit">Submit</button> :
+                            <button className="commBtn" type="submit"><Link to={"/login"}>Login to Comment</Link></button>
+                        }
                     </form>
                 </div>
 
-                <div className="comments">
+                <Grid
+                    container
+                    direction="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    className="commentsContainer"
+                >
                     {comments && comments.map((comment) => (
-                        <div key={comment._id}>
-                            {comment.user && <Author userId={comment.user} />}
+                        <div className="comment" key={comment._id}>
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="flex-start"
+                                sx={{ my: 1 }}
+                            >
+                                <AccountCircleIcon aria-label="user profile photo" sx={{ height: 30, width: 30 }} />
+                                {comment.user && <Author userId={comment.user} />}
+                            </Grid>
                             <p>{comment.comment}</p>
-                            {user && user.currentUser.id === `${comment.user}` && <div>
-                                <Link key={comment._id} to={`/post/comment/editComment/${comment._id}`}>
-                                    <button>Edit Comment</button>
-                                </Link>
-                                <button id="deleteCommBtn" onClick={(e) => handleModal(comment._id, btnId[1])}>Delete Comment</button>
-                            </div>
+                            {user && user.currentUser.id === `${comment.user}` && <Grid container
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="flex-end"
+                                className="commBtnsContainer">
+                                <button className="editCommBtn"><Link className="editCommLink" key={comment._id} to={`/post/comment/editComment/${comment._id}`}>Edit</Link></button>
+                                <button className="deleteCommBtn" onClick={(e) => handleModal(comment._id, btnId[1])}>Delete</button>
+                            </Grid>
                             }
                         </div>
                     ))}
-                </div>
-            </section>
+                </Grid>
+            </div>
         </section >
     );
 }

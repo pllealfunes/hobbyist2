@@ -19,10 +19,6 @@ code {
     monospace;
 }
 
-main {
-  min-height: 100vh;
-}
-
 AppBar [aria-current] {
   border-bottom: 0.125em solid #0A0909;
 }
@@ -56,6 +52,12 @@ footer {
   clear: both;
   z-index: 1;
   position: static;
+}
+
+.footerProfile,
+.navbar-link,
+.userLink {
+  color: #0A0909;
 }
 
 /* Home STYLING */
@@ -182,8 +184,156 @@ footer {
 
 /* Post Details Page */
 
-.postsdetailsSection {
-  margin-bottom: 50px;
+
+
+.postPhoto {
+  border-radius: 16px;
+  max-width: 100%;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.postInfo {
+  background-color: #F5F5F5;
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border: 16px solid #FFBF86;
+}
+
+.postDetails {
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.contentContainer {
+  margin-top: 50px;
+}
+
+.postContent {
+  margin-bottom: 1rem;
+}
+
+.editPostBtn,
+.deletePostBtn,
+.deleteModalBtn {
+  width: 100px;
+  height: 30px;
+  background-color: #FFBF86;
+  font-weight: bold;
+  color: #0A0909;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  margin: 20px;
+}
+
+.editPostLink,
+.editCommLink {
+  text-decoration: none;
+  color: #0A0909;
+}
+
+.commSection {
+  margin-top: 60px;
+  margin-bottom: 100px;
+}
+
+
+.commFormContainer {
+  padding: 32px;
+  display: flex;
+  flex-flow: column wrap;
+  margin: auto;
+  border-radius: 0.8px;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  border: 10px solid #FFBF86;
+  border-radius: 10px;
+}
+
+
+.commentForm {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.comment {
+  background-color: #F5F5F5;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border: 5px solid #FFBF86;
+  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+  width: 90%;
+}
+
+.commentBox {
+  resize: none;
+}
+
+.submitCommBtn {
+  width: 65px;
+  height: 30px;
+  background-color: #FFBF86;
+  font-weight: bold;
+  color: #0A0909;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.commBtn {
+  width: 200px;
+  height: 30px;
+  background-color: #FFBF86;
+  font-weight: bold;
+  color: #0A0909;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.commBtnsContainer {
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.editCommBtn,
+.deleteCommBtn {
+  width: 60px;
+  height: 30px;
+  background-color: #FFBF86;
+  font-weight: bold;
+  color: #0A0909;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  margin: 20px;
+}
+
+.editPostBtn:hover,
+.deletePostBtn:hover,
+.deleteModalBtn:hover,
+.submitCommBtn:hover,
+.commBtn:hover,
+.editCommBtn:hover,
+.deleteCommBtn:hover,
+.followBtn:hover {
+  background-color: #a18100;
+  color: #fff2f2;
 }
 
 /* Create and Edit Form Styles */
@@ -250,41 +400,6 @@ footer {
   flex-direction: column;
 }
 
-
-
-.commFormContainer {
-  padding: 32px;
-  display: flex;
-  flex-flow: column wrap;
-  margin: auto;
-  border-radius: 0.8px;
-  border: 1px solid #ccc;
-  box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-  width: 80%
-}
-
-
-.commentForm {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
-  gap: 12px;
-}
-
-.submitCommBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  padding: 16px;
-  border-radius: 0.8px;
-  background-color: green;
-  color: #F5F5F5;
-  font-size: 1rem;
-  font-weight: bold;
-  width: 160px;
-  height: 16px;
-}
 
 
 /* Explore and Category Styling*/

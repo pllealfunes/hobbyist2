@@ -329,7 +329,7 @@ router.delete('/post/deletePost/:postid', verifyJWT, (req, res) => {
     PostService.find(req.params.postid)
         .then((post) => {
             if (post.photo) {
-                fs.unlink("./public/images/" + post.photo, (err) => {
+                fs.unlink("./public/images/posts/" + post.photo, (err) => {
                     if (err) {
                         console.error(err);
                     }
@@ -405,7 +405,7 @@ router.post('/post/:postid/comment/newComment', verifyJWT, [
         return res.status(400).json({ errors: errors.array() })
     } else {
         const comment = {
-            user: req.user,
+            user: req.body.user,
             comment: req.body.comment,
             postId: req.params.postid
         };
