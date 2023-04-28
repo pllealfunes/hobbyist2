@@ -19,7 +19,6 @@ import Explore from './pages/Explore'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import NotFound from './pages/NotFound'
-import PersistLogin from './components/PersistLogin'
 import EditProfile from './pages/EditProfile';
 import PrivateRoutes from './utils/PrivateRoutes'
 import Category from './pages/Category';

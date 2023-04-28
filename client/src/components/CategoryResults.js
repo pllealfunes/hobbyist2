@@ -42,7 +42,7 @@ const CategoryResults = ({ categoryResults }) => {
                                 className='postCard' sx={{ width: 300, height: 400, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={5}>
                                 <div>
                                     <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
-                                        <AccountCircleIcon aria-label="auser profile photo" sx={{ height: 30, width: 30 }} className="profilePhoto" />
+                                        <AccountCircleIcon aria-label="user profile photo" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                         {post.user && <Author userId={post.user} />}
                                     </Grid>
                                     <Link to={`/post/${post._id}`}>

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
-import axios from 'axios'
+import { regularAxios } from '../config/useAxiosPrivate'
 
 import { Author } from '../components/Author';
 import Pagination from '../components/Pagination'
@@ -43,7 +43,7 @@ const Feed = () => {
             try {
                 if (user) {
                     await dispatch(getUser(user.currentUser.id))
-                    let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
+                    let response = await regularAxios.get('/blog/posts')
                     setPosts(response.data)
                 }
 

@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
 import axios from "axios";
-import axiosPrivate from "../config/useAxiosPrivate";
+import { axiosPrivate, regularAxios } from "../config/useAxiosPrivate";
 import { useSelector } from "react-redux";
 
 
@@ -53,7 +53,7 @@ const PostDetails = () => {
     const fetchComments = useCallback(async () => {
 
         try {
-            let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}/getComments`)
+            let response = await regularAxios.get(`/blog/post/${id}/getComments`)
             setComments(response.data);
         } catch (error) {
             console.log(error);
@@ -65,7 +65,7 @@ const PostDetails = () => {
 
         const fetchPost = async () => {
             try {
-                let getPosts = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}`);
+                let getPosts = await regularAxios.get(`/blog/post/${id}`);
                 setPost(getPosts.data);
                 let data = getPosts.data
                 if (data.post.includes('\n')) {

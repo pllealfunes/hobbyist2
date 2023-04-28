@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
 import { toast } from 'react-toastify'
-import axiosPrivate from '../config/useAxiosPrivate'
+import { axiosPrivate } from '../config/useAxiosPrivate'
 
 function FollowCategoryBtn({ category, user }) {
 

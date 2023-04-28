@@ -4,7 +4,7 @@ import SearchResults from '../components/SearchResults';
 import LatestPosts from '../components/LatestPosts';
 import CategoryResults from '../components/CategoryResults';
 import ErrorMessage from '../components/ErrorMessage';
-import axios from 'axios';
+import { regularAxios } from '../config/useAxiosPrivate';
 
 
 /*** MATERIAL UI STYLING ***/
@@ -39,7 +39,7 @@ const ExplorePage = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
+                let response = await regularAxios.get('/blog/posts')
                 setPostsLoaded(response.data)
                 const lastPosts = response.data.slice(-3)
                 setLatestPosts(lastPosts.reverse())

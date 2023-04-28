@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
 import axios from "axios"
-import axiosPrivate from '../config/useAxiosPrivate';
+import { axiosPrivate, regularAxios } from '../config/useAxiosPrivate';
 import Pagination from '../components/Pagination';
 import { Author } from '../components/Author';
 import EmptyProfile from "../components/EmptyProfile";
@@ -63,7 +63,7 @@ const UserProfile = () => {
     useEffect(() => {
         (async () => {
             try {
-                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/user/${id}`)
+                let response = await regularAxios.get(`/blog/post/user/${id}`)
                 let posts = response.data
                 let slicedPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
                 let newFeed = slicedPosts.sort((a, b) => {

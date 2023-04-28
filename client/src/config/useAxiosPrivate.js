@@ -5,9 +5,12 @@ const user = JSON.parse(localStorage.getItem('user'));
 const axiosPrivate = axios.create({
     baseURL: `${process.env.REACT_APP_URL}/api`,
     headers: {
-        Authorization: `Bearer ${user.token}`
+        Authorization: user ? `Bearer ${user.token}` : null
     }
 })
 
+const regularAxios = axios.create({
+    baseURL: `${process.env.REACT_APP_URL}/api`
+});
 
-export default axiosPrivate
+export { axiosPrivate, regularAxios }

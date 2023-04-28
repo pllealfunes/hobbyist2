@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Author } from '../components/Author';
 import Pagination from '../components/Pagination';
 import ErrorMessage from '../components/ErrorMessage';
+import { regularAxios } from '../config/useAxiosPrivate';
 
 import {
     Card,
@@ -34,7 +35,7 @@ function Category() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
+                let response = await regularAxios.get('/blog/posts')
                 let results = response.data.filter(post => {
                     return post.category === category
                 })
