@@ -162,7 +162,7 @@ const ExplorePage = () => {
                             label="Search"
                             name="search"
                             fullWidth
-                            margin="normal"
+                            margin="dense"
                             {...register('search')}
                             InputProps={{
                                 endAdornment: (
@@ -197,7 +197,7 @@ const ExplorePage = () => {
                             </Select>
                         </FormControl>
 
-                        <Button className="submitFormBtn" type="submit" variant="contained" color="success" fullWidth>Submit</Button>
+                        <button className="submitFormBtn" type="submit">Submit</button>
                     </form>
 
                 </Grid>

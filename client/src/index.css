@@ -158,6 +158,16 @@ footer {
   align-items: stretch;
 }
 
+.feedpostsWrapper,
+.profilepostsWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
 .postContainer {
   padding: 32px;
   display: flex;
@@ -524,6 +534,7 @@ footer {
 .loginWrapper,
 .signupWrapper {
   background-color: #FFBF86;
+  min-height: 100vh;
 }
 
 .loginContainer,
@@ -570,4 +581,25 @@ footer {
   color: #0A0909;
   margin: 50px;
   padding: 20px;
+}
+
+/* Not Found Page */
+
+.notfoundWrapper {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+}
+
+.notfoundContainer {
+  border-radius: 10px;
+  background-color: #FFBF86;
+  color: #0A0909;
+  margin: 50px;
+  padding: 20px;
+}
+
+main {
+  min-height: 100vh;
 }

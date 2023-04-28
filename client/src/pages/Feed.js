@@ -154,7 +154,7 @@ const Feed = () => {
                     <h2 className="searchTitle">Feed</h2>
                 </Grid>
             </Box>
-            <section className='postsWrapper'>
+            <section className='feedpostsWrapper'>
                 {currentPosts ? currentPosts.map((post) => (
                     <div className="postCard" key={post._id} >
                         {post.photo &&

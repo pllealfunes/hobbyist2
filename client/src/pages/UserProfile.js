@@ -135,7 +135,7 @@ const UserProfile = () => {
                                 <FollowUserBtn currentUser={currentUser} id={id} user={user} userProfile={userProfile} />
                             </Grid>
                         </Box>
-                        {currentPosts.length > 0 ? <section className='postsWrapper'>
+                        {currentPosts.length > 0 ? <section className='profilepostsWrapper'>
                             {currentPosts && currentPosts.map((post) => (
                                 <div className="postCard" key={post._id} >
                                     {post.photo &&
@@ -248,7 +248,7 @@ const UserProfile = () => {
                             </Grid>
                         </Box>
 
-                        {currentPosts.length > 0 ? <section className='postsWrapper'>
+                        {currentPosts.length > 0 ? <section className='profilepostsWrapper'>
 
                             {currentPosts && currentPosts.map((post) => (
                                 <div className="postCard" key={post._id} >
@@ -376,7 +376,7 @@ const UserProfile = () => {
                             <button className="followBtn" onClick={() => (navigate('/login'))}>Follow User</button>
                         </Grid>
                     </Box>
-                    {currentPosts.length > 0 ? <section className='postsWrapper'>
+                    {currentPosts.length > 0 ? <section className='profilepostsWrapper'>
                         {currentPosts && currentPosts.map((post) => (
                             <div className="postCard" key={post._id} >
                                 {post.photo &&
