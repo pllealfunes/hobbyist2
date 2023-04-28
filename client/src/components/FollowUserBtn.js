@@ -4,7 +4,7 @@ import { axiosPrivate } from '../config/useAxiosPrivate'
 
 function FollowUserBtn({ currentUser, id, user, userProfile }) {
 
-    const [isFollow, setIsFollow] = useState('')
+    const [isFollow, setIsFollow] = useState(false)
 
 
     useEffect(() => {
@@ -24,7 +24,7 @@ function FollowUserBtn({ currentUser, id, user, userProfile }) {
 
         })();
 
-    }, [currentUser, isFollow, id])
+    }, [currentUser, id])
 
 
     const followUser = async () => {

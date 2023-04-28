@@ -59,7 +59,7 @@ const EditPost = () => {
 
         fetchPost()
 
-    }, [id, setValue, navigate])
+    }, [id, setValue, navigate, photo])
 
     const removePhoto = () => {
         setPhotoExists(false)

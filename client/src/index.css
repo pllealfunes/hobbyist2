@@ -366,6 +366,11 @@ footer {
   background-color: #FFBF86;
 }
 
+.editpostWrapper {
+  background-color: #FFBF86;
+  min-height: 100vh;
+}
+
 .newpostContainer,
 .editpostContainer {
   padding: 3rem;

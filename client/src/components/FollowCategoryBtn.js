@@ -8,9 +8,8 @@ import { axiosPrivate } from '../config/useAxiosPrivate'
 
 function FollowCategoryBtn({ category, user }) {
 
-    //const { singleUser } = useSelector((state) => state.auth)
     const [currentUser, setCurrentUser] = useState('')
-    const [isFollow, setIsFollow] = useState('')
+    const [isFollow, setIsFollow] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 

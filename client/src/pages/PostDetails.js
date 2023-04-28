@@ -214,22 +214,31 @@ const PostDetails = () => {
                             {user ? <FollowCategoryBtn category={post.category} user={user} /> : <div>Category: {post.category}</div>}
                         </div>
 
-                        <Grid
-                            container
-                            direction="row"
-                            alignItems="center"
-                            justifyContent="center"
-                        >
-                            <p>Created: {createdAt}</p>
-                            {user && user.currentUser.id === `${post.user}` &&
+                        {user && user.currentUser.id === `${post.user}` ?
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="center"
+                            >
+                                <p>Created: {createdAt}</p>
                                 <div>
                                     <button className="deletePostBtn" onClick={(e) => handleModal(post._id, btnId[0])}>Delete Post</button>
                                     <button className="editPostBtn"><Link className="editPostLink" key={post._id} to={`/post/editPost/${post._id}`}>Edit Post</Link></button>
                                 </div>
-                            }
-                            <p>Updated: {updatedAt}</p>
-                        </Grid>
-
+                                <p>Updated: {updatedAt}</p>
+                            </Grid>
+                            :
+                            <Grid
+                                container
+                                direction="row"
+                                alignItems="center"
+                                justifyContent="space-between"
+                            >
+                                <p>Created: {createdAt}</p>
+                                <p>Updated: {updatedAt}</p>
+                            </Grid>
+                        }
                     </Grid>
                     <Box sx={{ p: 3 }}>
                         {post.photo && <img className="postPhoto" src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" />}

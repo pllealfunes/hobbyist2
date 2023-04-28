@@ -67,7 +67,7 @@ const EditComment = () => {
 
             <Grid
                 container
-                width={600}
+                width={800}
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
@@ -84,14 +84,15 @@ const EditComment = () => {
                         name="comment"
                         rows={10}
                         label="Edit Comment Box"
+                        InputLabelProps={{ shrink: true }}
                         className="editCommentBox"
                         multiline
                         margin="normal"
                         id="editCommentBox"
-                        InputProps={{ sx: { width: { xs: 350, md: 500 } } }}
+                        InputProps={{ sx: { width: { xs: 350, md: 700 } } }}
                         {...register("comment", { required: true, minLength: 5 })}
                     />
-                    <Button className="submitFormBtn" type="submit" variant="contained" color="success" fullWidth>Submit</Button>
+                    <button className="submitFormBtn" type="submit">Submit</button>
                 </form>
             </Grid>
         </Box>
