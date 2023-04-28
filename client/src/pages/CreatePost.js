@@ -74,6 +74,7 @@ const CreatNewPost = () => {
                 navigate(`/profile/${user.currentUser.id}`)
             } catch (error) {
                 toast.error("Unable to create new post")
+                console.log(error);
             }
         })();
 
