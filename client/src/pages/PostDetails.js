@@ -189,7 +189,7 @@ const PostDetails = () => {
                     sx={{
                         '& button': { my: 3 }
                     }}
-                    width={1000}
+                    width={900}
                 >
 
                     {showModal && <Modal deleteId={deleteId} deleteFunction={deleteFunction} message={message} />}
@@ -201,7 +201,7 @@ const PostDetails = () => {
                         className="postInfo"
                     >
 
-                        <Typography variant="h3">{post.title}</Typography>
+                        <Typography variant="h4">{post.title}</Typography>
                         <div className="postDetails">
                             <Grid
                                 container
@@ -240,7 +240,7 @@ const PostDetails = () => {
                             </Grid>
                         }
                     </Grid>
-                    <Box sx={{ p: 3 }}>
+                    <Box sx={{ p: 3 }} width={800}>
                         {post.photo && <img className="postPhoto" src={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} alt="" />}
                         <div className="contentContainer">
                             {paragraph.map((paragraph, index) => (
@@ -294,7 +294,7 @@ const PostDetails = () => {
                                 <AccountCircleIcon aria-label="user profile photo" sx={{ height: 30, width: 30 }} />
                                 {comment.user && <Author userId={comment.user} />}
                             </Grid>
-                            <p>{comment.comment}</p>
+                            <Typography variant="body1">{comment.comment}</Typography>
                             {user && user.currentUser.id === `${comment.user}` && <Grid container
                                 direction="row"
                                 alignItems="center"

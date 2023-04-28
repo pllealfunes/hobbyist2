@@ -71,14 +71,11 @@ const CreatNewPost = () => {
                 await axiosPrivate.post('/blog/post/newPost', formData)
                 toast.success("Post Created")
                 setPhotoExists(false)
-                reset()
                 navigate(`/profile/${user.currentUser.id}`)
             } catch (error) {
-                if (error.response) setErrorsServer(error.response.data.errors);
                 toast.error("Unable to create new post")
             }
         })();
-        if (errorsServer) setErrorsServer('')
 
     }
 
