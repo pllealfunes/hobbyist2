@@ -41,7 +41,7 @@ const ExplorePage = () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/posts`)
                 setPostsLoaded(response.data)
-                const lastPosts = response.data.slice(-3)
+                const lastPosts = response.data.slice(-8)
                 setLatestPosts(lastPosts.reverse())
                 setShowLatestPosts(true)
             } catch (error) {

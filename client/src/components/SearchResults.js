@@ -42,13 +42,23 @@ const SearchResults = ({ searchResults }) => {
                     <div className="postCard" key={post._id}>
                         {post.photo &&
                             <Card
-                                className='postCard' sx={{ width: 300, height: 400, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={5}>
+                                className='postCard'
+                                sx={{
+                                    maxHeight: 400,
+                                    maxWidth: 300,
+                                    minHeight: 400,
+                                    minWidth: 300,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between"
+                                }}
+                                elevation={5}>
                                 <div>
                                     <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
                                         <AccountCircleIcon aria-label="auser profile photo" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                         {post.user && <Author userId={post.user} />}
                                     </Grid>
-                                    <Link to={`/post/${post._id}`}>
+                                    <Link to={`/post/${post._id}`} className='cardLink'>
                                         <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
                                         <CardContent>
                                             <Typography gutterBottom variant="h5" component="div">
@@ -73,7 +83,18 @@ const SearchResults = ({ searchResults }) => {
                         }
 
                         {!post.photo &&
-                            <Card className='postCard' sx={{ width: 300, height: 400, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={5}>
+                            <Card
+                                className='postCard'
+                                sx={{
+                                    maxHeight: 400,
+                                    maxWidth: 300,
+                                    minHeight: 400,
+                                    minWidth: 300,
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    justifyContent: "space-between"
+                                }}
+                                elevation={5}>
                                 <div>
                                     <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
                                         <AccountCircleIcon aria-label="user profile photo" sx={{ height: 30, width: 30 }} className="profilePhoto" />
@@ -86,7 +107,7 @@ const SearchResults = ({ searchResults }) => {
                                                 {post.title}
                                             </Typography>
                                             <Typography className="textPreview" variant="body2" color="text.secondary">
-                                                {post.post.split("", 350)}
+                                                {post.post.split("", 400)}
                                             </Typography>
                                         </CardContent>
                                     </Link>
