@@ -162,7 +162,6 @@ const ExplorePage = () => {
                             label="Search"
                             name="search"
                             fullWidth
-                            margin="dense"
                             {...register('search')}
                             InputProps={{
                                 endAdornment: (
@@ -171,10 +170,13 @@ const ExplorePage = () => {
                                     </InputAdornment>
                                 )
                             }}
+                            sx={{
+                                my: 2
+                            }}
                         />
 
 
-                        <FormControl fullWidth margin="dense">
+                        <FormControl fullWidth>
                             <InputLabel id="categorySelect" htmlFor="category" >Category...</InputLabel>
                             <Select
                                 label="Category"
@@ -182,7 +184,6 @@ const ExplorePage = () => {
                                 name="category"
                                 className="category"
                                 variant="outlined"
-                                margin='normal'
                                 value={watch("category") || ""}
                                 {...register("category")}
                             >

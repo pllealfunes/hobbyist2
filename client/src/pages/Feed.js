@@ -155,7 +155,7 @@ const Feed = () => {
                 </Grid>
             </Box>
             <section className='feedpostsWrapper'>
-                {currentPosts ? currentPosts.map((post) => (
+                {currentPosts && currentPosts.length > 0 ? currentPosts.map((post) => (
                     <div className="postCard" key={post._id} >
                         {post.photo &&
                             <Card
