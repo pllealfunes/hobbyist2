@@ -9,8 +9,4 @@ const axiosPrivate = axios.create({
     }
 })
 
-const regularAxios = axios.create({
-    baseURL: `${process.env.REACT_APP_URL}/api`
-});
-
-export { axiosPrivate, regularAxios }
+export default axiosPrivate

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { axiosPrivate } from '../config/useAxiosPrivate'
+import axiosPrivate from '../config/useAxiosPrivate'
 
 function FollowUserBtn({ currentUser, id, user, userProfile }) {
 

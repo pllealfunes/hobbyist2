@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { axiosPrivate } from "../config/useAxiosPrivate";
+import axiosPrivate from "../config/useAxiosPrivate";
 import axios from 'axios';
 
 /*** MATERIAL UI STYLING ***/

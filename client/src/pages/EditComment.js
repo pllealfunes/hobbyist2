@@ -2,7 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-toastify';
-import { axiosPrivate, regularAxios } from "../config/useAxiosPrivate";
+import axiosPrivate from "../config/useAxiosPrivate";
+import axios from "axios";
 
 
 /*** MATERIAL UI STYLING ***/
@@ -30,7 +31,7 @@ const EditComment = () => {
     useEffect(() => {
         const fetchComment = async () => {
             try {
-                let response = await regularAxios.get(`/blog/post/comment/${id}`);
+                let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/comment/${id}`);
                 setValue("comment", response.data.comment);
             } catch (error) {
                 console.log(error);
