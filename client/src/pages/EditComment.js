@@ -47,9 +47,9 @@ const EditComment = () => {
             try {
                 await axiosPrivate.put(`/blog/post/comment/editComment/${id}`, data);
                 toast.success("Saved new edit")
-            } catch (error) {
-                if (error.response) setErrorsServer(error.response.data.errors);
+            } catch (errors) {
                 toast.error("Unable to edit")
+                console.log(errors);
             }
         })();
         if (errorsServer) setErrorsServer('')
