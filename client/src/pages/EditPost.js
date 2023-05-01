@@ -17,7 +17,6 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import { Typography } from '@mui/material';
