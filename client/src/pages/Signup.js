@@ -23,8 +23,7 @@ const Signup = () => {
             username: "",
             email: "",
             password: "",
-            bio: "",
-            photo: ""
+            bio: ""
         }
     });
 
