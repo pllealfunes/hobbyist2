@@ -91,8 +91,7 @@ const PostDetails = () => {
     const submitComment = (data) => {
         (async () => {
             try {
-                await axiosPrivate.post(`/blog/post/${id}/comment/newComment`, { ...data, user: user.currentUser.id })
-                console.log("new comment");
+                const response = await axiosPrivate.post(`/blog/post/${id}/comment/newComment`, { ...data, user: user.currentUser.id })
                 fetchComments()
                 toast.success("You added a new comment!")
                 reset()

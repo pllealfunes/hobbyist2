@@ -5,7 +5,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 let postSchema = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User' },
-    title: { type: String, minLength: 5, required: true },
+    title: { type: String, minLength: 5, maxLength: 50, required: true },
     category: { type: String, required: true },
     photo: { type: String },
     post: { type: String, minLength: 500, required: true }

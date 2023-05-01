@@ -21,6 +21,8 @@ import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import SendIcon from '@mui/icons-material/Send';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
+import { Typography } from '@mui/material';
+
 
 
 const EditPost = () => {
@@ -160,10 +162,11 @@ const EditPost = () => {
                             ))}
 
                             {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Only Images are Allowed</span></Alert>}
-                            {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
+                            {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be 5 - 50 characters</span></Alert>}
                             {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
-                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 500 characters long</span></Alert>}
+                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 500 characters</span></Alert>}
 
+                            <Typography variant="caption" display="block" >* Titles must be at least 5 - 50 characters</Typography>
                             <TextField
                                 className="title"
                                 type="text"
@@ -208,7 +211,7 @@ const EditPost = () => {
                                 multiline
                                 margin="normal"
                                 rows={20}
-                                {...register("post", { required: true, minLength: 5 })}
+                                {...register("post", { required: true, minLength: 500 })}
                             />
 
                             <button className="submitFormBtn" type="submit">Submit</button>
@@ -225,9 +228,9 @@ const EditPost = () => {
                             ))}
 
                             {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Only Images are Allowed</span></Alert>}
-                            {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be at least 5 characters long</span></Alert>}
+                            {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be 5 - 50 characters</span></Alert>}
                             {errors.category && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A category must be selected.</span></Alert>}
-                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 5 characters long</span></Alert>}
+                            {errors.post && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Posts must be at least 500 characters</span></Alert>}
 
                             {selectedImages ? <img className="currentPhoto" src={`${selectedImages}`} alt={`${selectedImages}`} /> :
                                 <label htmlFor="photo">Upload Photo:
@@ -242,6 +245,7 @@ const EditPost = () => {
                                 </label>}
                             {photoExists && <button type="button" variant="contained" onClick={removePhoto} className="removePhoto">Remove Photo</button>}
 
+                            <Typography variant="caption" display="block" >* Titles must be at least 5 characters long</Typography>
                             <TextField
                                 className="title"
                                 type="text"
@@ -274,7 +278,7 @@ const EditPost = () => {
                             </FormControl>
 
 
-
+                            <Typography variant="caption">* Posts be at least 500 characters long</Typography>
                             <TextField
                                 className="post"
                                 name="post"
@@ -284,7 +288,7 @@ const EditPost = () => {
                                 multiline
                                 margin="normal"
                                 rows={20}
-                                {...register("post", { required: true, minLength: 5 })}
+                                {...register("post", { required: true, minLength: 500 })}
                             />
 
                             <button className="submitFormBtn" type="submit">Submit</button>

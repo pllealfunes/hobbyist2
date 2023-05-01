@@ -150,7 +150,6 @@ router.post("/login", (req, res, next) => {
                 return res.status(500).send({ error: "Server error" });
             }
             if (result) {
-                console.log(result);
                 const token = createToken(user._id)
                 return res.json({
                     currentUser: {

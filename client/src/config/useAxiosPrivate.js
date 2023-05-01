@@ -8,7 +8,9 @@ const axiosPrivate = axios.create({
 
 axiosPrivate.interceptors.request.use(
     config => {
-        config.headers['Authorization'] = `Bearer ${user.token}`;
+        if (user && user.token) { // Check if user and user.token are not null or undefined
+            config.headers['Authorization'] = `Bearer ${user.token}`;
+        }
         return config;
     },
     error => {
