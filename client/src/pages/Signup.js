@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { useForm } from "react-hook-form";
@@ -35,7 +35,7 @@ const Signup = () => {
         try {
             await dispatch(registerUser(data)).unwrap()
             toast.success('New Account Created')
-            navigate('/feed', { replace: true })
+            redirect('/feed')
         } catch (error) {
             toast.error(error)
         }
