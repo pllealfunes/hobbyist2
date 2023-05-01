@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const user = JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')) : null;
+const user = JSON.parse(localStorage.getItem('user'));
 
 const axiosPrivate = axios.create({
     baseURL: `${process.env.REACT_APP_URL}/api`

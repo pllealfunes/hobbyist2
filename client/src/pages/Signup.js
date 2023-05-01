@@ -35,7 +35,7 @@ const Signup = () => {
         try {
             await dispatch(registerUser(data)).unwrap()
             toast.success('New Account Created')
-            navigate('/feed')
+            navigate('/feed', { replace: true })
         } catch (error) {
             toast.error(error)
         }
