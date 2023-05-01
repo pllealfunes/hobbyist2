@@ -41,10 +41,7 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '/../client', 'build', 'index.html'))
 });
 
-connectDB().then(() => {
-    app.listen(process.env.PORT, () => {
-        console.log("listening for requests");
-    })
-})
+
+app.listen(process.env.PORT, () => console.log("Server started!"))
 
 module.exports = app;
