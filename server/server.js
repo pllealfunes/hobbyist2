@@ -11,11 +11,15 @@ const users = require('./api/users')
 
 
 /* Connect to Database */
-mongoose.connect(process.env.DBURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(() => console.log('MongoDB connected...'))
-    .catch(err => console.log(err))
+const connectDB = async () => {
+    try {
+        await mongoose.connect(process.env.DBURI);
+        console.log('MongoDB Connected...');
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
 
 
 app.use(cookieParser())
@@ -41,7 +45,12 @@ app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, '/../client', 'build', 'index.html'))
 });
 
-app.listen(process.env.PORT, () => console.log("Server started!"))
+//Connect to the database before listening
+connectDB().then(() => {
+    app.listen(process.env.PORT, () => {
+        console.log("listening for requests");
+    })
+})
 
 
 module.exports = app;
