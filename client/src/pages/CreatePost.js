@@ -73,9 +73,9 @@ const CreatNewPost = () => {
                 toast.success("Post Created")
                 setPhotoExists(false)
                 navigate(`/profile/${user.currentUser.id}`)
-            } catch (errors) {
+            } catch (error) {
                 toast.error("Unable to create new post")
-                console.log(errors);
+                console.log(error);
             }
         })();
 
