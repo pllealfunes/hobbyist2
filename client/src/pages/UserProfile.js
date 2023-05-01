@@ -15,7 +15,8 @@ import {
     CardMedia,
     Typography,
     Grid,
-    Box
+    Box,
+    Divider
 
 } from "@mui/material";
 
@@ -152,7 +153,13 @@ const UserProfile = () => {
                                             }}
                                             elevation={5}>
                                             <div>
-                                                <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                                <Grid
+                                                    container
+                                                    flexDirection="row"
+                                                    justifyContent="flex-start"
+                                                    alignItems="center"
+                                                    sx={{ p: 1 }}
+                                                    className="postHeader">
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                     {post.user && <Author userId={post.user} />}
                                                 </Grid>
@@ -168,11 +175,17 @@ const UserProfile = () => {
                                                     </CardContent>
                                                 </Link>
                                             </div>
-                                            <Grid container flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ py: .5 }} className="postFooter">
+                                            <Grid
+                                                container
+                                                flexDirection="row"
+                                                justifyContent="space-between"
+                                                alignItems="center"
+                                                sx={{ py: .5 }}
+                                                className="postFooter">
                                                 <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                                     {post.category}
                                                 </Typography>
-                                                <Typography variant="caption" color="text.primary">
+                                                <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
                                                     {post.createdAt}
                                                 </Typography>
                                             </Grid>
@@ -194,7 +207,14 @@ const UserProfile = () => {
                                             }}
                                             elevation={5}>
                                             <div>
-                                                <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                                <Grid
+                                                    container
+                                                    flexDirection="row"
+                                                    justifyContent="flex-start"
+                                                    alignItems="center"
+                                                    sx={{ p: 1 }}
+                                                    className="postHeader"
+                                                >
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                     {post.user && <Author userId={post.user} />}
                                                 </Grid>
@@ -204,13 +224,20 @@ const UserProfile = () => {
                                                         <Typography gutterBottom variant="h5" component="div">
                                                             {post.title}
                                                         </Typography>
+
                                                         <Typography className="textPreview" variant="body2" color="text.secondary">
                                                             {post.post.split("", 400)}
                                                         </Typography>
                                                     </CardContent>
                                                 </Link>
                                             </div>
-                                            <Grid container flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ py: .5 }} className="postFooter">
+                                            <Grid
+                                                container
+                                                flexDirection="row"
+                                                justifyContent="space-between"
+                                                alignItems="center"
+                                                sx={{ py: .5 }}
+                                                className="postFooter">
                                                 <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                                     {post.category}
                                                 </Typography>
@@ -287,7 +314,14 @@ const UserProfile = () => {
                                             }}
                                             elevation={5}>
                                             <div>
-                                                <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                                <Grid
+                                                    container
+                                                    flexDirection="row"
+                                                    justifyContent="flex-start"
+                                                    alignItems="center"
+                                                    sx={{ p: 1 }}
+                                                    className="postHeader"
+                                                >
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                     {post.user && <Author userId={post.user} />}
                                                 </Grid>
@@ -307,7 +341,7 @@ const UserProfile = () => {
                                                 <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                                     {post.category}
                                                 </Typography>
-                                                <Typography variant="caption" color="text.primary">
+                                                <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
                                                     {post.createdAt}
                                                 </Typography>
                                             </Grid>
@@ -329,7 +363,14 @@ const UserProfile = () => {
                                             }}
                                             elevation={5}>
                                             <div>
-                                                <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                                <Grid
+                                                    container
+                                                    flexDirection="row"
+                                                    justifyContent="flex-start"
+                                                    alignItems="center"
+                                                    sx={{ p: 1 }}
+                                                    className="postHeader"
+                                                >
                                                     <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                     {post.user && <Author userId={post.user} />}
                                                 </Grid>
@@ -339,6 +380,7 @@ const UserProfile = () => {
                                                         <Typography gutterBottom variant="h5" component="div">
                                                             {post.title}
                                                         </Typography>
+
                                                         <Typography className="textPreview" variant="body2" color="text.secondary">
                                                             {post.post.split("", 400)}
                                                         </Typography>
@@ -435,7 +477,14 @@ const UserProfile = () => {
                                         }}
                                         elevation={5}>
                                         <div>
-                                            <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                            <Grid
+                                                container
+                                                flexDirection="row"
+                                                justifyContent="flex-start"
+                                                alignItems="center"
+                                                sx={{ p: 1 }}
+                                                className="postHeader"
+                                            >
                                                 <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                 {post.user && <Author userId={post.user} />}
                                             </Grid>
@@ -451,11 +500,17 @@ const UserProfile = () => {
                                                 </CardContent>
                                             </Link>
                                         </div>
-                                        <Grid container flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ py: .5 }} className="postFooter">
+                                        <Grid
+                                            container
+                                            flexDirection="row"
+                                            justifyContent="space-between"
+                                            alignItems="center"
+                                            sx={{ py: .5 }}
+                                            className="postFooter">
                                             <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                                 {post.category}
                                             </Typography>
-                                            <Typography variant="caption" color="text.primary">
+                                            <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
                                                 {post.createdAt}
                                             </Typography>
                                         </Grid>
@@ -466,7 +521,13 @@ const UserProfile = () => {
                                 {!post.photo &&
                                     <Card className='postCard' sx={{ width: 300, height: 400, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={5}>
                                         <div>
-                                            <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
+                                            <Grid
+                                                container
+                                                flexDirection="row"
+                                                justifyContent="flex-start"
+                                                alignItems="center"
+                                                sx={{ p: 1 }}
+                                                className="postHeader">
                                                 <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                                 {post.user && <Author userId={post.user} />}
                                             </Grid>
@@ -476,13 +537,20 @@ const UserProfile = () => {
                                                     <Typography gutterBottom variant="h5" component="div">
                                                         {post.title}
                                                     </Typography>
+
                                                     <Typography className="textPreview" variant="body2" color="text.secondary">
                                                         {post.post.split("", 400)}
                                                     </Typography>
                                                 </CardContent>
                                             </Link>
                                         </div>
-                                        <Grid container flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ py: .5 }} className="postFooter">
+                                        <Grid
+                                            container
+                                            flexDirection="row"
+                                            justifyContent="space-between"
+                                            alignItems="center"
+                                            sx={{ py: .5 }}
+                                            className="postFooter">
                                             <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                                 {post.category}
                                             </Typography>

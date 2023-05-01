@@ -1,4 +1,4 @@
-/* LOGIN AND LOGOUT CODE IS A MIX OF CODE FROM TUTORIALS FROM NET NINJA AND DAVE GRAY. VIEW README FOR RESOURCE */
+
 
 require('dotenv').config()
 const fs = require("fs");
@@ -127,42 +127,46 @@ router.post("/signup", [
 
 
 
-router.post("/login", async (req, res, next) => {
+router.post("/login", (req, res, next) => {
 
     const { username, password } = req.body
 
-    try {
-        if (!username || !password) {
-            return res.status(400).send({ error: "All fields must be filled" })
-        }
 
-        const user = await UserService.find({ username: username })
-
-
-        const currentUser = {
-            id: user._id,
-            username: user.username,
-            email: user.email,
-            bio: user.bio
-        }
-
-
-        if (!user) {
-            return res.status(400).send({ error: "Incorrect username" })
-        }
-
-        const match = await bcrypt.compare(password, user.password)
-
-        if (!match) return res.status(400).send({ error: "Incorrect password" })
-
-        const token = createToken(user._id)
-
-        // Send accessToken containing username and roles 
-        res.json({ currentUser, token })
-
-    } catch (error) {
-        return res.status(400).send({ error: "Unable to login" })
+    if (!username || !password) {
+        return res.status(400).send({ error: "All fields are required" });
     }
+
+    User.findOne({ username: username }, (err, user) => {
+        if (err) {
+            console.log(err);
+        }
+        if (!user) {
+            return res.status(404).send({ error: "Incorrect username" })
+        }
+
+        bcrypt.compare(password, user.password, (err, result) => {
+            if (err) {
+                console.log(err);
+                return res.status(500).send({ error: "Server error" });
+            }
+            if (result) {
+                console.log(result);
+                const token = createToken(user._id)
+                return res.json({
+                    currentUser: {
+                        id: user._id,
+                        username: user.username,
+                        email: user.email,
+                        bio: user.bio
+                    }, token
+                });
+
+            } else {
+                return res.status(400).send({ error: "Incorrect password" })
+            }
+        });
+    });
+
 })
 
 

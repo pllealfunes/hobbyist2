@@ -118,11 +118,7 @@ export default function RootLayout() {
                                                 open={Boolean(anchorElNav)}
                                                 onClose={handleCloseNavMenu}
                                                 sx={{
-                                                    display: { xs: 'block' },
-                                                    visibility: {
-                                                        md: 'hidden'
-                                                    }
-
+                                                    display: { xs: 'block', md: 'none' },
                                                 }}
                                             >
                                                 <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
@@ -131,12 +127,7 @@ export default function RootLayout() {
                                             </Menu>
                                         </Box>
                                     </div>
-                                    <AdbIcon sx={{
-                                        display: { xs: 'flex' },
-                                        mr: 1, visibility: {
-                                            md: 'hidden'
-                                        }
-                                    }} />
+                                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                                     <Tooltip title="home" placement="bottom-start">
                                         <Typography
                                             variant="h5"
@@ -160,10 +151,10 @@ export default function RootLayout() {
                                             Hobbyist
                                         </Typography>
                                     </Tooltip>
-                                    <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                    <Box sx={{ display: { xs: 'none', md: 'flex' }, justifyContent: "center", alignItems: "center" }}>
                                         <NavLink className="navbar-link" to="/explore"><MenuItem>Explore</MenuItem></NavLink>
-                                        <NavLink className="navbar-link" to="/login"><MenuItem>Login</MenuItem></NavLink>
-                                        <NavLink className="navbar-link" to="/signup"><MenuItem>Signup</MenuItem></NavLink>
+                                        <NavLink className="loginBtnNav" to="/login"><MenuItem>Login</MenuItem></NavLink>
+                                        <NavLink className="signupBtnNav" to="/signup"><MenuItem>Signup</MenuItem></NavLink>
                                     </Box>
                                 </Grid>
                             </Toolbar>
@@ -316,9 +307,9 @@ export default function RootLayout() {
                         <Grid item md={6} lg={4}>
                             <Typography variant="h5">About us</Typography>
                             <Typography variant="caption2">
-                                Hobbyist was built with the MERN stack alogn with
+                                Hobbyist was built with the MERN stack along with
                                 Redux React Router, and MUI for the
-                                2023 Harvard Extension School Capstone project. This project is my copyright material and using it will attract legal action.
+                                2023 Harvard Extension School Capstone project. Photos are not mine and belong to respected owners. README contains resources used. This project is my copyright material and using it will attract legal action.
                             </Typography>
                             <Box
                                 sx={{

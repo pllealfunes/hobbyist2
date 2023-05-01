@@ -86,7 +86,7 @@ const latestPosts = ({ latestPosts }) => {
                                 <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                     {post.category}
                                 </Typography>
-                                <Typography variant="caption" color="text.primary">
+                                <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
                                     {post.createdAt}
                                 </Typography>
                             </Grid>
@@ -118,7 +118,7 @@ const latestPosts = ({ latestPosts }) => {
                                         <Typography gutterBottom variant="h6" component="div">
                                             {post.title}
                                         </Typography>
-                                        <Divider />
+
                                         <Typography className="textPreview" variant="body2" color="text.secondary">
                                             {post.post.split("", 400)}
                                         </Typography>

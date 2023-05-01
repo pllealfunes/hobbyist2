@@ -52,16 +52,24 @@ const SearchResults = ({ searchResults }) => {
                                     flexDirection: "column",
                                     justifyContent: "space-between"
                                 }}
-                                elevation={5}>
+                                elevation={5}
+                            >
                                 <div>
-                                    <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
-                                        <AccountCircleIcon aria-label="auser profile photo" sx={{ height: 30, width: 30 }} className="profilePhoto" />
+                                    <Grid
+                                        container
+                                        flexDirection="row"
+                                        justifyContent="flex-start"
+                                        alignItems="center"
+                                        sx={{ p: 1 }}
+                                        className="postHeader"
+                                    >
+                                        <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                         {post.user && <Author userId={post.user} />}
                                     </Grid>
                                     <Link to={`/post/${post._id}`} className='cardLink'>
                                         <CardMedia component="div" sx={{ height: 140 }} image={`${process.env.REACT_APP_URL}/public/images/posts/${post.photo}`} />
                                         <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
+                                            <Typography gutterBottom variant="h6" component="div" className='postTitle'>
                                                 {post.title}
                                             </Typography>
                                             <Typography className="textPreview" variant="body2" color="text.secondary">
@@ -70,11 +78,18 @@ const SearchResults = ({ searchResults }) => {
                                         </CardContent>
                                     </Link>
                                 </div>
-                                <Grid container flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ py: .5 }} className="postFooter">
+                                <Grid
+                                    container
+                                    flexDirection="row"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    sx={{ py: .5 }}
+                                    className="postFooter"
+                                >
                                     <Typography component="div" className="postCategory" color="text.primary" sx={{ fontWeight: "bold" }}>
                                         {post.category}
                                     </Typography>
-                                    <Typography variant="caption" color="text.primary">
+                                    <Typography variant="caption" color="text.primary" sx={{ p: 1 }}>
                                         {post.createdAt}
                                     </Typography>
                                 </Grid>
@@ -97,15 +112,16 @@ const SearchResults = ({ searchResults }) => {
                                 elevation={5}>
                                 <div>
                                     <Grid container flexDirection="row" justifyContent="flex-start" alignItems="center" sx={{ p: 1 }} className="postHeader">
-                                        <AccountCircleIcon aria-label="user profile photo" sx={{ height: 30, width: 30 }} className="profilePhoto" />
+                                        <AccountCircleIcon aria-label="account of current user" sx={{ height: 30, width: 30 }} className="profilePhoto" />
                                         {post.user && <Author userId={post.user} />}
                                     </Grid>
                                     <Link to={`/post/${post._id}`} className='cardLink'>
 
                                         <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
+                                            <Typography gutterBottom variant="h6" component="div">
                                                 {post.title}
                                             </Typography>
+
                                             <Typography className="textPreview" variant="body2" color="text.secondary">
                                                 {post.post.split("", 400)}
                                             </Typography>
