@@ -22,14 +22,14 @@ const verifyJWT = async (req, res, next) => {
             next()
         } catch (error) {
             console.log(error)
-            res.status(401)
-            throw new Error('Not authorized')
+            console.log("Not authorized")
+            return res.status(401).send({ error: "Not Authorized" })
         }
     }
 
     if (!token) {
-        res.status(401)
-        throw new Error('Not authorized, no token')
+        console.log("Not authorized, no token")
+        return res.status(401).send({ error: "Not authorized, no token" })
     }
 }
 

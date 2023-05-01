@@ -56,7 +56,7 @@ router.post("/signup", [
                 username: value
             }).then(user => {
                 if (user) {
-                    throw new Error('Username already being used')
+                    return res.status(400).send({ error: 'Username already being used' })
                 }
             });
         }).bail(),
@@ -75,7 +75,7 @@ router.post("/signup", [
                 email: value
             }).then(user => {
                 if (user) {
-                    throw new Error('Email is already being used')
+                    return res.status(400).send({ error: 'Email is already being used' })
                 }
             });
         }).bail(),
