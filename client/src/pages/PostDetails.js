@@ -83,7 +83,7 @@ const PostDetails = () => {
         fetchPost()
         fetchComments()
 
-    }, [id, fetchComments, navigate])
+    }, [id, fetchComments, navigate, user])
 
 
 
