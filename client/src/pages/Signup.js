@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 /*** MATERIAL UI STYLING ***/
 import Box from '@mui/material/Box';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import Button from '@mui/material/Button';
+import { Typography } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Alert from '@mui/material/Alert';
@@ -73,7 +73,7 @@ const Signup = () => {
                     {errors.username && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Username must be 5 characters long</span></Alert>}
                     {errors.email && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Please enter a valid email</span></Alert>}
                     {errors.password && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A password must contain at least 8 Characters, 1 Uppercase Character, 1 lowercase character, 1 Number, and 1 Special Character</span></Alert>}
-                    {errors.bio && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A short bio is required.</span></Alert>}
+                    {errors.bio && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>A bio must be at least 10 characters</span></Alert>}
                 </Stack>
 
                 <form className="registerForm" onSubmit={handleSubmit(newUser)}>
@@ -131,11 +131,12 @@ const Signup = () => {
                         margin="normal"
                     />
 
+                    <Typography variant="caption" display="block" sx={{ my: 1 }}>* A bio must be at least 10 characters</Typography>
                     <TextField
                         className="bioContainer"
                         name="bio"
                         label="User Bio"
-                        placeholder="Write Bio"
+                        placeholder="User Bio"
                         fullWidth
                         multiline
                         margin="normal"

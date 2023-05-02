@@ -151,7 +151,7 @@ const ExplorePage = () => {
                 >
                     <div className='searchTitle'>
                         <Typography variant="h4" className="searchTitle">Explore</Typography>
-                        <Typography variant='subtitle1'>By Search,Category, or Both</Typography>
+                        <Typography variant='subtitle1'>By Search, Category, or Both</Typography>
                     </div>
 
                     <form className="searchForm" onSubmit={handleSubmit(searchForm)}>

@@ -165,7 +165,7 @@ const CreatNewPost = () => {
                         </Select>
                     </FormControl>
 
-                    <Typography variant="caption">* Posts be at least 500 characters</Typography>
+                    <Typography variant="caption">* Posts must be at least 500 characters</Typography>
                     <TextField
                         className="post"
                         name="post"
