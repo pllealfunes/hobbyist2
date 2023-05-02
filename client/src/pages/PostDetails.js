@@ -40,6 +40,8 @@ const PostDetails = () => {
     const [deleteId, setDeleteId] = useState('')
     const [buttonId, setButtonId] = useState('')
     const [message, setMessage] = useState('')
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+    const [characterCount, setCharacterCount] = useState(0)
 
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
@@ -52,7 +54,15 @@ const PostDetails = () => {
 
         try {
             let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/${id}/getComments`)
-            setComments(response.data);
+            let newComments = response.data.sort((a, b) => {
+                const dateA = new Date(a.createdAt)
+                const dateB = new Date(b.createdAt)
+                return dateB - dateA
+            })
+            newComments.forEach(post => {
+                post.createdAt = new Date(post.createdAt).toLocaleString();
+            });
+            setComments(newComments);
         } catch (error) {
             console.log(error);
         }
@@ -85,7 +95,15 @@ const PostDetails = () => {
 
     }, [id, fetchComments, navigate, user])
 
-
+    const handleTextChange = (event) => {
+        const inputText = event.target.value;
+        setCharacterCount(inputText.length);
+        if (inputText.length < 5) {
+            setIsButtonDisabled(true)
+        } else {
+            setIsButtonDisabled(false)
+        }
+    };
 
     // Function to create a new comment and display new comment by calling fetchComments
     const submitComment = (data) => {
@@ -257,6 +275,7 @@ const PostDetails = () => {
 
                         <label htmlFor="commentBox"></label>
                         {errors.comment && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Comments must be at least 5 characters long</span></Alert>}
+                        <Typography variant="caption">* 5 Minimum Characters</Typography>
                         <textarea
                             id="commentBox"
                             className="commentBox"
@@ -264,9 +283,11 @@ const PostDetails = () => {
                             placeholder="Comment"
                             rows={10}
                             {...register("comment", { required: true, minLength: 5 })}
+                            onChange={handleTextChange}
                         />
+                        <p>Character count: {characterCount}</p>
                         {user ?
-                            <button className="submitCommBtn" type="submit">Submit</button> :
+                            <button className="submitCommBtn" type="submit" disabled={isButtonDisabled}>Submit</button> :
                             <button className="commBtn" type="submit"><Link to={"/login"}>Login to Comment</Link></button>
                         }
                     </form>
@@ -292,14 +313,25 @@ const PostDetails = () => {
                                 {comment.user && <Author userId={comment.user} />}
                             </Grid>
                             <Typography variant="body1">{comment.comment}</Typography>
-                            {user && user.currentUser.id === `${comment.user}` && <Grid container
-                                direction="row"
-                                alignItems="center"
-                                justifyContent="flex-end"
-                                className="commBtnsContainer">
-                                <button className="editCommBtn"><Link className="editCommLink" key={comment._id} to={`/post/comment/editComment/${comment._id}`}>Edit</Link></button>
-                                <button className="deleteCommBtn" onClick={(e) => handleModal(comment._id, btnId[1])}>Delete</button>
-                            </Grid>
+                            {user && user.currentUser.id === `${comment.user}` ?
+                                <Grid container
+                                    direction="row"
+                                    alignItems="center"
+                                    justifyContent="flex-end"
+                                    className="commBtnsContainer"
+                                >
+                                    <Typography variant="caption">Created: {createdAt}</Typography>
+                                    <button className="editCommBtn"><Link className="editCommLink" key={comment._id} to={`/post/comment/editComment/${comment._id}`}>Edit</Link></button>
+                                    <button className="deleteCommBtn" onClick={(e) => handleModal(comment._id, btnId[1])}>Delete</button>
+                                </Grid>
+                                :
+                                <Grid container
+                                    direction="row"
+                                    alignItems="center"
+                                    justifyContent="flex-end"
+                                    className="commBtnsContainer">
+                                    <Typography variant="caption">Created: {createdAt}</Typography>
+                                </Grid>
                             }
                         </div>
                     ))}

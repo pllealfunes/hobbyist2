@@ -8,15 +8,10 @@ import axios from "axios";
 
 /*** MATERIAL UI STYLING ***/
 import Box from '@mui/material/Box';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
+import { Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import SendIcon from '@mui/icons-material/Send';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+
 
 
 const EditComment = () => {
@@ -24,6 +19,9 @@ const EditComment = () => {
     const navigate = useNavigate
     const { id } = useParams()
     const [errorsServer, setErrorsServer] = useState('')
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+    const [characterCount, setCharacterCount] = useState(0)
+
     const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
     useEffect(() => {
@@ -31,6 +29,7 @@ const EditComment = () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/comment/${id}`);
                 setValue("comment", response.data.comment);
+                setCharacterCount(response.data.comment.length)
             } catch (error) {
                 console.log(error);
                 navigate("*")
@@ -40,6 +39,18 @@ const EditComment = () => {
         fetchComment()
 
     }, [id, setValue, navigate])
+
+
+
+    const handleTextChange = (event) => {
+        const inputText = event.target.value;
+        setCharacterCount(inputText.length);
+        if (inputText.length < 5) {
+            setIsButtonDisabled(true)
+        } else {
+            setIsButtonDisabled(false)
+        }
+    };
 
 
     const submitEditComment = (data) => {
@@ -79,6 +90,14 @@ const EditComment = () => {
                 <h2 className="editCommTitle">Edit Comment</h2>
                 <form className="editCommForm" onSubmit={handleSubmit(submitEditComment)}>
                     {errors.comment && <span>Comments must be at least 5 characters long</span>}
+                    <Grid
+                        container
+                        flexDirection="row"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                    >
+                        <Typography variant="caption">* 5 Minimum Characters</Typography>
+                    </Grid>
                     <TextField
                         name="comment"
                         rows={10}
@@ -90,8 +109,17 @@ const EditComment = () => {
                         id="editCommentBox"
                         InputProps={{ sx: { width: { xs: 350, md: 700 } } }}
                         {...register("comment", { required: true, minLength: 5 })}
+                        onChange={handleTextChange}
                     />
-                    <button className="submitFormBtn" type="submit">Submit</button>
+                    <Grid
+                        container
+                        flexDirection="row"
+                        justifyContent="flex-start"
+                        alignItems="center"
+                    >
+                        <p>Character count: {characterCount}</p>
+                    </Grid>
+                    <button className="submitFormBtn" type="submit" disabled={isButtonDisabled}>Submit</button>
                 </form>
             </Grid>
         </Box>

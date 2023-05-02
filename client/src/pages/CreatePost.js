@@ -40,6 +40,20 @@ const CreatNewPost = () => {
     const [photoExists, setPhotoExists] = useState(false)
     const [selectedImages, setSelectedImages] = useState("");
     const [selectedFile, setSelectedFile] = useState("")
+    const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+
+    const [characterCount, setCharacterCount] = useState(0)
+
+    const handleTextChange = (event) => {
+        const inputText = event.target.value;
+        setCharacterCount(inputText.length);
+        if (inputText.length < 500) {
+            setIsButtonDisabled(true)
+        } else {
+            setIsButtonDisabled(false)
+        }
+    };
+
 
     const onSelectFile = (event) => {
         setPhotoExists(true);
@@ -165,7 +179,7 @@ const CreatNewPost = () => {
                         </Select>
                     </FormControl>
 
-                    <Typography variant="caption">* Posts must be at least 500 characters</Typography>
+                    <Typography variant="caption">* 500 Minimum Characters</Typography>
                     <TextField
                         className="post"
                         name="post"
@@ -176,9 +190,10 @@ const CreatNewPost = () => {
                         margin="normal"
                         rows={20}
                         {...register("post", { required: true, minLength: 500 })}
+                        onChange={handleTextChange}
                     />
-
-                    <button className="submitFormBtn" type="submit">Submit</button>
+                    <p>Character count: {characterCount}</p>
+                    <button className="submitFormBtn" type="submit" disabled={isButtonDisabled}>Submit</button>
 
                 </form>
 

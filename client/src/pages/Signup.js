@@ -131,11 +131,11 @@ const Signup = () => {
                         margin="normal"
                     />
 
-                    <Typography variant="caption" display="block" sx={{ my: 1 }}>* A bio must be at least 10 characters</Typography>
+                    <Typography variant="caption" display="block" sx={{ my: 1 }}>* Bio 10 Characters Minimum</Typography>
                     <TextField
                         className="bioContainer"
                         name="bio"
-                        label="User Bio"
+                        label="User Bio 10 Characters Minimum"
                         placeholder="User Bio"
                         fullWidth
                         multiline

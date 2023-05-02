@@ -29,6 +29,8 @@ const EditPost = () => {
     const { id } = useParams()
     const [photo, setPhoto] = useState('')
     const [photoExists, setPhotoExists] = useState(false)
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false)
+    const [characterCount, setCharacterCount] = useState(0)
     const [selectedImages, setSelectedImages] = useState("");
     const [selectedFile, setSelectedFile] = useState("")
     const [errorsServer, setErrorsServer] = useState('')
@@ -52,7 +54,7 @@ const EditPost = () => {
                     setValue("photo", null);
                 }
                 setPhoto(response.data.photo)
-
+                setCharacterCount(response.data.post.length)
             } catch (error) {
                 navigate("*")
             }
@@ -61,6 +63,17 @@ const EditPost = () => {
         fetchPost()
 
     }, [id, setValue, navigate, photo])
+
+
+    const handleTextChange = (event) => {
+        const inputText = event.target.value;
+        setCharacterCount(inputText.length);
+        if (inputText.length < 500) {
+            setIsButtonDisabled(true)
+        } else {
+            setIsButtonDisabled(false)
+        }
+    };
 
     const removePhoto = () => {
         setPhotoExists(false)
@@ -199,7 +212,7 @@ const EditPost = () => {
                             </FormControl>
 
 
-
+                            <Typography variant="caption">* 500 Minimum Characters</Typography>
                             <TextField
                                 className="post"
                                 name="post"
@@ -210,9 +223,10 @@ const EditPost = () => {
                                 margin="normal"
                                 rows={20}
                                 {...register("post", { required: true, minLength: 500 })}
+                                onChange={handleTextChange}
                             />
-
-                            <button className="submitFormBtn" type="submit">Submit</button>
+                            <p>Character count: {characterCount}</p>
+                            <button className="submitFormBtn" type="submit" disabled={isButtonDisabled}>Submit</button>
 
                         </form>
                     </div>
@@ -276,7 +290,7 @@ const EditPost = () => {
                             </FormControl>
 
 
-                            <Typography variant="caption">* Posts be at least 500 characters long</Typography>
+                            <Typography variant="caption">* 500 Minimum Characters</Typography>
                             <TextField
                                 className="post"
                                 name="post"
@@ -287,9 +301,10 @@ const EditPost = () => {
                                 margin="normal"
                                 rows={20}
                                 {...register("post", { required: true, minLength: 500 })}
+                                onChange={handleTextChange}
                             />
-
-                            <button className="submitFormBtn" type="submit">Submit</button>
+                            <p>Character count: {characterCount}</p>
+                            <button className="submitFormBtn" type="submit" disabled={isButtonDisabled}>Submit</button>
                         </form>
                     </div>
                 }
