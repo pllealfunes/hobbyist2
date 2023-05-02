@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams, useNavigate, Link } from "react-router-dom"
 import { getUser } from '../features/auth/authSlice'
 import axios from "axios"
-import axiosPrivate from '../config/useAxiosPrivate';
 import Pagination from '../components/Pagination';
 import { Author } from '../components/Author';
 import EmptyProfile from "../components/EmptyProfile";
@@ -139,7 +138,7 @@ const UserProfile = () => {
                         {currentPosts.length > 0 ? <section className='profilepostsWrapper'>
                             {currentPosts && currentPosts.map((post) => (
                                 <div className="postCard" key={post._id} >
-                                    {post.photo &&
+                                    {post.photo ?
                                         <Card
                                             className='postCard'
                                             sx={{
@@ -191,9 +190,7 @@ const UserProfile = () => {
                                             </Grid>
                                         </Card>
 
-                                    }
-
-                                    {!post.photo &&
+                                        :
                                         <Card
                                             className='postCard'
                                             sx={{
@@ -300,7 +297,7 @@ const UserProfile = () => {
 
                             {currentPosts && currentPosts.map((post) => (
                                 <div className="postCard" key={post._id} >
-                                    {post.photo &&
+                                    {post.photo ?
                                         <Card
                                             className='postCard'
                                             sx={{
@@ -347,9 +344,8 @@ const UserProfile = () => {
                                             </Grid>
                                         </Card>
 
-                                    }
 
-                                    {!post.photo &&
+                                        :
                                         <Card
                                             className='postCard'
                                             sx={{
@@ -463,7 +459,7 @@ const UserProfile = () => {
                     {currentPosts.length > 0 ? <section className='profilepostsWrapper'>
                         {currentPosts && currentPosts.map((post) => (
                             <div className="postCard" key={post._id} >
-                                {post.photo &&
+                                {post.photo ?
                                     <Card
                                         className='postCard'
                                         sx={{
@@ -516,9 +512,7 @@ const UserProfile = () => {
                                         </Grid>
                                     </Card>
 
-                                }
-
-                                {!post.photo &&
+                                    :
                                     <Card className='postCard' sx={{ width: 300, height: 400, display: "flex", flexDirection: "column", justifyContent: "space-between" }} elevation={5}>
                                         <div>
                                             <Grid
