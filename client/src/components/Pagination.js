@@ -12,7 +12,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
     }
 
     return (
-        <Page onChange={(event, value) => paginate(value)} count={pageNumbers.length} color="warning" variant="outlined" />
+        <Page className="paginationBar" onChange={(event, value) => paginate(value)} count={pageNumbers.length} color="warning" variant="outlined" />
     );
 };
 

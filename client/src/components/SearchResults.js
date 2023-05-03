@@ -155,7 +155,6 @@ const SearchResults = ({ searchResults }) => {
                 }
             </Grid>
             {searchResults.length > 10 && <Pagination
-                className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={searchResults.length}
                 paginate={paginate}

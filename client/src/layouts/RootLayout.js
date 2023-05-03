@@ -272,7 +272,9 @@ export default function RootLayout() {
                                         alignItems="center"
                                         justifyContent="center"
                                     >
-                                        <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
+                                        <Box sx={{ display: { xs: 'none', md: "block", lg: "block" } }}>
+                                            <p className="profileName">Hello! {user.currentUser.username.toUpperCase()}</p>
+                                        </Box>
                                         <Tooltip title="profile">
                                             <NavLink className="navbar-link" to={`/profile/${user.currentUser.id}`}>
                                                 <IconButton sx={{ p: 0 }}>

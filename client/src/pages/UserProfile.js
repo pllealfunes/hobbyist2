@@ -29,7 +29,7 @@ const UserProfile = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-
+    const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);
     const indexOfLastPost = currentPage * postsPerPage;
@@ -64,9 +64,8 @@ const UserProfile = () => {
         (async () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/user/${id}`)
-                let posts = response.data
-                let slicedPosts = posts.slice(indexOfFirstPost, indexOfLastPost)
-                let newFeed = slicedPosts.sort((a, b) => {
+                setPosts(response.data)
+                let newFeed = posts.sort((a, b) => {
                     const dateA = new Date(a.createdAt)
                     const dateB = new Date(b.createdAt)
                     return dateB - dateA
@@ -74,7 +73,7 @@ const UserProfile = () => {
                 newFeed.forEach(post => {
                     post.createdAt = new Date(post.createdAt).toLocaleString();
                 });
-                setCurrentPosts(newFeed)
+                setCurrentPosts(newFeed.slice(indexOfFirstPost, indexOfLastPost))
 
             } catch (error) {
                 console.log(error);
@@ -563,12 +562,16 @@ const UserProfile = () => {
                 </div>
 
             }
-            {currentPosts.length > 10 && <Pagination
-                className="paginationBar"
-                postsPerPage={postsPerPage}
-                totalPosts={currentPosts.length}
-                paginate={paginate}
-            />}
+
+            {posts.length > 10 &&
+
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={posts.length}
+                    paginate={paginate}
+                />
+
+            }
 
         </section >
 

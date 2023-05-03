@@ -276,12 +276,17 @@ const Feed = () => {
                     </section>
                 }
             </section>
-            {feed.length > 10 && <Pagination
-                className="paginationBar"
-                postsPerPage={postsPerPage}
-                totalPosts={feed.length}
-                paginate={paginate}
-            />}
+
+            {feed.length > 10 &&
+
+                <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={feed.length}
+                    paginate={paginate}
+                />
+
+
+            }
         </section >
     )
 }
