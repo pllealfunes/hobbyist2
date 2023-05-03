@@ -26,7 +26,7 @@ const Feed = () => {
     const { user } = useSelector((state) => state.auth)
     const { singleUser } = useSelector((state) => state.auth)
     const [posts, setPosts] = useState([])
-    const [feed, setFeed] = useState(null)
+    const [feed, setFeed] = useState([])
     const dispatch = useDispatch()
 
 
@@ -34,7 +34,7 @@ const Feed = () => {
     const [postsPerPage] = useState(10);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const [currentPosts, setCurrentPosts] = useState('')
+    const [currentPosts, setCurrentPosts] = useState([])
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -115,8 +115,7 @@ const Feed = () => {
 
     useEffect(() => {
         if (feed) {
-            let slicedFeed = feed.slice(indexOfFirstPost, indexOfLastPost)
-            let newFeed = slicedFeed.sort((a, b) => {
+            let newFeed = feed.sort((a, b) => {
                 const dateA = new Date(a.createdAt)
                 const dateB = new Date(b.createdAt)
                 return dateB - dateA
@@ -124,7 +123,7 @@ const Feed = () => {
             newFeed.forEach(post => {
                 post.createdAt = new Date(post.createdAt).toLocaleString();
             });
-            setCurrentPosts(newFeed)
+            setCurrentPosts(newFeed.slice(indexOfFirstPost, indexOfLastPost))
         }
     }, [indexOfFirstPost, indexOfLastPost, feed])
 
@@ -277,7 +276,7 @@ const Feed = () => {
                     </section>
                 }
             </section>
-            {currentPosts.length > 10 && <Pagination
+            {feed.length > 10 && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={feed.length}

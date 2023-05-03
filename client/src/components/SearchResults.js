@@ -25,7 +25,18 @@ const SearchResults = ({ searchResults }) => {
     const [postsPerPage] = useState(10);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = searchResults.slice(indexOfFirstPost, indexOfLastPost);
+
+    let newResults = searchResults.sort((a, b) => {
+        const dateA = new Date(a.createdAt)
+        const dateB = new Date(b.createdAt)
+        return dateB - dateA
+    })
+    newResults.forEach(post => {
+        post.createdAt = new Date(post.createdAt).toLocaleString();
+    });
+
+    const currentPosts = newResults.slice(indexOfFirstPost, indexOfLastPost);
+
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -143,7 +154,7 @@ const SearchResults = ({ searchResults }) => {
                 ))
                 }
             </Grid>
-            {currentPosts.length > 10 && <Pagination
+            {searchResults.length > 10 && <Pagination
                 className="paginationBar"
                 postsPerPage={postsPerPage}
                 totalPosts={searchResults.length}

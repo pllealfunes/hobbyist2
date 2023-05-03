@@ -52,22 +52,6 @@ const ExplorePage = () => {
     }, [])
 
 
-    const searchCategory = (event, category) => {
-        event.preventDefault()
-        const results = postsLoaded.filter((post) => post.category.includes(category.toLowerCase()));
-        if (results.length === 0) {
-            setShowLatestPosts(false)
-            setShowResults(false)
-            setShowCategory(false)
-        } else {
-            reset()
-            setShowLatestPosts(false)
-            setShowResults(false)
-            setCategoryResults(results)
-            setShowCategory(true)
-        }
-    }
-
     const searchForm = (data) => {
         const { search, category } = data
         let categoryArray
