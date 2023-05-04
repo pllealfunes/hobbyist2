@@ -21,7 +21,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 function Category() {
 
     const { category } = useParams()
-    const [postsLoaded, setPostsLoaded] = useState()
+    const [postsLoaded, setPostsLoaded] = useState([])
 
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(10);

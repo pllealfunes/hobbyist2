@@ -25,8 +25,8 @@ import { Typography } from '@mui/material';
 const ExplorePage = () => {
 
 
-    const [postsLoaded, setPostsLoaded] = useState()
-    const [latestPosts, setLatestPosts] = useState()
+    const [postsLoaded, setPostsLoaded] = useState([])
+    const [latestPosts, setLatestPosts] = useState([])
     const [showLatestPosts, setShowLatestPosts] = useState(false)
     const [searchResults, setSearchResults] = useState(false)
     const [showResults, setShowResults] = useState(false)
