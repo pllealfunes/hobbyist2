@@ -34,7 +34,7 @@ const UserProfile = () => {
     const [postsPerPage] = useState(10);
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const [currentPosts, setCurrentPosts] = useState('')
+    const [currentPosts, setCurrentPosts] = useState([])
     const [currentUser, setCurrentUser] = useState('')
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -65,7 +65,8 @@ const UserProfile = () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/user/${id}`)
                 setPosts(response.data)
-                let newFeed = posts.sort((a, b) => {
+                let results = response.data
+                let newFeed = results.sort((a, b) => {
                     const dateA = new Date(a.createdAt)
                     const dateB = new Date(b.createdAt)
                     return dateB - dateA
