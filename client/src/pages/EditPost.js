@@ -25,7 +25,7 @@ import { Typography } from '@mui/material';
 
 const EditPost = () => {
     const { user } = useSelector((state) => state.auth)
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const { id } = useParams()
     const [photo, setPhoto] = useState('')
     const [photoExists, setPhotoExists] = useState(false)

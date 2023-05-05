@@ -10,6 +10,7 @@ function FollowCategoryBtn({ category, user }) {
 
     const [currentUser, setCurrentUser] = useState('')
     const [isFollow, setIsFollow] = useState(false)
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -34,20 +35,18 @@ function FollowCategoryBtn({ category, user }) {
         (async () => {
             try {
                 if (currentUser) {
+                    setIsLoading(false);
                     if (currentUser.categories.includes(category)) {
-                        setIsFollow(true)
-                    } else if (!currentUser.categories.includes(category)) {
-                        setIsFollow(false)
+                        setIsFollow(true);
+                    } else {
+                        setIsFollow(false);
                     }
                 }
-
             } catch (error) {
                 console.log(error);
             }
-
         })();
-
-    }, [currentUser])
+    }, [currentUser]);
 
     const followCategory = async () => {
         try {
@@ -72,26 +71,29 @@ function FollowCategoryBtn({ category, user }) {
 
     return (
         <div>
-            {
-                user ?
-
-
-                    <button
-                        className="followBtn"
-                        onClick={() => {
-                            if (isFollow) {
-                                unfollowCategory();
-                            } else {
-                                followCategory();
-                            }
-                        }}>
-                        {isFollow ? `Unfollow ${category}` : `Follow ${category}`}
-                    </button >
-
-                    :
-
-                    <button onClick={() => (navigate('/login'))}>Follow ${category}</button>
-            }
+            <div>
+                {
+                    user ?
+                        <button
+                            className="followBtn"
+                            onClick={() => {
+                                if (isLoading) return; // disable button while loading
+                                if (isFollow) {
+                                    unfollowCategory();
+                                } else {
+                                    followCategory();
+                                }
+                            }}
+                            disabled={isLoading} // disable button while loading
+                        >
+                            {isFollow ? `Unfollow ${category}` : `Follow ${category}`}
+                        </button>
+                        :
+                        <button onClick={() => (navigate('/login'))}>
+                            Follow {category}
+                        </button>
+                }
+            </div>
         </div>
 
 
