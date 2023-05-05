@@ -321,7 +321,8 @@ const PostDetails = () => {
                                     className="commBtnsContainer"
                                 >
                                     <Typography variant="caption">Created: {createdAt}</Typography>
-                                    <button className="editCommBtn"><Link className="editCommLink" key={comment._id} to={`/post/comment/editComment/${comment._id}`}>Edit</Link></button>
+                                    <button className="editCommBtn">
+                                        <Link className="editCommLink" key={comment._id} to={`/post/comment/editComment/${comment._id}`}>Edit</Link></button>
                                     <button className="deleteCommBtn" onClick={(e) => handleModal(comment._id, btnId[1])}>Delete</button>
                                 </Grid>
                                 :

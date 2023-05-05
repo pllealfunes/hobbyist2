@@ -122,7 +122,7 @@ const EditPost = () => {
             try {
                 await axiosPrivate.put(`/blog/post/editPost/${id}`, formData);
                 toast.success("Updated post!")
-                setPhoto(selectedFile.name)
+                navigate(`/post/${id}`)
             } catch (error) {
                 toast.error("Unable to update post")
                 console.log(error);

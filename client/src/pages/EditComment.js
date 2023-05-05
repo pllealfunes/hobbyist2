@@ -16,8 +16,9 @@ import Grid from '@mui/material/Grid';
 
 const EditComment = () => {
 
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const { id } = useParams()
+    const [postId, setPostId] = useState("")
     const [errorsServer, setErrorsServer] = useState('')
     const [isButtonDisabled, setIsButtonDisabled] = useState(false)
     const [characterCount, setCharacterCount] = useState(0)
@@ -29,6 +30,7 @@ const EditComment = () => {
             try {
                 let response = await axios.get(`${process.env.REACT_APP_URL}/api/blog/post/comment/${id}`);
                 setValue("comment", response.data.comment);
+                setPostId(response.data.postId)
                 setCharacterCount(response.data.comment.length)
             } catch (error) {
                 console.log(error);
@@ -58,6 +60,7 @@ const EditComment = () => {
             try {
                 await axiosPrivate.put(`/blog/post/comment/editComment/${id}`, data);
                 toast.success("Saved new edit")
+                navigate(`/post/${postId}`)
             } catch (error) {
                 toast.error("Unable to edit")
                 console.log(error);
