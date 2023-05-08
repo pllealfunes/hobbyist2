@@ -36,7 +36,7 @@ const CreatNewPost = () => {
         }
     });
 
-    const [errorsServer, setErrorsServer] = useState("")
+
     const [photoExists, setPhotoExists] = useState(false)
     const [selectedImages, setSelectedImages] = useState("");
     const [selectedFile, setSelectedFile] = useState("")
@@ -120,11 +120,6 @@ const CreatNewPost = () => {
                 <h2 className="createTitle">New Post</h2>
 
                 <form className="postForm" onSubmit={handleSubmit(submitNewPost)}>
-                    {errorsServer && errorsServer.map((error) => (
-                        <div className="errorMsg" key={error.param}>
-                            <div>{error.msg}</div>
-                        </div>
-                    ))}
 
                     {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Only Images are Allowed</span></Alert>}
                     {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be 5 - 50 characters</span></Alert>}
@@ -154,7 +149,7 @@ const CreatNewPost = () => {
                         placeholder="Title"
                         fullWidth
                         margin="normal"
-                        {...register("title", { required: true, minLength: 5 })}
+                        {...register("title", { required: true, minLength: 5, maxLength: 50 })}
                     />
 
 

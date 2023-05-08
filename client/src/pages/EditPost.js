@@ -178,7 +178,7 @@ const EditPost = () => {
                                 label="Title"
                                 fullWidth
                                 margin="normal"
-                                {...register("title", { required: true, minLength: 5 })}
+                                {...register("title", { required: true, minLength: 5, maxLength: 50 })}
                             >
                             </TextField>
 
