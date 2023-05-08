@@ -33,7 +33,6 @@ const EditPost = () => {
     const [characterCount, setCharacterCount] = useState(0)
     const [selectedImages, setSelectedImages] = useState("");
     const [selectedFile, setSelectedFile] = useState("")
-    const [errorsServer, setErrorsServer] = useState('')
     const { register, handleSubmit, setValue, watch, formState: { errors } } = useForm({
         defaultValues: {
             user: user ? user.currentUser.id : null
@@ -97,11 +96,10 @@ const EditPost = () => {
                 setSelectedImages("")
                 setPhotoExists(false)
             } catch (error) {
-                if (error.response) setErrorsServer(error.response.data.errors);
                 toast.error("Unable to delete photo")
+                console.log(error);
             }
         })();
-        if (errorsServer) setErrorsServer('')
     }
 
 
@@ -128,7 +126,6 @@ const EditPost = () => {
                 console.log(error);
             }
         })();
-        if (errorsServer) setErrorsServer('')
 
     }
 
@@ -166,11 +163,6 @@ const EditPost = () => {
                         </div>
 
                         <form className="editPostForm" onSubmit={handleSubmit(submitEditPost)}>
-                            {errorsServer && errorsServer.map((error) => (
-                                <div className="errorMsg" key={error.param}>
-                                    <div>{error.msg}</div>
-                                </div>
-                            ))}
 
                             {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Only Images are Allowed</span></Alert>}
                             {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be 5 - 50 characters</span></Alert>}
@@ -233,11 +225,6 @@ const EditPost = () => {
                     :
                     <div>
                         <form className="editPostForm" onSubmit={handleSubmit(submitEditPost)}>
-                            {errorsServer && errorsServer.map((error) => (
-                                <div className="errorMsg" key={error.param}>
-                                    <div>{error.msg}</div>
-                                </div>
-                            ))}
 
                             {errors.photo && <Alert severity="error"><AlertTitle>Error</AlertTitle><span>Only Images are Allowed</span></Alert>}
                             {errors.title && <Alert severity="error"><AlertTitle>Error</AlertTitle> <span>Titles must be 5 - 50 characters</span></Alert>}
@@ -284,6 +271,7 @@ const EditPost = () => {
                                     <MenuItem value="creative">Creative</MenuItem>
                                     <MenuItem value="mental">Mental</MenuItem>
                                     <MenuItem value="food">Food</MenuItem>
+                                    <MenuItem value="musical">Musical</MenuItem>
                                     <MenuItem value="collecting">Collecting</MenuItem>
                                     <MenuItem value="games+puzzles">Games+Puzzles</MenuItem>
                                 </Select>
