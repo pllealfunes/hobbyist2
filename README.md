@@ -1,13 +1,20 @@
 # Hobbyist
-A blogging website where users can blog about their hobbies, explore new
-ideas, and discover new passions.
 
-## TEST ACCOUNT USRENAME AND PASSWORD
+A blogging website where users can blog about their hobbies, explore new
+ideas, and discover new passions. 
+
+This project was built with using Node.js, Express.js, MongoDB Atlas, Mongoose, React, Redux Toolkit, Material UI, Unsplash, Storyset and deployed on Render for the 2023 Harvard Extension School Capstone project. 
+
+This project is my first MERN Stack project and had to learn React, Redux Toolkit, Material UI and JWT Tokens. I learned and used Figma to create design of the project but improved the design along the way. I am proud of my first MERN project and look forward to improving it. 
+
+This project is my copyright material and using it will attract legal action.
+
+## TEST LOGIN ACCOUNT USRENAME AND PASSWORD
 U: Peach
 P: @Peach12
         
 ## Features
-* Users can create Blog Posts + Comment on Posts
+* Users can create an account
 * Create - Blogs + Comments
 * Read - Blogs + Comments
 * Update - Blogs + Comments
@@ -17,17 +24,42 @@ P: @Peach12
 * Feed
         * View posts related to categroies being followed
         * View posts from people followed
-* Explore Page
-        * View latest posts
-        * Filter by categories
 * User Profiles
         * View lists of users posts
         * View number of categgories they follow
         * View number of people they follow
 * Explore/Search Page
-        * Use the search bar alone to search
+        * View latest posts
+        * Use the search bar alone to search for posts
         * Use the category select alone to search by category
-        * Use serach bar and catgeoy select to search
+        * Use serach bar and catgeoy select to search posts
+
+## Room for Improvement
+
+This is my first MERN project and of course there is room for improvement and there can be more features added. The below is a list of improvemnets that I would like to address in the future.
+
+* Create React APP --> Vite
+* Work on necessary clean up + organization
+* Search for repeated code and create components
+* Improve routing code
+* Improve routing back and forth
+* Add ability to go to next post or go back to previous post
+* Improve routing copy and paste url
+* Improve  Redux store
+* Filter categories in feed
+* Add abiblity to update profile bio
+* Add ability to add profile photo
+* Delete profile photo
+* Update profile photo
+* Favorite a post
+* View Favorite posts
+* Filter Favorite post by category
+* View followers
+* Search and Delete followers from profile
+* View categories
+* Search and Delete categories from profile
+* Improve 404 page
+* Improve auth
 
 ## Resources
 * CSCI E-12 Fundamentals of Website Development
