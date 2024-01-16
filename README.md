@@ -2,8 +2,8 @@
 A blogging website where users can blog about their hobbies, explore new
 ideas, and discover new passions.
 
-# TEST ACCOUNT USRENAME AND PASSWORD
-U: peach
+## TEST ACCOUNT USRENAME AND PASSWORD
+U: Peach
 P: @Peach12
         
 ## Features
